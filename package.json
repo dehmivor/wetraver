@@ -4,6 +4,13 @@
     "apps/*",
     "packages/*"
   ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=web",
+    "dev:mobile": "npm run start --workspace=mobile",
+    "build:web": "npm run build --workspace=web",
+    "android": "npm run android --workspace=mobile",
+    "ios": "npm run ios --workspace=mobile"
+  },
   "dependencies": {
     "@react-navigation/native": "^7.1.17",
     "axios": "^1.12.2",
