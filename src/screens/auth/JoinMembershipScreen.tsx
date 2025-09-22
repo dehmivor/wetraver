@@ -5,6 +5,7 @@ import Text from '../../components/ui/Text';
 import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 type AgreementKey =
   | 'tos'
@@ -23,6 +24,7 @@ const JoinMembershipScreen: React.FC = () => {
     marketing: false,
     age14: false,
   });
+  const navigation = useNavigation();
 
   const requiredChecked = useMemo(() => agreements.tos && agreements.privacy && agreements.age14, [agreements]);
   const allChecked = useMemo(
@@ -104,7 +106,12 @@ const JoinMembershipScreen: React.FC = () => {
       </ScrollView>
 
       <View style={styles.footer}>
-        <Button title="확인" onPress={() => {}} disabled={!requiredChecked} size="large" />
+        <Button
+          title="확인"
+          onPress={() => navigation.navigate('JoinMembershipPhoneNumber' as never)}
+          disabled={!requiredChecked}
+          size="large"
+        />
       </View>
     </Container>
   );

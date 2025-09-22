@@ -4,12 +4,14 @@ import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import Button from '../../components/ui/Button';
 import { colors, spacing } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const CODE_LENGTH = 6;
 
 const JoinMembershipEmailCheckScreen: React.FC = () => {
   const [code, setCode] = useState<string>('');
   const inputRef = useRef<TextInput>(null);
+  const navigation = useNavigation();
 
   const isValid = useMemo(() => code.length === CODE_LENGTH, [code]);
 
@@ -52,7 +54,12 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
       </View>
 
       <View style={styles.footer}>
-        <Button title="다음" onPress={() => {}} disabled={!isValid} size="large" />
+        <Button
+          title="다음"
+          onPress={() => navigation.navigate('JoinMembershipVerification' as never)}
+          disabled={!isValid}
+          size="large"
+        />
       </View>
     </Container>
   );

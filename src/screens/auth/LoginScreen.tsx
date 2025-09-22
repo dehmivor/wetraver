@@ -9,11 +9,13 @@ import {
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import { spacing } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
   const handleRegisterPress = () => {
-    console.log('Navigate to register');
+    navigation.navigate('JoinMembership' as never);
   };
 
   const handleExploreBeforeLogin = () => {

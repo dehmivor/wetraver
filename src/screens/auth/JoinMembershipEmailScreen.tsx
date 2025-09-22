@@ -6,12 +6,14 @@ import Button from '../../components/ui/Button';
 import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const emailRegex = /^(?:[a-zA-Z0-9_'^&\+\-])+(?:\.(?:[a-zA-Z0-9_'^&\+\-])+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 
 const JoinMembershipEmailScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const isValid = useMemo(() => emailRegex.test(email), [email]);
+  const navigation = useNavigation();
 
   return (
     <Container padding="large">
@@ -40,7 +42,12 @@ const JoinMembershipEmailScreen: React.FC = () => {
       </View>
 
       <View style={styles.footer}>
-        <Button title="다음" onPress={() => {}} disabled={!isValid} size="large" />
+        <Button
+          title="다음"
+          onPress={() => navigation.navigate('JoinMembershipEmailCheck' as never)}
+          disabled={!isValid}
+          size="large"
+        />
       </View>
     </Container>
   );

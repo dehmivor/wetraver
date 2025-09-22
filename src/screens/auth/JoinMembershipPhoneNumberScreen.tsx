@@ -1,22 +1,54 @@
 import React, { useMemo, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import Input from '../../components/ui/Input';
 import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const JoinMembershipPhoneNumberScreen: React.FC = () => {
   const [country, setCountry] = useState('');
   const [phone, setPhone] = useState('');
+  const navigation = useNavigation();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const countryOptions = [
+    { label: '대한민국 (+82)', value: '+82' },
+    { label: '일본 (+81)', value: '+81' },
+    { label: '미국 (+1)', value: '+1' },
+  ];
 
-  const isValid = useMemo(() => !!country && /^\d{8,15}$/.test(phone.replace(/\D/g, '')), [country, phone]);
+  const isValid = useMemo(() => country.trim().length > 0 && phone.trim().length > 0, [country, phone]);
 
   return (
     <Container padding="large">
-      <View style={styles.selectBox}>
-        <Text variant="body1" color="gray.400">국가/지역</Text>
+      <View>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => setDropdownOpen(prev => !prev)}
+          style={styles.selectBox}
+        >
+          <Text variant="body1" color={country ? 'gray.900' : 'gray.400'}>
+            {country ? countryOptions.find(o => o.value === country)?.label : '국가/지역'}
+          </Text>
+          <Text variant="body1" color="gray.400">▾</Text>
+        </TouchableOpacity>
+
+        {dropdownOpen && (
+          <View style={styles.dropdownMenu}>
+            {countryOptions.map(opt => (
+              <TouchableOpacity
+                key={opt.value}
+                activeOpacity={0.8}
+                style={styles.dropdownItem}
+                onPress={() => { setCountry(opt.value); setDropdownOpen(false); }}
+              >
+                <Text variant="body1" color="gray.900">{opt.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
       </View>
 
       <Input
@@ -48,7 +80,12 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
       </View>
 
       <View style={styles.footer}>
-        <Button title="다음" onPress={() => {}} disabled={!isValid} size="large" />
+        <Button
+          title="다음"
+          onPress={() => navigation.navigate('JoinMembershipPhoneNumberCheck' as never)}
+          disabled={!isValid}
+          size="large"
+        />
       </View>
     </Container>
   );
@@ -69,12 +106,28 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.md,
     paddingHorizontal: spacing.md,
     height: 48,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   helperWrap: {
     marginTop: spacing.sm,
     marginBottom: spacing.lg,
     gap: 2,
+  },
+  dropdownMenu: {
+    marginTop: 4,
+    borderWidth: 1,
+    borderColor: colors.gray[200],
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.white,
+    overflow: 'hidden',
+  },
+  dropdownItem: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.gray[100],
   },
   socialBtn: {
     height: 48,
