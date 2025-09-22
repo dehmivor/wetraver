@@ -14,127 +14,146 @@ import { useNavigation } from '@react-navigation/native';
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
+  
   const handleRegisterPress = () => {
     navigation.navigate('JoinMembership' as never);
   };
-
+  
   const handleExploreBeforeLogin = () => {
     console.log('Explore before login');
   };
-
+  
   return (
-    <Container>
       <ImageBackground
         source={require('../../assets/images/background-login.jpg')}
         style={styles.background}
         resizeMode="cover"
       >
         <View style={styles.dimmed} />
-
-        <KeyboardAvoidingView
-          style={styles.keyboardAvoid}
-        >
+        
+        <KeyboardAvoidingView style={styles.keyboardAvoid}>
           <View style={styles.content}>
+            {/* Header Section with Title and Badge */}
             <View style={styles.headerSection}>
               <View style={styles.titleRow}>
                 <Text variant="h1" color="white" align="center" style={styles.title}>
                   WETRAVER
                 </Text>
+                <View style={styles.titleBadge} />
               </View>
-              <Text variant="body1" color="rgba(255,255,255,0.8)" align="center" style={styles.subtitle}>
+            </View>
+            
+            {/* Content Section - positioned lower */}
+            <View style={styles.bottomContent}>
+              <Text variant="body1" color="rgba(255,255,255,0.9)" align="center" style={styles.subtitle}>
                 바쁜 일상 속 잠깐의 쉼표가 필요할 때,
               </Text>
-              <Text variant="body1" color="rgba(255,255,255,0.8)" align="center" style={styles.subtitle}>
+              <Text variant="body1" color="rgba(255,255,255,0.9)" align="center" style={styles.subtitle}>
                 내 하루를 조금 더 특별하게 만드는 시작.
               </Text>
-            </View>
-
-            <TouchableOpacity
-              style={styles.registerButton}
-              onPress={handleRegisterPress}
-              activeOpacity={0.7}
-            >
-              <Text variant="button" color="white" align="center" style={styles.registerButtonText}>
-                회원 가입하기
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={handleExploreBeforeLogin}
-              activeOpacity={0.7}
-            >
-              <Text
-                variant="caption"
-                color="rgba(255,255,255,0.6)"
-                align="center"
-                style={styles.exploreText}
+              
+              <TouchableOpacity
+                style={styles.registerButton}
+                onPress={handleRegisterPress}
+                activeOpacity={0.7}
               >
-                로그인 전 둘러보기 &gt;
-              </Text>
-            </TouchableOpacity>
+                <Text variant="button" color="white" align="center" style={styles.registerButtonText}>
+                  회원 가입하기
+                </Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity
+                onPress={handleExploreBeforeLogin}
+                activeOpacity={0.7}
+              >
+                <Text
+                  variant="caption"
+                  color="rgba(255, 255, 255, 0.8)"
+                  align="center"
+                  style={styles.exploreText}
+                >
+                  로그인 전 둘러보기 ›
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   background: {
+    flex: 1,
     width: '100%',
     height: '100%',
   },
   dimmed: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: '#001E33',
-    opacity: 0.6,
+    opacity: 0.7,  
   },
   keyboardAvoid: {
     flex: 1,
-    justifyContent: 'center',
   },
   content: {
+    flex: 1,
     paddingHorizontal: spacing.lg,
+    justifyContent: 'space-between',
+    paddingTop: 110, // Add top padding to position title higher
+    paddingBottom: 60, // Add bottom padding
   },
   headerSection: {
-    marginBottom: spacing['xl'],
+    alignItems: 'center',
   },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 8,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 28,
-    marginTop: 120
+    fontWeight: 500,
+    fontSize: 26,  
+    letterSpacing: 2,  
   },
   titleBadge: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
     backgroundColor: 'white',
     marginLeft: 8,
   },
+  bottomContent: {
+    alignItems: 'center',
+    paddingBottom: 40,
+  },
   subtitle: {
-    marginTop: 8,
-    textShadowColor: 'rgba(0,0,0,0.5)',
+    marginTop: 4,
+    marginBottom: 4,
+    textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 4,
+    textShadowRadius: 2,
+    fontSize: 15,
+    lineHeight: 20,
   },
   registerButton: {
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: 'white',
-    paddingVertical: 12,
-    borderRadius: 6,
-    marginBottom: spacing.md,
+    paddingVertical: 10,
+    paddingHorizontal: 90,
+    borderRadius: 8,
+    marginTop: 32,
+    marginBottom: 40,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Add slight background
   },
   registerButtonText: {
     fontWeight: 'bold',
+    fontSize: 16,
   },
   exploreText: {
-    textDecorationLine: 'underline',
+    color: 'rgba(255, 255, 255, 0.8)',
+    fontWeight: '500',
+    fontSize: 15,
   },
 });
 
