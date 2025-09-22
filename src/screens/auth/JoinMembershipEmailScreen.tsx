@@ -8,11 +8,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors, spacing, borderRadius } from '../../constants/theme';
 import { useNavigation } from '@react-navigation/native';
 
-const emailRegex = /^(?:[a-zA-Z0-9_'^&\+\-])+(?:\.(?:[a-zA-Z0-9_'^&\+\-])+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
-
 const JoinMembershipEmailScreen: React.FC = () => {
   const [email, setEmail] = useState('');
-  const isValid = useMemo(() => emailRegex.test(email), [email]);
   const navigation = useNavigation();
 
   return (
@@ -45,7 +42,6 @@ const JoinMembershipEmailScreen: React.FC = () => {
         <Button
           title="다음"
           onPress={() => navigation.navigate('JoinMembershipEmailCheck' as never)}
-          disabled={!isValid}
           size="large"
         />
       </View>
