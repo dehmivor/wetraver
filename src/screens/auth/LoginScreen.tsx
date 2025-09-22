@@ -1,103 +1,138 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { colors, spacing } from '../../constants/theme';
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import Container from '../../components/layout/Container';
-import Header from '../../components/layout/Header';
-import LoginForm from '../../components/forms/LoginForm';
-import Button from '../../components/ui/Button';
 import Text from '../../components/ui/Text';
-
-interface LoginFormData {
-  email: string;
-  password: string;
-}
+import { spacing } from '../../constants/theme';
 
 const LoginScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
-
-  const handleLogin = async (data: LoginFormData) => {
-    setLoading(true);
-    try {
-      // TODO: Implement actual login logic
-      console.log('Login data:', data);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(() => resolve(undefined), 2000));
-      
-      Alert.alert('Thành công', 'Đăng nhập thành công!');
-    } catch (error) {
-      Alert.alert('Lỗi', 'Đăng nhập thất bại. Vui lòng thử lại.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleRegisterPress = () => {
-    // TODO: Navigate to register screen
     console.log('Navigate to register');
   };
 
+  const handleExploreBeforeLogin = () => {
+    console.log('Explore before login');
+  };
+
   return (
-    <Container backgroundColor={colors.background}>
-      <KeyboardAvoidingView
-        style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Header title="Đăng nhập" />
-        
-        <View style={styles.content}>
-          <View style={styles.headerSection}>
-            <Text variant="h1" color="primary" align="center">
-              WeTraver
-            </Text>
-            <Text variant="body1" color="gray.600" align="center" style={styles.subtitle}>
-              Khám phá thế giới cùng chúng tôi
-            </Text>
-          </View>
+    <Container>
+      <ImageBackground
+        source={require('../../assets/images/background-login.jpg')}
+        style={styles.background}
+        resizeMode="cover"
+      >
+        <View style={styles.dimmed} />
 
-          <LoginForm onSubmit={handleLogin} loading={loading} />
+        <KeyboardAvoidingView
+          style={styles.keyboardAvoid}
+        >
+          <View style={styles.content}>
+            <View style={styles.headerSection}>
+              <View style={styles.titleRow}>
+                <Text variant="h1" color="white" align="center" style={styles.title}>
+                  WETRAVER
+                </Text>
+              </View>
+              <Text variant="body1" color="rgba(255,255,255,0.8)" align="center" style={styles.subtitle}>
+                바쁜 일상 속 잠깐의 쉼표가 필요할 때,
+              </Text>
+              <Text variant="body1" color="rgba(255,255,255,0.8)" align="center" style={styles.subtitle}>
+                내 하루를 조금 더 특별하게 만드는 시작.
+              </Text>
+            </View>
 
-          <View style={styles.footer}>
-            <Text variant="body2" color="gray.600" align="center">
-              Chưa có tài khoản?{' '}
-            </Text>
-            <Button
-              title="Đăng ký ngay"
-              variant="ghost"
-              onPress={handleRegisterPress}
+            <TouchableOpacity
               style={styles.registerButton}
-            />
+              onPress={handleRegisterPress}
+              activeOpacity={0.7}
+            >
+              <Text variant="button" color="white" align="center" style={styles.registerButtonText}>
+                회원 가입하기
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={handleExploreBeforeLogin}
+              activeOpacity={0.7}
+            >
+              <Text
+                variant="caption"
+                color="rgba(255,255,255,0.6)"
+                align="center"
+                style={styles.exploreText}
+              >
+                로그인 전 둘러보기 &gt;
+              </Text>
+            </TouchableOpacity>
           </View>
-        </View>
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     </Container>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
+    width: '100%',
+    height: '100%',
+  },
+  dimmed: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: '#001E33',
+    opacity: 0.6,
+  },
+  keyboardAvoid: {
     flex: 1,
+    justifyContent: 'center',
   },
   content: {
-    flex: 1,
-    justifyContent: 'center',
+    paddingHorizontal: spacing.lg,
   },
   headerSection: {
-    marginBottom: spacing['3xl'],
-    paddingHorizontal: spacing.lg,
+    marginBottom: spacing['xl'],
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 28,
+    marginTop: 120
+  },
+  titleBadge: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: 'white',
+    marginLeft: 8,
   },
   subtitle: {
-    marginTop: spacing.sm,
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: spacing.xl,
-    paddingHorizontal: spacing.lg,
+    marginTop: 8,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
   },
   registerButton: {
-    paddingHorizontal: 0,
-    paddingVertical: 0,
+    borderWidth: 1,
+    borderColor: 'white',
+    paddingVertical: 12,
+    borderRadius: 6,
+    marginBottom: spacing.md,
+  },
+  registerButtonText: {
+    fontWeight: 'bold',
+  },
+  exploreText: {
+    textDecorationLine: 'underline',
   },
 });
 
