@@ -1,6 +1,20 @@
 export type RootStackParamList = {
-  Auth: undefined;
-  Home: undefined;
+  // Auth screens
+  Login: undefined;
+  JoinMembership: undefined;
+  JoinMembershipPhoneNumber: undefined;
+  JoinMembershipPhoneNumberCheck: undefined;
+  JoinMembershipEmail: undefined;
+  JoinMembershipEmailCheck: undefined;
+  JoinMembershipVerification: undefined;
+  // Home screens
+  HomeRecommendation: undefined;
+  HomePopularSeller: undefined;
+  HomeCreator: undefined;
+  HomeChangeViewMode: undefined;
+  HomeCardTap: { modeId?: string } | undefined;
+  HomeDetailPage: undefined;
+  HomeComments: undefined;
 };
 
 export type MainStackParamList = {

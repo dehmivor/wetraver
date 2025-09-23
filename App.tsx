@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AuthNavigator from './src/navigation/AuthNavigator';
 import HomeNavigator from './src/navigation/HomeNavigator';
 import SplashScreen from './src/screens/splash/SplashScreen';
+import RootNavigator from './src/navigation/RootNavigator';
 
 function App() {
   const [showSplash, setShowSplash] = useState(true); // Bật lại splash screen
@@ -19,7 +20,7 @@ function App() {
   return (
       <SafeAreaProvider>
         <NavigationContainer>
-          <HomeNavigator />
+          <RootNavigator />
         </NavigationContainer>
       </SafeAreaProvider>
   );
