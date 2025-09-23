@@ -20,8 +20,7 @@ const LoginScreen: React.FC = () => {
   };
   
   const handleExploreBeforeLogin = () => {
-    // Navigate on parent (RootNavigator) to the 'Home' route
-    (navigation as any).getParent()?.navigate('Home');
+    navigation.navigate('HomeRecommendation' as never);
   };
   
   return (

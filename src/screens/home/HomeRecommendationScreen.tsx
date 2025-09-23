@@ -72,50 +72,45 @@ const HomeRecommendationScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="dark-content" backgroundColor="#000" />
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
-        <Text style={styles.timeText}>23:18</Text>
         <View style={styles.statusIcons}>
-          <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
-          <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
         </View>
       </View>
 
       {/* Header with Tabs */}
-      <View style={styles.header}>
-        <View style={styles.tabContainer}>
-          {tabs.map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              style={styles.tab}
-              onPress={() => handleTabPress(tab)}
-            >
-              <Text
-                style={
-                  activeTab === tab
-                    ? [styles.tabText, styles.activeTabText]
-                    : styles.tabText
-                }
-              >
-                {tab}
-              </Text>
-              {activeTab === tab && <View style={styles.tabIndicator} />}
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-            <Icon name="search" size={24} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-            <Icon name="notifications" size={24} color="#fff" />
-            <View style={styles.notificationDot} />
-          </TouchableOpacity>
-        </View>
-      </View>
+<View style={styles.header}>
+  <View style={styles.headerLeft} />
+  <View style={styles.tabContainer}>
+    {tabs.map((tab) => (
+      <TouchableOpacity
+        key={tab}
+        style={styles.tab}
+        onPress={() => handleTabPress(tab)}
+      >
+        <Text
+          style={
+            activeTab === tab
+              ? [styles.tabText, styles.activeTabText]
+              : styles.tabText
+          }
+        >
+          {tab}
+        </Text>
+        {activeTab === tab && <View style={styles.tabIndicator} />}
+      </TouchableOpacity>
+    ))}
+  </View>
+ <View style={styles.headerIcons}>
+  <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+    <Icon name="notifications" size={24} color="#000" />
+    <View style={styles.notificationDot} />
+  </TouchableOpacity>
+</View>
+</View>
+
 
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
@@ -128,13 +123,6 @@ const HomeRecommendationScreen: React.FC = () => {
               {/* Top Row - User Avatars and Bookmark */}
               <View style={styles.postTopRow}>
                 <View style={styles.userAvatars}>
-                  <Image source={post.userAvatar} style={styles.smallAvatar} />
-                  <View style={styles.avatarBadge}>
-                    <Image source={require('../../assets/images/plane-ticket.png')} style={styles.badgeIcon} />
-                  </View>
-                </View>
-                <View style={styles.userAvatars}>
-                  <Image source={post.userAvatar} style={styles.smallAvatar} />
                 </View>
                 <View style={styles.bookmarkContainer}>
                   <Icon name="bookmark-border" size={20} color="#fff" />
@@ -221,9 +209,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 5,
+    paddingHorizontal: 30,
+    paddingTop: 40,
+    paddingBottom: 3,
   },
   timeText: {
     color: '#fff',
@@ -243,7 +231,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 15,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
+  },
+  headerLeft: {
+    width: 80, // Space for left side (same width as headerIcons)
   },
   tabContainer: {
     flexDirection: 'row',
@@ -259,13 +250,13 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   activeTabText: {
-    color: '#fff',
+    color: '#000',
   },
   tabIndicator: {
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#00C7A6',
     marginTop: 5,
   },
   headerIcons: {
@@ -278,8 +269,8 @@ const styles = StyleSheet.create({
   },
   notificationDot: {
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: 2,
+    right: 2,
     width: 8,
     height: 8,
     borderRadius: 4,
@@ -303,7 +294,7 @@ const styles = StyleSheet.create({
   },
   postImage: {
     width: '100%',
-    height: 400,
+    height: 600,
     resizeMode: 'cover',
   },
   postOverlay: {
@@ -404,7 +395,7 @@ const styles = StyleSheet.create({
   },
   postDescription: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 24,
     marginBottom: 15,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
