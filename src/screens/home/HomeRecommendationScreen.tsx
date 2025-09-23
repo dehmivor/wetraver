@@ -10,11 +10,13 @@ import {
   Text
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-const HomeScreen: React.FC = () => {
+const HomeRecommendationScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState('추천');
+  const navigation = useNavigation();
 
   const handleSearchPress = () => {
     console.log('Search pressed');
@@ -22,6 +24,19 @@ const HomeScreen: React.FC = () => {
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
+  };
+
+  const handleTabPress = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === '인기셀러') {
+      navigation.navigate('HomePopularSeller' as never);
+    } else if (tab === '크리에이터') {
+      navigation.navigate('HomeCreator' as never);
+    }
+  };
+
+  const handleViewModePress = () => {
+    navigation.navigate('HomeChangeViewMode' as never);
   };
 
   const tabs = ['추천', '인기셀러', '크리에이터'];
@@ -76,7 +91,7 @@ const HomeScreen: React.FC = () => {
             <TouchableOpacity
               key={tab}
               style={styles.tab}
-              onPress={() => setActiveTab(tab)}
+              onPress={() => handleTabPress(tab)}
             >
               <Text
                 style={
@@ -186,7 +201,7 @@ const HomeScreen: React.FC = () => {
 
       {/* Floating Action Buttons */}
       <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabSecondary}>
+        <TouchableOpacity style={styles.fabSecondary} onPress={handleViewModePress}>
           <Icon name="grid-on" size={24} color="#666" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.fabPrimary}>
@@ -475,4 +490,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default HomeRecommendationScreen;

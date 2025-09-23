@@ -11,10 +11,12 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const HomeCommentsScreen: React.FC = () => {
+  const navigation = useNavigation();
   const [commentText, setCommentText] = useState('저도 함께 해보고');
   const [likedComments, setLikedComments] = useState(new Set([0])); // First comment is liked
 
@@ -35,6 +37,10 @@ const HomeCommentsScreen: React.FC = () => {
   const handleSendComment = () => {
     console.log('Send comment:', commentText);
     setCommentText('');
+  };
+
+  const handleBackPress = () => {
+    navigation.goBack();
   };
 
   const comments = [
@@ -94,6 +100,9 @@ const HomeCommentsScreen: React.FC = () => {
       <View style={styles.modalHeader}>
         <View style={styles.dragHandle} />
         <View style={styles.headerContent}>
+          <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+            <Icon name="arrow-back" size={24} color="#000" />
+          </TouchableOpacity>
           <Text style={styles.title}>댓글 97</Text>
           <View style={styles.headerIcons}>
             <TouchableOpacity style={styles.headerIconButton}>
@@ -330,6 +339,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
+  },
+  backButton: {
+    padding: 8,
+    marginRight: 10,
   },
   title: {
     fontSize: 18,

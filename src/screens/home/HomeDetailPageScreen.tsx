@@ -10,14 +10,16 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const HomeDetailPageScreen: React.FC = () => {
+  const navigation = useNavigation();
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
 
   const handleBackPress = () => {
-    console.log('Back pressed');
+    navigation.goBack();
   };
 
   const handleSearchPress = () => {
@@ -26,6 +28,10 @@ const HomeDetailPageScreen: React.FC = () => {
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
+  };
+
+  const handleCommentPress = () => {
+    navigation.navigate('HomeComments' as never);
   };
 
   const handleFollowPress = () => {
@@ -170,10 +176,10 @@ const HomeDetailPageScreen: React.FC = () => {
             <Icon name="favorite" size={20} color="#FF6B6B" />
             <Text style={styles.engagementText}>1.3만</Text>
           </View>
-          <View style={styles.engagementItem}>
+          <TouchableOpacity style={styles.engagementItem} onPress={handleCommentPress}>
             <Icon name="chat-bubble-outline" size={20} color="#9CA3AF" />
             <Text style={styles.engagementText}>97</Text>
-          </View>
+          </TouchableOpacity>
           <View style={styles.engagementItem}>
             <Icon name="bookmark-border" size={20} color="#9CA3AF" />
             <Text style={styles.engagementText}>76</Text>

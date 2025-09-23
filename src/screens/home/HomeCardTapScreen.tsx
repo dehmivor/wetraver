@@ -10,12 +10,17 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const HomeCardTapScreen: React.FC = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { modeId } = route.params as { modeId?: string };
+
   const handleBackPress = () => {
-    console.log('Back pressed');
+    navigation.goBack();
   };
 
   const handleSearchPress = () => {
@@ -24,6 +29,10 @@ const HomeCardTapScreen: React.FC = () => {
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
+  };
+
+  const handleScrollPress = () => {
+    navigation.navigate('HomeDetailPage' as never);
   };
 
   return (
@@ -45,6 +54,7 @@ const HomeCardTapScreen: React.FC = () => {
         <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
+        <Text style={styles.title}>카드 탭</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
             <Icon name="search" size={24} color="#fff" />
@@ -65,15 +75,17 @@ const HomeCardTapScreen: React.FC = () => {
         
         {/* Text Overlay */}
         <View style={styles.textOverlay}>
-          <Text style={styles.titleText}>TOKYO</Text>
-          <Text style={styles.subtitleText}>Traveler</Text>
+          <Text style={styles.titleText}>카드 탭</Text>
+          <Text style={styles.subtitleText}>
+            {modeId ? `선택된 모드: ${modeId}` : '모드 정보 없음'}
+          </Text>
         </View>
 
         {/* Scroll Indicator */}
-        <View style={styles.scrollIndicator}>
+        <TouchableOpacity style={styles.scrollIndicator} onPress={handleScrollPress}>
           <Text style={styles.scrollText}>아래로 스크롤 해주세요.</Text>
           <Icon name="keyboard-arrow-down" size={20} color="#fff" />
-        </View>
+        </TouchableOpacity>
       </View>
 
       {/* Bottom Navigation */}
@@ -140,6 +152,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
   },
   backButton: {
     width: 40,

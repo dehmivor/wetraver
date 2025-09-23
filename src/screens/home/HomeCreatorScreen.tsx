@@ -10,11 +10,13 @@ import {
   Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const HomeCreatorScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState('크리에이터');
+  const navigation = useNavigation();
 
   const handleSearchPress = () => {
     console.log('Search pressed');
@@ -22,6 +24,15 @@ const HomeCreatorScreen: React.FC = () => {
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
+  };
+
+  const handleTabPress = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === '추천') {
+      navigation.navigate('HomeRecommendation' as never);
+    } else if (tab === '인기셀러') {
+      navigation.navigate('HomePopularSeller' as never);
+    }
   };
 
   const tabs = ['추천', '인기셀러', '크리에이터'];
@@ -47,7 +58,7 @@ const HomeCreatorScreen: React.FC = () => {
             <TouchableOpacity
               key={tab}
               style={styles.tab}
-              onPress={() => setActiveTab(tab)}
+              onPress={() => handleTabPress(tab)}
             >
               <Text
                 style={
