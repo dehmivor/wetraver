@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Auth screens
@@ -14,7 +13,6 @@ import JoinMembershipVerificationScreen from '../screens/auth/JoinMembershipVeri
 export type AuthStackParamList = {
   Login: undefined;
   JoinMembership: undefined;
-  JoinMembershipCheck: undefined; // Map to JoinMembershipScreen if this represents the check step
   JoinMembershipPhoneNumber: undefined;
   JoinMembershipPhoneNumberCheck: undefined;
   JoinMembershipEmail: undefined;
@@ -24,33 +22,28 @@ export type AuthStackParamList = {
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
-const authNavigator = () => {
+const AuthNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerShown: true,
-          headerTitleAlign: 'center',
-          headerTintColor: '#111827',
-          headerStyle: {
-            backgroundColor: '#FFFFFF'
-          }
-        }}
-        initialRouteName="Login"
-      >
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="JoinMembership" component={JoinMembershipScreen} options={{ title: '약관동의' }} />
-        <Stack.Screen name="JoinMembershipCheck" component={JoinMembershipScreen} options={{ title: '약관동의' }} />
-        <Stack.Screen name="JoinMembershipPhoneNumber" component={JoinMembershipPhoneNumberScreen} options={{ title: '신규 회원 가입' }} />
-        <Stack.Screen name="JoinMembershipPhoneNumberCheck" component={JoinMembershipPhoneNumberCheckScreen} options={{ title: '전화번호 인증하기' }} />
-        <Stack.Screen name="JoinMembershipEmail" component={JoinMembershipEmailScreen} options={{ title: '신규 회원 가입' }} />
-        <Stack.Screen name="JoinMembershipEmailCheck" component={JoinMembershipEmailCheckScreen} options={{ title: '이메일 인증하기' }} />
-        <Stack.Screen name="JoinMembershipVerification" component={JoinMembershipVerificationScreen} options={{ title: '가입 완료하기' }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true,
+        headerTitleAlign: 'center',
+        headerTintColor: '#111827',
+        headerStyle: {
+          backgroundColor: '#FFFFFF'
+        }
+      }}
+      initialRouteName="Login"
+    >
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="JoinMembership" component={JoinMembershipScreen} options={{ title: '약관동의' }} />
+      <Stack.Screen name="JoinMembershipPhoneNumber" component={JoinMembershipPhoneNumberScreen} options={{ title: '신규 회원 가입' }} />
+      <Stack.Screen name="JoinMembershipPhoneNumberCheck" component={JoinMembershipPhoneNumberCheckScreen} options={{ title: '전화번호 인증하기' }} />
+      <Stack.Screen name="JoinMembershipEmail" component={JoinMembershipEmailScreen} options={{ title: '신규 회원 가입' }} />
+      <Stack.Screen name="JoinMembershipEmailCheck" component={JoinMembershipEmailCheckScreen} options={{ title: '이메일 인증하기' }} />
+      <Stack.Screen name="JoinMembershipVerification" component={JoinMembershipVerificationScreen} options={{ title: '가입 완료하기' }} />
+    </Stack.Navigator>
   );
 };
 
-export default authNavigator;
-
-
+export default AuthNavigator;

@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AuthNavigator from './src/navigation/AuthNavigator';
+import HomeNavigator from './src/navigation/HomeNavigator';
 import SplashScreen from './src/screens/splash/SplashScreen';
-import AuthNavigator from './src/navigation/authNavigator';
 
 function App() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(true); // Bật lại splash screen
 
   const handleSplashFinish = () => {
-    setShowSplash(false); // Sửa: Set false để kết thúc splash
+    setShowSplash(false);
   };
 
   if (showSplash) {
-    return <SplashScreen onFinish={handleSplashFinish} />; // Render splash đầu tiên
+    return <SplashScreen onFinish={handleSplashFinish} />;
   }
 
   return (
-    <SafeAreaProvider>
-      <AuthNavigator />
-    </SafeAreaProvider>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <HomeNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
   );
 }
 
