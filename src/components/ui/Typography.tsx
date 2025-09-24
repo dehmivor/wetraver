@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, TextProps, TextStyle } from 'react-native';
+import { TextProps, TextStyle } from 'react-native';
+import Text from './Text';
 import { textStyles } from '../../constants/textStyles';
 
 interface TypographyProps extends TextProps {
@@ -16,8 +17,10 @@ export const Typography: React.FC<TypographyProps> = ({
 }) => {
   const baseStyle = textStyles[variant];
   
+  const combinedStyle = Object.assign({}, ...(Array.isArray(style) ? [baseStyle, ...style] : [baseStyle, style]));
+
   return (
-    <Text style={[baseStyle, style]} {...props}>
+    <Text style={combinedStyle} {...props}>
       {children}
     </Text>
   );

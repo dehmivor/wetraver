@@ -6,8 +6,8 @@ import {
   StatusBar,
   Dimensions,
   Animated,
-  Text,
 } from 'react-native';
+import Text from '../../components/ui/Text';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
 

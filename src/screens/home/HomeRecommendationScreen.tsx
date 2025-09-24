@@ -7,8 +7,8 @@ import {
   TouchableOpacity, 
   Dimensions,
   StatusBar,
-  Text
 } from 'react-native';
+import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 

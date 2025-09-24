@@ -1,15 +1,14 @@
 import React from 'react';
-import { Text as RNText, StyleSheet, TextStyle } from 'react-native';
+import { Text as RNText, StyleSheet, TextStyle, TextProps as RNTextProps } from 'react-native';
 import { colors, typography } from '../../constants/theme';
 
-interface TextProps {
+interface TextProps extends RNTextProps {
   children: React.ReactNode;
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'caption' | 'button';
   color?: keyof typeof colors | string;
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'medium' | 'bold';
   style?: TextStyle;
-  numberOfLines?: number;
 }
 
 const Text: React.FC<TextProps> = ({
@@ -20,6 +19,7 @@ const Text: React.FC<TextProps> = ({
   weight,
   style,
   numberOfLines,
+  ...rest
 }) => {
   const getVariantStyle = (): TextStyle => {
     switch (variant) {
@@ -101,7 +101,8 @@ const Text: React.FC<TextProps> = ({
         { textAlign: align },
         style,
       ]}
-      numberOfLines={numberOfLines}>
+      numberOfLines={numberOfLines}
+      {...rest}>
       {children}
     </RNText>
   );

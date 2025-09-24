@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, ScrollView, Text as RNText } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import Divider from '../../components/ui/Divider';
