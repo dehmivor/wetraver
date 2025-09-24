@@ -101,7 +101,7 @@ const HomePopularSellerScreen: React.FC = () => {
           {/* Left Side Profile Card */}
           <View style={styles.sideProfileCard}>
             <Image 
-              source={require('../../assets/images/anthony-tran.jpg')} 
+              source={require('../../assets/images/daniel-j.jpg')} 
               style={styles.sideProfileImage} 
             />
           </View>
@@ -109,7 +109,7 @@ const HomePopularSellerScreen: React.FC = () => {
           {/* Central Profile Card */}
           <View style={styles.centralProfileCard}>
             <Image 
-              source={require('../../assets/images/daniel-j.jpg')} 
+              source={require('../../assets/images/anthony-tran.jpg')} 
               style={styles.centralProfileImage} 
             />
             <View style={styles.profileOverlay}>

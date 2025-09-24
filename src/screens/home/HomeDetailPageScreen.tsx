@@ -44,7 +44,7 @@ const HomeDetailPageScreen: React.FC = () => {
 
   const images = [
     require('../../assets/images/tokyo-traveler.jpg'),
-    require('../../assets/images/daniel-j.jpg'),
+    require('../../assets/images/ruitong-xie.jpg'),
     require('../../assets/images/anthony-tran.jpg'),
     require('../../assets/images/leandro-navarro.jpg'),
   ];
@@ -119,7 +119,7 @@ const HomeDetailPageScreen: React.FC = () => {
           </View>
           <View style={styles.avatarOverlay}>
             <Image 
-              source={require('../../assets/images/harrison-chang.jpg')} 
+              source={require('../../assets/images/ruitong-xie.jpg')} 
               style={styles.overlayAvatar} 
             />
           </View>
@@ -149,8 +149,37 @@ const HomeDetailPageScreen: React.FC = () => {
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
+        <View style={styles.imageContainer}>
+          <Image 
+            source={images[currentImageIndex]} 
+            style={styles.mainImage} 
+          />
+          <View style={styles.imageCounter}>
+            <Text style={styles.counterText}>{currentImageIndex + 1}/4</Text>
+          </View>
+          <View style={styles.avatarOverlay}>
+            <Image 
+              source={require('../../assets/images/daniel-smit.jpg')} 
+              style={styles.overlayAvatar} 
+            />
+          </View>
+        </View>
+
+         {/* Description Text */}
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.descriptionText}>
+익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와 함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리, 계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진 도쿄는 언제나 새로운 이야기를 들려줍니다.          </Text>
+          <Text style={styles.timestamp}>9시간 전</Text>
+        </View>
+
         {/* Map Section */}
         <View style={styles.mapContainer}>
+           <View style={styles.avatarOverlay}>
+            <Image 
+              source={require('../../assets/images/map.png')} 
+              style={styles.overlayAvatar} 
+            />
+          </View>
           <View style={styles.mapPlaceholder}>
             <Icon name="map" size={40} color="#9CA3AF" />
             <Text style={styles.mapText}>지도 보기</Text>
@@ -162,13 +191,23 @@ const HomeDetailPageScreen: React.FC = () => {
         <Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
 
         {/* Hashtags */}
-        <View style={styles.hashtagsContainer}>
-          <Text style={styles.hashtag}>#일본여행</Text>
-          <Text style={styles.hashtag}>#도쿄여행</Text>
-          <Text style={styles.hashtag}>#로컬체험</Text>
-          <Text style={styles.hashtag}>#핫플</Text>
-          <Text style={styles.hashtag}>#숨은명소</Text>
-        </View>
+      <View style={styles.hashtagsContainer}>
+  <Text style={styles.hashtag}>
+    <Text style={{ color: '#2563EB' }}>#</Text>일본여행
+  </Text>
+  <Text style={styles.hashtag}>
+    <Text style={{ color: '#2563EB' }}>#</Text>도쿄여행
+  </Text>
+  <Text style={styles.hashtag}>
+    <Text style={{ color: '#2563EB' }}>#</Text>로컬체험
+  </Text>
+  <Text style={styles.hashtag}>
+    <Text style={{ color: '#2563EB' }}>#</Text>핫플
+  </Text>
+  <Text style={styles.hashtag}>
+    <Text style={{ color: '#2563EB' }}>#</Text>숨은명소
+  </Text>
+</View>
 
         {/* Engagement Metrics */}
         <View style={styles.engagementContainer}>
@@ -502,8 +541,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   hashtag: {
-    backgroundColor: '#9C27B0',
-    color: '#fff',
+    backgroundColor: '#fff',
+    color: '#000',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 15,

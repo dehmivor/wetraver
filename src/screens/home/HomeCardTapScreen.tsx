@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { 
   View, 
   StyleSheet, 
@@ -7,17 +7,38 @@ import {
   TouchableOpacity, 
   Image,
   StatusBar,
-  Dimensions
+  Dimensions,
+  PanResponder,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
+const SWIPE_THRESHOLD = 100; // Minimum vertical swipe distance
+
 const HomeCardTapScreen: React.FC = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const { modeId } = route.params as { modeId?: string };
+  const route = useRoute<any>();
+  const { modeId } = route.params || {};
+
+  // Ref to track vertical movement
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => {
+        // Activate responder only if vertical swipe qualifies
+        const { dx, dy } = gestureState;
+        return Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 5;
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy < -SWIPE_THRESHOLD) {
+          // Detected swipe up
+          navigation.navigate('HomeDetailPage' as never);
+        }
+      },
+    })
+  ).current;
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -29,10 +50,6 @@ const HomeCardTapScreen: React.FC = () => {
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
-  };
-
-  const handleScrollPress = () => {
-    navigation.navigate('HomeDetailPage' as never);
   };
 
   return (
@@ -66,8 +83,8 @@ const HomeCardTapScreen: React.FC = () => {
         </View>
       </View>
 
-      {/* Main Content with Background Image */}
-      <View style={styles.content}>
+      {/* Main Content with Background Image and Swipe Gesture */}
+      <View style={styles.content} {...panResponder.panHandlers}>
         <Image 
           source={require('../../assets/images/tokyo-traveler.jpg')} 
           style={styles.backgroundImage} 
@@ -82,7 +99,7 @@ const HomeCardTapScreen: React.FC = () => {
         </View>
 
         {/* Scroll Indicator */}
-        <TouchableOpacity style={styles.scrollIndicator} onPress={handleScrollPress}>
+        <TouchableOpacity style={styles.scrollIndicator} onPress={() => navigation.navigate('HomeDetailPage' as never)}>
           <Text style={styles.scrollText}>아래로 스크롤 해주세요.</Text>
           <Icon name="keyboard-arrow-down" size={20} color="#fff" />
         </TouchableOpacity>
