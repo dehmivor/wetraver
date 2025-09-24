@@ -154,11 +154,11 @@ const HomeRecommendationScreen: React.FC = () => {
               {/* Engagement Stats */}
               <View style={styles.engagementRow}>
                 <View style={styles.engagementItem}>
-                  <Icon name="favorite" size={16} color="#FF6B6B" />
+                  <Icon name="favorite" size={30} color="#FE0055" />
                   <Text style={styles.engagementText}>{post.likes}</Text>
                 </View>
                 <View style={styles.engagementItem}>
-                  <Icon name="chat-bubble-outline" size={16} color="#fff" />
+                  <Icon name="chat-bubble-outline" size={30} color="#fff" />
                   <Text style={styles.engagementText}>{post.comments}</Text>
                 </View>
               </View>
@@ -447,7 +447,7 @@ const styles = StyleSheet.create({
   },
   engagementText: {
     color: '#fff',
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '600',
     marginLeft: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
