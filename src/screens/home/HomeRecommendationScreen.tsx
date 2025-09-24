@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -72,7 +73,7 @@ const HomeRecommendationScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#000" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
@@ -105,13 +106,12 @@ const HomeRecommendationScreen: React.FC = () => {
   </View>
  <View style={styles.headerIcons}>
   <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-    <Icon name="notifications" size={24} color="#000" />
+    <Feather name="search" size={24} style={{ marginRight: 20 }}  color="black" />
+    <Icon name="bell-outline" size={24} color="#000" />
     <View style={styles.notificationDot} />
   </TouchableOpacity>
 </View>
 </View>
-
-
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {posts.map((post) => (
@@ -158,7 +158,7 @@ const HomeRecommendationScreen: React.FC = () => {
                   <Text style={styles.engagementText}>{post.likes}</Text>
                 </View>
                 <View style={styles.engagementItem}>
-                  <Icon name="chat-bubble-outline" size={30} color="#fff" />
+                 <Feather name="message-circle" size={30} color="#fff" />
                   <Text style={styles.engagementText}>{post.comments}</Text>
                 </View>
               </View>
@@ -267,6 +267,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconButton: {
+    flexDirection: 'row',
     marginLeft: 15,
     position: 'relative',
   },
@@ -369,12 +370,13 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     zIndex: 1,
+    marginTop: -30,
   },
   postTitle: {
     fontFamily: 'Pretendard-Thin',
     fontSize: 54,
     lineHeight: 54, // 100%
-    letterSpacing: 10.8, // 20% of 54
+    letterSpacing: 12.8, // 20% of 54
     textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
@@ -383,8 +385,8 @@ const styles = StyleSheet.create({
   postSubtitle: {
     fontFamily: 'Pretendard-ExtraLight',
     fontSize: 32,
-    lineHeight: 32, // 100%
-    letterSpacing: 13.44, // 42% of 32
+    lineHeight: 50, // 100%
+    letterSpacing: 15, // 42% of 32
     textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
@@ -444,6 +446,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 20,
+  },
+  circleIcon: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   engagementText: {
     color: '#fff',
