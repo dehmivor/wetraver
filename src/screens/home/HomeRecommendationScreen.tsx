@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -106,8 +105,8 @@ const HomeRecommendationScreen: React.FC = () => {
   </View>
  <View style={styles.headerIcons}>
   <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-    <Feather name="search" size={24} style={{ marginRight: 20 }}  color="black" />
-    <Icon name="bell-outline" size={24} color="#000" />
+    <Icon name="search" size={24} style={{ marginRight: 5 }}  color="black" />
+    <Icon name="bell-outline" size={24} color="black" />
     <View style={styles.notificationDot} />
   </TouchableOpacity>
 </View>
@@ -158,7 +157,7 @@ const HomeRecommendationScreen: React.FC = () => {
                   <Text style={styles.engagementText}>{post.likes}</Text>
                 </View>
                 <View style={styles.engagementItem}>
-                 <Feather name="message-circle" size={30} color="#fff" />
+                  <Icon name="message-circle" size={30} color="#fff" />
                   <Text style={styles.engagementText}>{post.comments}</Text>
                 </View>
               </View>
@@ -174,7 +173,7 @@ const HomeRecommendationScreen: React.FC = () => {
           <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="people" size={24} color="#9CA3AF" />
+          <Icon name="sharealt" size={24} color="#9CA3AF" />
           <Text style={styles.navText}>커뮤니티</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
