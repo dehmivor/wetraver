@@ -20,12 +20,11 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
 
   return (
     <Container padding="large">
-      <View style={{ alignItems: 'center', marginTop: spacing.lg }}>
-        <Text variant="h4" weight="bold">전화번호 인증하기</Text>
-      </View>
       <View style={{ alignItems: 'center', marginVertical: spacing.lg }}>
         <Text variant="body2" align="center">
-          문자 메시지를 통해 010-2295-1902번으로{`\n`}보내드린 코드를 입력하세요.
+          문자 메시지를 통해 
+          <Text variant="body1" weight="bold"> 010-1234-5678 </Text>
+          번으로{`\n`}보내드린 코드를 입력하세요.
         </Text>
       </View>
 
@@ -46,10 +45,10 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
         />
       </TouchableOpacity>
 
-      <View style={{ alignItems: 'center', marginTop: spacing.md }}>
+      <View style={{ alignItems: 'center', marginTop: spacing['2xl'] }}>
         <Text variant="caption" color="gray.500">
           코드를 받지 못하셨나요?{' '}
-          <Text variant="caption" color={colors.primary}>다시 보내기</Text>
+          <Text variant="caption" color={colors.black} style={{ textDecorationLine: 'underline' }} weight="bold">다시 보내기</Text>
         </Text>
       </View>
 
@@ -58,7 +57,8 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
           title="다음"
           onPress={() => navigation.navigate('JoinMembershipEmail' as never)}
           disabled={!isValid}
-          size="large"
+                   size="large"
+                   style={{ borderRadius: 0, height: 100 }}
         />
       </View>
     </Container>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   codeUnderline: {
     width: 42,
     height: 2,
-    backgroundColor: colors.gray[300],
+    backgroundColor: "#18191A",
     marginTop: spacing.sm,
   },
   hiddenInput: {
@@ -88,9 +88,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: 'absolute',
-    left: spacing.lg,
-    right: spacing.lg,
-    bottom: spacing.lg,
+    left: 0,
+    right: 0,
+    bottom: -10,
+    borderTopColor: '#EBF0F5',
   },
 });
 
