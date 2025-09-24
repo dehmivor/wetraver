@@ -54,47 +54,41 @@ const HomePopularSellerScreen: React.FC = () => {
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
-        <Text style={styles.timeText}>23:18</Text>
-        <View style={styles.statusIcons}>
-          <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
-          <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
-        </View>
-      </View>
+      </View>
 
 
       {/* Header with Tabs */}
-      <View style={styles.header}>
-        <View style={styles.tabContainer}>
-          {tabs.map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              style={styles.tab}
-              onPress={() => handleTabPress(tab)}
-            >
-              <Text
-                style={
-                  activeTab === tab
-                    ? [styles.tabText, styles.activeTabText]
-                    : styles.tabText
-                }
-              >
-                {tab}
-              </Text>
-              {activeTab === tab && <View style={styles.tabIndicator} />}
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-            <Icon name="search" size={24} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-            <Icon name="notifications" size={24} color="#fff" />
-            <View style={styles.notificationDot} />
-          </TouchableOpacity>
-        </View>
-      </View>
+  <View style={styles.header}>
+        <View style={styles.tabContainer}>
+          {tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              style={styles.tab}
+              onPress={() => handleTabPress(tab)}
+            >
+              <Text
+                style={
+                  activeTab === tab
+                    ? [styles.tabText, styles.activeTabText]
+                    : styles.tabText
+                }
+              >
+                {tab}
+              </Text>
+              {activeTab === tab && <View style={styles.tabIndicator} />}
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.headerIcons}>
+          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+            <Icon name="search" size={24} color="#000" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+            <Icon name="notifications" size={24} color="#000" />
+            <View style={styles.notificationDot} />
+          </TouchableOpacity>
+        </View>
+      </View>
 
 
       {/* Main Content */}
@@ -149,13 +143,13 @@ const HomePopularSellerScreen: React.FC = () => {
         {/* Hashtags Section */}
         <View style={styles.hashtagsContainer}>
           <View style={styles.hashtagRow}>
-            <Text style={{fontSize: 20}}>  <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>일본여행</Text>
-            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>도쿄여행</Text>
-            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>로컬체험</Text>
+            <Text style={{fontSize: 20}}>  <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>일본여행</Text>
+            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>도쿄여행</Text>
+            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>로컬체험</Text>
           </View>
           <View style={styles.hashtagRow}>
-            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>핫플</Text>
-            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>숨은명소</Text>
+            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>핫플</Text>
+            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>숨은명소</Text>
           </View>
         </View>
 
@@ -213,18 +207,18 @@ const HomePopularSellerScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+backgroundColor: '#fff', 
   },
   statusBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 5,
+     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   timeText: {
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -235,41 +229,44 @@ const styles = StyleSheet.create({
   statusIcon: {
     marginLeft: 5,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: '#000',
-  },
-  tabContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  tab: {
-    marginRight: 30,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: '#666',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  activeTabText: {
-    color: '#fff',
-  },
-  tabIndicator: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#9C27B0',
-    marginTop: 5,
-  },
-  headerIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
+ header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    backgroundColor: '#fff',
+  },
+  headerLeft: {
+    width: 80, // Space for left side (same width as headerIcons)
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  tab: {
+    marginRight: 30,
+    alignItems: 'center',
+  },
+  tabText: {
+    color: '#666',
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  activeTabText: {
+    color: '#000',
+  },
+  tabIndicator: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#00C7A6',
+    marginTop: 5,
+  },
+  headerIcons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   iconButton: {
     marginLeft: 15,
     position: 'relative',
@@ -289,14 +286,14 @@ const styles = StyleSheet.create({
   },
   callToActionContainer: {
     alignItems: 'center',
-    paddingVertical: 30,
-    paddingHorizontal: 20,
+    marginTop:60
   },
   callToActionText: {
-    fontSize: 16,
+    fontSize: 24,
     color: '#374151',
     textAlign: 'center',
     lineHeight: 24,
+marginBottom: 10,
   },
   profileCardsContainer: {
     flexDirection: 'row',

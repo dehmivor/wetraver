@@ -43,12 +43,6 @@ const HomeCreatorScreen: React.FC = () => {
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
-        <Text style={styles.timeText}>23:18</Text>
-        <View style={styles.statusIcons}>
-          <Icon name="signal-cellular-4-bar" size={16} color="#000" />
-          <Icon name="wifi" size={16} color="#000" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#000" style={styles.statusIcon} />
-        </View>
       </View>
 
       {/* Header with Tabs */}
