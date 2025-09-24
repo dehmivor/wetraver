@@ -141,7 +141,9 @@ const HomeRecommendationScreen: React.FC = () => {
               {/* Bottom User Info */}
               <View style={styles.postBottomRow}>
                 <View style={styles.userInfo}>
-                  <Image source={post.userAvatar} style={styles.largeAvatar} />
+                  <View style={styles.avatarContainer}>
+                    <Image source={post.userAvatar} style={styles.largeAvatar} />
+                  </View>
                   <Text style={styles.username}>{post.username}</Text>
                 </View>
               </View>
@@ -396,12 +398,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  largeAvatar: {
+  avatarContainer: {
     width: 40,
     height: 40,
     borderRadius: 20,
+    overflow: 'hidden',
     borderWidth: 2,
     borderColor: '#fff',
+  },
+  largeAvatar: {
+    width: 190, 
+    height: 190,
+    position: 'absolute',
+    left: -75, 
+    top: -70,
+    resizeMode: 'cover',
   },
   verifiedIcon: {
     marginLeft: 5,
