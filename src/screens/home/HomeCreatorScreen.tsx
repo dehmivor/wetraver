@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -118,11 +119,19 @@ const HomeCreatorScreen: React.FC = () => {
       </View>
 
       {/* Floating Action Button */}
-      <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabPrimary}>
-          <Icon name="add" size={24} color="#fff" />
-        </TouchableOpacity>
-      </View>
+        <View style={styles.fabContainer}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+            <LinearGradient
+              colors={["#AB42FF", "#7862FF", "#3687FF"]}
+              locations={[0, 0.5, 1]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.fabPrimary}
+            >
+              <Icon name="add" size={24} color="#fff" />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
@@ -180,7 +189,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#584DFF',
     marginTop: 5,
   },
   headerIcons: {
@@ -264,24 +273,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   fabContainer: {
-    position: 'absolute',
-    right: 20,
-    bottom: 100,
-    alignItems: 'center',
-  },
-  fabPrimary: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#9C27B0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-  },
+    position: 'absolute',
+    right: 15,
+    bottom: 80,
+    alignItems: 'center',
+  },
+	fabShadow: {
+		elevation: 6,
+		shadowColor: '#402E99',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.3,
+		shadowRadius: 6,
+		borderRadius: 28,
+	},
+	fabPrimary: {
+		width: 56,
+		height: 56,
+		borderRadius: 28,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 export default HomeCreatorScreen;
