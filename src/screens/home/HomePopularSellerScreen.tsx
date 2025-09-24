@@ -149,13 +149,13 @@ const HomePopularSellerScreen: React.FC = () => {
         {/* Hashtags Section */}
         <View style={styles.hashtagsContainer}>
           <View style={styles.hashtagRow}>
-            <Text style={styles.hashtag}>#일본여행</Text>
-            <Text style={styles.hashtag}>#도쿄여행</Text>
-            <Text style={styles.hashtag}>#로컬체험</Text>
+            <Text style={{fontSize: 20}}>  <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>일본여행</Text>
+            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>도쿄여행</Text>
+            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>로컬체험</Text>
           </View>
           <View style={styles.hashtagRow}>
-            <Text style={styles.hashtag}>#핫플</Text>
-            <Text style={styles.hashtag}>#숨은명소</Text>
+            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>핫플</Text>
+            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 16, fontWeight: '500' }}>#</Text>숨은명소</Text>
           </View>
         </View>
 
@@ -191,12 +191,20 @@ const HomePopularSellerScreen: React.FC = () => {
       </View>
 
 
-      {/* Floating Action Button */}
-      <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabPrimary}>
-          <Icon name="add" size={24} color="#fff" />
-        </TouchableOpacity>
-      </View>
+		{/* Floating Action Button */}
+		<View style={styles.fabContainer}>
+			<TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+				<LinearGradient
+					colors={["#AB42FF", "#7862FF", "#3687FF"]}
+					locations={[0, 0.5, 1]}
+					start={{ x: 0, y: 0 }}
+					end={{ x: 1, y: 1 }}
+					style={styles.fabPrimary}
+				>
+					<Icon name="add" size={24} color="#fff" />
+				</LinearGradient>
+			</TouchableOpacity>
+		</View>
     </View>
   );
 };
@@ -371,16 +379,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 10,
   },
-  hashtag: {
-    backgroundColor: '#9C27B0',
-    color: '#fff',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 15,
-    fontSize: 12,
-    fontWeight: '500',
-    marginHorizontal: 5,
-  },
   followButton: {
     backgroundColor: '#fff',
     borderWidth: 1,
@@ -396,6 +394,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
+paddingHorizontal: 40,
   },
   bottomNav: {
     flexDirection: 'row',
@@ -423,23 +422,25 @@ const styles = StyleSheet.create({
   },
   fabContainer: {
     position: 'absolute',
-    right: 20,
-    bottom: 100,
+    right: 15,
+    bottom: 80,
     alignItems: 'center',
   },
-  fabPrimary: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#9C27B0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-  },
+	fabShadow: {
+		elevation: 6,
+		shadowColor: '#402E99',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.3,
+		shadowRadius: 6,
+		borderRadius: 28,
+	},
+	fabPrimary: {
+		width: 56,
+		height: 56,
+		borderRadius: 28,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 
