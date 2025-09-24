@@ -93,7 +93,7 @@ const HomeRecommendationScreen: React.FC = () => {
         <Text
           style={
             activeTab === tab
-              ? [styles.tabText, styles.activeTabText]
+              ? StyleSheet.flatten([styles.tabText, styles.activeTabText])
               : styles.tabText
           }
         >
@@ -125,7 +125,7 @@ const HomeRecommendationScreen: React.FC = () => {
                 <View style={styles.userAvatars}>
                 </View>
                 <View style={styles.bookmarkContainer}>
-                  <Icon name="bookmark-border" size={20} color="#fff" />
+                  <Icon name="bookmark-border" size={40} color="#fff" />
                   <Text style={styles.bookmarkCount}>{post.bookmarks}</Text>
                 </View>
               </View>
@@ -343,28 +343,31 @@ const styles = StyleSheet.create({
   },
   bookmarkCount: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '600',
     marginTop: 2,
   },
   titleContainer: {
     alignItems: 'center',
-    marginTop: 50,
   },
   postTitle: {
-    fontSize: 48,
-    fontWeight: 'bold',
+    fontFamily: 'Pretendard-Thin',
+    fontSize: 54,
+    lineHeight: 54, // 100%
+    letterSpacing: 10.8, // 20% of 54
+    textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 4,
   },
   postSubtitle: {
-    fontSize: 24,
+    fontFamily: 'Pretendard-ExtraLight',
+    fontSize: 32,
+    lineHeight: 32, // 100%
+    letterSpacing: 13.44, // 42% of 32
+    textAlign: 'center',
     color: '#fff',
-    fontWeight: '300',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },
   postBottomRow: {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, StyleSheet, TextStyle, TextProps as RNTextProps } from 'react-native';
+import { Text as RNText, StyleSheet, TextStyle, TextProps as RNTextProps, StyleProp } from 'react-native';
 import { colors, typography } from '../../constants/theme';
 
 interface TextProps extends RNTextProps {
@@ -8,7 +8,7 @@ interface TextProps extends RNTextProps {
   color?: keyof typeof colors | string;
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'medium' | 'bold';
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
 }
 
 const Text: React.FC<TextProps> = ({
