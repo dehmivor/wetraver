@@ -8,9 +8,16 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors, spacing, borderRadius } from '../../constants/theme';
 import { useNavigation } from '@react-navigation/native';
 
+// Regular expression for RFC 5322 compliant email validation (simplified)
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 const JoinMembershipEmailScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const navigation = useNavigation();
+
+  // Email validation using regex
+  const isValid = useMemo(() => EMAIL_REGEX.test(email.trim()), [email]);
 
   return (
     <Container padding="large">
@@ -26,35 +33,43 @@ const JoinMembershipEmailScreen: React.FC = () => {
 
       <View style={styles.orWrap}>
         <View style={styles.orLine} />
-        <Text variant="caption" color="gray.400">또는</Text>
+        <Text variant="caption" color="gray.400">
+          또는
+        </Text>
         <View style={styles.orLine} />
       </View>
 
       <View style={{ gap: spacing.sm }}>
         <SocialButton label="전화번호로 로그인하기" icon="phone-android" />
-        <SocialButton label="네이버로 로그인하기" icon="public" />
-        <SocialButton label="페이스북으로 로그인하기" icon="facebook" />
-        <SocialButton label="구글로 로그인하기" icon="google" />
-        <SocialButton label="Apple로 로그인하기" icon="apple" />
+        <SocialButton label="네이버로 로그인하기" icon="public" color="#03C75A" />
+        <SocialButton label="페이스북으로 로그인하기" icon="facebook" color="#1877F2" />
+        <SocialButton label="구글로 로그인하기" icon="google" color="#DB4437" />
+        <SocialButton label="Apple로 로그인하기" icon="apple" color="#000" />
       </View>
 
       <View style={styles.footer}>
         <Button
           title="다음"
           onPress={() => navigation.navigate('JoinMembershipEmailCheck' as never)}
+          disabled={!isValid}
           size="large"
+          style={{ borderRadius: 0, height: 100 }}
         />
       </View>
     </Container>
   );
 };
 
-const SocialButton: React.FC<{ label: string; icon: string }> = ({ label, icon }) => (
+const SocialButton: React.FC<{ label: string; icon: string; color?: string }> = ({
+  label,
+  icon,
+  color = colors.gray[700],
+}) => (
   <TouchableOpacity activeOpacity={0.8} style={styles.socialBtn}>
-    <View style={styles.socialContent}>
-      <Icon name={icon} size={20} color={colors.gray[700]} style={{ marginRight: spacing.md }} />
-      <Text variant="body1" color="gray.900">{label}</Text>
-    </View>
+    <Icon name={icon} size={20} color={color} style={{ marginRight: spacing.md }} />
+    <Text variant="body1" color="gray.900">
+      {label}
+    </Text>
   </TouchableOpacity>
 );
 
@@ -78,19 +93,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: spacing.lg,
     backgroundColor: colors.white,
-  },
-  socialContent: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: spacing.sm,
   },
   footer: {
     position: 'absolute',
-    left: spacing.lg,
-    right: spacing.lg,
-    bottom: spacing.lg,
+    left: 0,
+    right: 0,
+    bottom: -10,
+    borderTopColor: '#EBF0F5',
   },
 });
 
 export default JoinMembershipEmailScreen;
-
-
