@@ -120,6 +120,8 @@ const HomeRecommendationScreen: React.FC = () => {
             
             {/* Post Overlay Content */}
             <View style={styles.postOverlay}>
+            {/* Dimmed layer above image, below text */}
+            <View style={styles.dimOverlay} />
               {/* Top Row - User Avatars and Bookmark */}
               <View style={styles.postTopRow}>
                 <View style={styles.userAvatars}>
@@ -303,22 +305,33 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    padding: 20,
+    padding: 16,
     justifyContent: 'space-between',
+  },
+  dimOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    zIndex: 2,
+    pointerEvents: 'none'
   },
   postTopRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    zIndex: 3,
   },
   userAvatars: {
     position: 'relative',
   },
   smallAvatar: {
-    width: 30,
-    height: 30,
+    width: 42,
+    height: 42,
     borderRadius: 15,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#fff',
   },
   avatarBadge: {
@@ -349,6 +362,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     alignItems: 'center',
+    zIndex: 1,
   },
   postTitle: {
     fontFamily: 'Pretendard-Thin',
@@ -371,7 +385,8 @@ const styles = StyleSheet.create({
     textShadowRadius: 2,
   },
   postBottomRow: {
-    marginBottom: 20,
+    marginBottom: -130,
+    zIndex: 3,
   },
   userInfo: {
     flexDirection: 'row',
@@ -399,14 +414,16 @@ const styles = StyleSheet.create({
   postDescription: {
     color: '#fff',
     fontSize: 24,
-    marginBottom: 15,
+    marginBottom: -120,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
+    zIndex: 3,
   },
   engagementRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    zIndex: 3,
   },
   engagementItem: {
     flexDirection: 'row',
