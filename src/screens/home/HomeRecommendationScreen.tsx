@@ -142,7 +142,6 @@ const HomeRecommendationScreen: React.FC = () => {
               <View style={styles.postBottomRow}>
                 <View style={styles.userInfo}>
                   <Image source={post.userAvatar} style={styles.largeAvatar} />
-                  {post.verified && <Icon name="star" size={16} color="#FFD700" style={styles.verifiedIcon} />}
                   <Text style={styles.username}>{post.username}</Text>
                 </View>
               </View>
@@ -298,6 +297,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 600,
     resizeMode: 'cover',
+    transform: [
+      { scale: 1.75 },
+      { translateX: screenWidth * 0.15 },
+      { translateY: -screenHeight * 0.1 },
+    ],
   },
   postOverlay: {
     position: 'absolute',
@@ -404,7 +408,7 @@ const styles = StyleSheet.create({
   },
   username: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '600',
     marginLeft: 10,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
