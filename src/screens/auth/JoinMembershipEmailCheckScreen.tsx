@@ -25,7 +25,9 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
       </View>
       <View style={{ alignItems: 'center', marginVertical: spacing.lg }}>
         <Text variant="body2" align="center">
-          이메일을 통해 abcdef.wetraver@naver.com으로{`\n`}보내드린 코드를 입력하세요.
+          이메일을 통해
+          <Text variant="h4" weight="bold"> abcdef.wetraver@naver.com</Text>
+          으로{`\n`}보내드린 코드를 입력하세요.
         </Text>
       </View>
 
@@ -49,7 +51,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
       <View style={{ alignItems: 'center', marginTop: spacing.md }}>
         <Text variant="caption" color="gray.500">
           코드를 받지 못하셨나요?{' '}
-          <Text variant="caption" color={colors.primary}>다시 보내기</Text>
+          <Text variant="caption" color={colors.black} weight="bold">다시 보내기</Text>
         </Text>
       </View>
 
@@ -59,6 +61,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
           onPress={() => navigation.navigate('JoinMembershipVerification' as never)}
           disabled={!isValid}
           size="large"
+          style={{ borderRadius: 0, height: 100 }}
         />
       </View>
     </Container>
@@ -88,9 +91,10 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: 'absolute',
-    left: spacing.lg,
-    right: spacing.lg,
-    bottom: spacing.lg,
+    left: 0,
+    right: 0,
+    bottom: -10,
+    borderTopColor: '#EBF0F5',
   },
 });
 

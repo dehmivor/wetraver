@@ -12,6 +12,12 @@ const hasLetter = (s: string) => /[A-Za-z가-힣]/.test(s);
 const hasNumber = (s: string) => /\d/.test(s);
 const hasSpecial = (s: string) => /[^A-Za-z0-9가-힣]/.test(s);
 
+const COUNTRY_OPTIONS = [
+  { label: '대한민국', value: 'KR' },
+  { label: '일본', value: 'JP' },
+  { label: '미국', value: 'US' },
+];
+
 const JoinMembershipVerificationScreen: React.FC = () => {
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
@@ -20,6 +26,7 @@ const JoinMembershipVerificationScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [region, setRegion] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [agreePrivacy, setAgreePrivacy] = useState(false);
   const [agreeMarketing, setAgreeMarketing] = useState(false);
@@ -32,19 +39,17 @@ const JoinMembershipVerificationScreen: React.FC = () => {
   const requiredValid = useMemo(
     () =>
       name.trim().length > 0 &&
-      /^\d{8}$/.test(birth.replace(/\D/g, '')) &&
-      country.trim().length > 0 &&
-      /^\d{8,15}$/.test(phone.replace(/\D/g, '')) &&
-      emailRegex.test(email) &&
-      passwordValid &&
       agreePrivacy,
-    [name, birth, country, phone, email, passwordValid, agreePrivacy]
+    [ agreePrivacy]
   );
 
   return (
     <Container padding="large">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: spacing['3xl'] }}>
-        <Input placeholder="실명  (예 : 홍 길동)" value={name} onChangeText={setName} />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: spacing['3xl'] }}
+      >
+        <Input placeholder="실명  (예 : 홍 길동)" value={name} onChangeText={setName} />
         <Text variant="caption" color="gray.500" style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}>
           정부 발급 신분증에 기재된 이름과 일치해야 합니다.
         </Text>
@@ -54,17 +59,40 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           18세 이상의 성인만 회원으로 가입할 수 있습니다. 해당 정보는 다른 이용자에게 공개되지 않습니다.
         </Text>
 
-        <View style={styles.selectBox}><Text variant="body1" color="gray.400">국가/지역</Text></View>
+        <TouchableOpacity
+          style={styles.selectBox}
+          activeOpacity={0.8}
+          onPress={() => setDropdownOpen(!dropdownOpen)}
+        >
+          <Text variant="body1" color={country ? 'gray.900' : 'gray.400'}>
+            {country
+              ? COUNTRY_OPTIONS.find(({ value }) => value === country)?.label
+              : '국가/지역'}
+          </Text>
+          <Text variant="body1" color="gray.400">▾</Text>
+        </TouchableOpacity>
+
+        {dropdownOpen && (
+          <View style={styles.dropdownMenu}>
+            {COUNTRY_OPTIONS.map(({ label, value }) => (
+              <TouchableOpacity
+                key={value}
+                activeOpacity={0.8}
+                style={styles.dropdownItem}
+                onPress={() => {
+                  setCountry(value);
+                  setDropdownOpen(false);
+                }}
+              >
+                <Text variant="body1" color="gray.900">{label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
 
         <Input placeholder="전화번호" value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
         <Input placeholder="이메일" value={email} onChangeText={setEmail} keyboardType="email-address" />
-        <Input
-          placeholder="비밀번호"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          rightIcon="visibility"
-        />
+        <Input placeholder="비밀번호" value={password} onChangeText={setPassword} secureTextEntry rightIcon="visibility" />
 
         <View style={styles.passwordHints}>
           <HintItem label="영문" active={hasLetter(password)} />
@@ -97,24 +125,35 @@ const JoinMembershipVerificationScreen: React.FC = () => {
         </Text>
       </ScrollView>
 
-      <View style={styles.footer}>
-        <Button title="다음" onPress={() => {}} disabled={!requiredValid} size="large" />
-      </View>
+       <View style={styles.footer}>
+    <Button
+      title="다음"
+      onPress={() => {
+        // Navigate or submit
+      }}
+      disabled={!requiredValid}
+      size="large"
+      style={{
+        borderRadius: 0,
+        height: 100,
+        backgroundColor: requiredValid ? colors.primary : colors.gray[300],
+      }}
+    />
+  </View>
+
     </Container>
   );
 };
 
-const AgreementRow: React.FC<{ label: string; checked: boolean; onPress: () => void }> = ({ label, checked, onPress }) => {
-  return (
-    <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.agreeRow}>
-      <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
-        {checked ? <Text variant="button" color={colors.white} align="center">✓</Text> : null}
-      </View>
-      <Text variant="body1" style={{ flex: 1 }}>{label}</Text>
-      <Text variant="body2" color="gray.400">›</Text>
-    </TouchableOpacity>
-  );
-};
+const AgreementRow: React.FC<{ label: string; checked: boolean; onPress: () => void }> = ({ label, checked, onPress }) => (
+  <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.agreeRow}>
+    <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
+      {checked ? <Text variant="button" color={'#fff'} align="center">✓</Text> : null}
+    </View>
+    <Text variant="body1" style={{ flex: 1 }}>{label}</Text>
+    <Text variant="body2" color="gray.400">›</Text>
+  </TouchableOpacity>
+);
 
 const HintItem: React.FC<{ label: string; active: boolean }> = ({ label, active }) => (
   <View style={styles.hintItem}>
@@ -130,8 +169,23 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.md,
     paddingHorizontal: spacing.md,
     height: 48,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: spacing.md,
+  },
+  dropdownMenu: {
+    borderWidth: 1,
+    borderColor: colors.gray[300],
+    borderRadius: borderRadius.md,
+    overflow: 'hidden',
+    marginBottom: spacing.md,
+  },
+  dropdownItem: {
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.md,
+    borderBottomColor: colors.gray[300],
+    borderBottomWidth: 1,
   },
   passwordHints: {
     flexDirection: 'row',
@@ -171,13 +225,12 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   footer: {
-    position: 'absolute',
-    left: spacing.lg,
-    right: spacing.lg,
-    bottom: spacing.lg,
+     position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: -10,
+    borderTopColor: '#EBF0F5',
   },
 });
 
 export default JoinMembershipVerificationScreen;
-
- 
