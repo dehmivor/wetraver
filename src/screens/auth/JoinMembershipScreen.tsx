@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useLayoutEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, ScrollView, Text as RNText } from 'react-native';
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
 import { useNavigation } from '@react-navigation/native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type AgreementKey =
   | 'tos'
@@ -24,13 +25,15 @@ const JoinMembershipScreen: React.FC = () => {
     marketing: false,
     age14: false,
   });
+
   const navigation = useNavigation();
 
-  const requiredChecked = useMemo(() => agreements.tos && agreements.privacy && agreements.age14, [agreements]);
-  const allChecked = useMemo(
-    () => Object.values(agreements).every(Boolean),
-    [agreements]
-  );
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: '회원가입 약관 동의' });
+  }, [navigation]);
+
+  const requiredChecked = agreements.tos && agreements.privacy && agreements.age14;
+  const allChecked = Object.values(agreements).every(Boolean);
 
   const toggleAll = () => {
     const next = !allChecked;
@@ -50,7 +53,7 @@ const JoinMembershipScreen: React.FC = () => {
 
   return (
     <Container padding="large">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+      <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={styles.scrollContent}>
         <View style={styles.noteWrap}>
           <Text variant="caption" color="gray.600" align="center">
             아래 약관 내용에 동의 후 서비스 이용이 가능합니다.
@@ -58,37 +61,42 @@ const JoinMembershipScreen: React.FC = () => {
         </View>
 
         <TouchableOpacity onPress={toggleAll} activeOpacity={0.8} style={styles.allWrap}>
-          <Checkbox checked={allChecked} />
-          <Text variant="h4" weight="bold">전체 동의</Text>
+          <MaterialIcons name="done" size={34} color={allChecked ? colors.primary : colors.gray[300]} />
+          <View><Text variant="h4" weight="bold" style={styles.allText}>전체 동의</Text></View>
         </TouchableOpacity>
 
-        <Divider />
+        <Divider style={styles.boldDivider} />
 
         <AgreementItem
           checked={agreements.tos}
           onPress={() => toggle('tos')}
           label="(필수) 서비스 이용약관"
         />
+        <Divider style={styles.thinDivider} />
         <AgreementItem
           checked={agreements.privacy}
           onPress={() => toggle('privacy')}
           label="(필수) 개인정보 수집 · 이용"
         />
+        <Divider style={styles.thinDivider} />
         <AgreementItem
           checked={agreements.location}
           onPress={() => toggle('location')}
           label="(선택) 위치정보 이용 동의"
         />
+        <Divider style={styles.thinDivider} />
         <AgreementItem
           checked={agreements.personalized}
           onPress={() => toggle('personalized')}
           label="(선택) 개인화 추천 정보 수신 동의"
         />
+        <Divider style={styles.thinDivider} />
         <AgreementItem
           checked={agreements.marketing}
           onPress={() => toggle('marketing')}
           label="(선택) 마케팅 정보 수신 동의"
         />
+        <Divider style={styles.thinDivider} />
         <AgreementItem
           checked={agreements.age14}
           onPress={() => toggle('age14')}
@@ -103,6 +111,8 @@ const JoinMembershipScreen: React.FC = () => {
             본인이 만 14세 이상이라면 체크박스를 선택해주세요.
           </Text>
         </View>
+
+        <Divider style={styles.boldDivider} />
       </ScrollView>
 
       <View style={styles.footer}>
@@ -111,6 +121,7 @@ const JoinMembershipScreen: React.FC = () => {
           onPress={() => navigation.navigate('JoinMembershipPhoneNumber' as never)}
           disabled={!requiredChecked}
           size="large"
+          style={{ borderRadius: 0, height: 100, }}
         />
       </View>
     </Container>
@@ -124,20 +135,12 @@ const AgreementItem: React.FC<{ checked: boolean; onPress: () => void; label: st
 }) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles.itemRow}>
-      <Checkbox checked={checked} />
+      <MaterialIcons name="done" size={24} color={checked ? colors.primary : colors.gray[300]} />
       <View style={styles.itemLabelWrap}>
         <Text variant="body1" color="gray.900">{label}</Text>
       </View>
-      <Text variant="body2" color="gray.400">›</Text>
+      <MaterialIcons name="keyboard-arrow-right" size={34} color="gray" />
     </TouchableOpacity>
-  );
-};
-
-const Checkbox: React.FC<{ checked: boolean }> = ({ checked }) => {
-  return (
-    <View style={[styles.checkboxBox, checked && styles.checkboxChecked]}>
-      {checked ? <Text variant="button" color={colors.white} align="center">✓</Text> : null}
-    </View>
   );
 };
 
@@ -159,6 +162,20 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     paddingVertical: spacing.md,
   },
+  allText: {
+    marginLeft: spacing.md,
+  },
+  boldDivider: {
+    height: 2,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    marginVertical: spacing.sm,
+    opacity: 0.8
+  },
+  thinDivider: {
+    paddingVertical: 1,
+    backgroundColor: '#E1E3E5',
+    marginVertical: 1,
+  },
   itemRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -169,30 +186,16 @@ const styles = StyleSheet.create({
     marginLeft: spacing.md,
   },
   helperWrap: {
-    marginTop: spacing.sm,
-    gap: 2,
+    marginLeft: 44,
+    marginBottom: spacing.lg,
   },
   footer: {
     position: 'absolute',
-    left: spacing.lg,
-    right: spacing.lg,
-    bottom: spacing.lg,
-  },
-  checkboxBox: {
-    width: 24,
-    height: 24,
-    borderRadius: 6,
-    borderWidth: 1,
-    borderColor: colors.gray[300],
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.white,
-  },
-  checkboxChecked: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    left: 0,
+    right: 0,
+    bottom: -10,
+    borderTopColor: '#EBF0F5',
   },
 });
 
 export default JoinMembershipScreen;
-

@@ -35,8 +35,8 @@ const AuthNavigator = () => {
       }}
       initialRouteName="Login"
     >
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="JoinMembership" component={JoinMembershipScreen} options={{ title: '약관동의' }} />
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false  }} />
+      <Stack.Screen name="JoinMembership" component={JoinMembershipScreen} options={{ title: '회원가입 약관 동의', headerShown: true }} />
       <Stack.Screen name="JoinMembershipPhoneNumber" component={JoinMembershipPhoneNumberScreen} options={{ title: '신규 회원 가입' }} />
       <Stack.Screen name="JoinMembershipPhoneNumberCheck" component={JoinMembershipPhoneNumberCheckScreen} options={{ title: '전화번호 인증하기' }} />
       <Stack.Screen name="JoinMembershipEmail" component={JoinMembershipEmailScreen} options={{ title: '신규 회원 가입' }} />
