@@ -186,7 +186,8 @@ const HomeCreatorScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
+          <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
+            <Text style={styles.navText}></Text>
         </TouchableOpacity>
       </View>
 
@@ -376,7 +377,7 @@ const styles = StyleSheet.create({
   bottom: -40,       // 40 pixels below card bottom
   left: '50%',
   marginLeft: -40,   // half avatar width to center
-  zIndex: 10,
+  zIndex: 1,
   elevation: 10,     // Android z-index
   borderRadius: 40,
   shadowColor: '#000',

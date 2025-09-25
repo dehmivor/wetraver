@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Image, 
-  TouchableOpacity, 
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
   Dimensions,
   StatusBar,
 } from 'react-native';
@@ -53,7 +53,6 @@ const HomeRecommendationScreen: React.FC = () => {
       comments: '97',
       bookmarks: '76',
       image: require('../../assets/images/tokyo-traveler.jpg'),
-      verified: true,
       userAvatar: require('../../assets/images/guiherme-stecanella.jpg'),
     },
     {
@@ -66,7 +65,6 @@ const HomeRecommendationScreen: React.FC = () => {
       comments: '23',
       bookmarks: '45',
       image: require('../../assets/images/harrison-chang.jpg'),
-      verified: false,
       userAvatar: require('../../assets/images/harrison-chang.jpg'),
     },
   ];
@@ -74,108 +72,103 @@ const HomeRecommendationScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
-      {/* Status Bar */}
-      <View style={styles.statusBar}>
-        <View style={styles.statusIcons}>
-          {/* Add status icons here if needed */}
+
+      {/* Header with Tabs */}
+      <View style={styles.header}>
+        <View style={styles.tabContainer}>
+          {tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              style={styles.tab}
+              onPress={() => handleTabPress(tab)}
+            >
+              <Text
+                style={
+                  activeTab === tab
+                    ? [styles.tabText, styles.activeTabText]
+                    : styles.tabText
+                }
+              >
+                {tab}
+              </Text>
+              {activeTab === tab && <View style={styles.tabIndicator} />}
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.headerIcons}>
+          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+            <Icon name="search" size={24} color="#000" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleNotificationPress}
+            style={styles.iconButton}
+          >
+            <Icon name="notifications" size={24} color="#000" />
+            <View style={styles.notificationDot} />
+          </TouchableOpacity>
         </View>
       </View>
 
-      {/* Header with Tabs */}
-          <View style={styles.header}>
-            <View style={styles.tabContainer}>
-              {tabs.map((tab) => (
-                <TouchableOpacity
-                  key={tab}
-                  style={styles.tab}
-                  onPress={() => handleTabPress(tab)}
-                >
-                  <Text
-                    style={
-                      activeTab === tab
-                        ? [styles.tabText, styles.activeTabText]
-                        : styles.tabText
-                    }
-                  >
-                    {tab}
-                  </Text>
-                  {activeTab === tab && <View style={styles.tabIndicator} />}
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View style={styles.headerIcons}>
-              <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-                <Icon name="search" size={24} color="#000" />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-                <Icon name="notifications" size={24} color="#000" />
-                <View style={styles.notificationDot} />
-              </TouchableOpacity>
-            </View>
-          </View>
-
       {/* Main Content */}
-      <ScrollView 
-        style={styles.scrollView} 
-        contentContainerStyle={styles.contentContainer} 
-        showsVerticalScrollIndicator={false}
-      >
-        {posts.map((post) => (
-          <View key={post.id} style={styles.postCard}>
-            <Image source={post.image} style={styles.postImage} />
-            
-            {/* Post Overlay Content */}
-            <View style={styles.postOverlay}>
-              {/* Dimmed layer above image, below text */}
-              <View style={styles.dimOverlay} />
-              
-              {/* Top Row - User Avatars and Bookmark */}
-              <View style={styles.postTopRow}>
-                <View style={styles.userAvatars}>
-                  {/* Add user avatars if needed */}
-                </View>
-                <View style={styles.bookmarkContainer}>
-                  <Icon name="bookmark-border" size={40} color="#fff" />
-                  <Text style={styles.bookmarkCount}>{post.bookmarks}</Text>
-                </View>
-              </View>
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.contentContainer}
+          showsVerticalScrollIndicator={false}
+        >
+          {posts.map((post) => (
+            <View key={post.id} style={styles.postCard}>
+              <Image source={post.image} style={styles.postImage} />
 
-              {/* Main Title */}
-              <View style={styles.titleContainer}>
-                <Text style={styles.postTitle}>{post.title}</Text>
-                <Text style={styles.postSubtitle}>{post.subtitle}</Text>
-              </View>
+              {/* Post Overlay Content */}
+              <View style={styles.postOverlay}>
+                {/* Dimmed layer */}
+                <View style={styles.dimOverlay} />
 
-              {/* Bottom User Info */}
-              <View style={styles.postBottomRow}>
-                <View style={styles.userInfo}>
-                  <View style={styles.avatarContainer}>
-                    <Image source={post.userAvatar} style={styles.largeAvatar} />
+                {/* Top Row */}
+                <View style={styles.postTopRow}>
+                  <View style={styles.userAvatars} />
+                  <View style={styles.bookmarkContainer}>
+                    <Icon name="bookmark-border" size={40} color="#fff" />
+                    <Text style={styles.bookmarkCount}>{post.bookmarks}</Text>
                   </View>
-                  <Text style={styles.username}>{post.username}</Text>
                 </View>
-              </View>
 
-              {/* Post Description */}
-              <Text style={styles.postDescription}>{post.description}</Text>
-
-              {/* Engagement Stats */}
-              <View style={styles.engagementRow}>
-                <View style={styles.engagementItem}>
-                  <Icon name="favorite" size={30} color="#FE0055" />
-                  <Text style={styles.engagementText}>{post.likes}</Text>
+                {/* Main Title */}
+                <View style={styles.titleContainer}>
+                  <Text style={styles.postTitle}>{post.title}</Text>
+                  <Text style={styles.postSubtitle}>{post.subtitle}</Text>
                 </View>
-                <View style={styles.engagementItem}>
-                  {/* Replaced "message-circle" with "message" */}
-                  <Icon name="message" size={30} color="#fff" />
-                  <Text style={styles.engagementText}>{post.comments}</Text>
+
+                {/* Bottom User Info */}
+                <View style={styles.postBottomRow}>
+                  <View style={styles.userInfo}>
+                    <View style={styles.avatarContainer}>
+                      <Image source={post.userAvatar} style={styles.largeAvatar} />
+                    </View>
+                    <Text style={styles.username}>{post.username}</Text>
+                  </View>
+                </View>
+
+                {/* Description */}
+                <Text style={styles.postDescription}>{post.description}</Text>
+
+                {/* Engagement */}
+                <View style={styles.engagementRow}>
+                  <View style={styles.engagementItem}>
+                    <Icon name="favorite" size={30} color="#FE0055" />
+                    <Text style={styles.engagementText}>{post.likes}</Text>
+                  </View>
+                  <View style={styles.engagementItem}>
+                    <Icon name="message" size={30} color="#fff" />
+                    <Text style={styles.engagementText}>{post.comments}</Text>
+                  </View>
                 </View>
               </View>
             </View>
-          </View>
-        ))}
-      </ScrollView>
+          ))}
+        </ScrollView>
+      </View>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
@@ -196,23 +189,27 @@ const HomeRecommendationScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
+          <Image
+            source={require('../../assets/images/harrison-chang.jpg')}
+            style={styles.profileNavAvatar}
+          />
         </TouchableOpacity>
       </View>
- {/* Floating Action Button */}
-        <View style={styles.fabContainer}>
-          <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
-            <LinearGradient
-              colors={["#AB42FF", "#7862FF", "#3687FF"]}
-              locations={[0, 0.5, 1]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.fabPrimary}
-            >
-              <Icon name="add" size={24} color="#fff" />
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
+
+      {/* Floating Action Button */}
+      <View style={styles.fabContainer}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+          <LinearGradient
+            colors={['#AB42FF', '#7862FF', '#3687FF']}
+            locations={[0, 0.5, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.fabPrimary}
+          >
+            <Icon name="add" size={24} color="#fff" />
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -230,32 +227,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  statusBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 5,
-  },
-  timeText: {
-    color: '#000',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  statusIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusIcon: {
-    marginLeft: 5,
-  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 25,
     backgroundColor: '#fff',
   },
   tabContainer: {
@@ -298,12 +275,6 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#FF0000',
   },
-  content: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   postCard: {
     marginHorizontal: 15,
     marginVertical: 10,
@@ -317,9 +288,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   postImage: {
-   width: '100%',
-  height: 300,              // Reduced height for demonstration
-  resizeMode: 'cover',
+    width: '100%',
+    height: 300,
+    resizeMode: 'cover',
     transform: [
       { scale: 1.75 },
       { translateX: screenWidth * 0.15 },
@@ -327,56 +298,23 @@ const styles = StyleSheet.create({
     ],
   },
   postOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
     padding: 16,
     justifyContent: 'space-between',
   },
   dimOverlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    zIndex: 2,
-    pointerEvents: 'none',
+    zIndex: 1,
   },
   postTopRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    zIndex: 3,
+    zIndex: 2,
   },
   userAvatars: {
     position: 'relative',
-  },
-  smallAvatar: {
-    width: 42,
-    height: 42,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#fff',
-  },
-  avatarBadge: {
-    position: 'absolute',
-    top: -5,
-    right: -5,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: '#9C27B0',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  badgeIcon: {
-    width: 12,
-    height: 12,
-    tintColor: '#fff',
-    resizeMode: 'contain',
   },
   bookmarkContainer: {
     alignItems: 'center',
@@ -389,8 +327,8 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     alignItems: 'center',
-    zIndex: 1,
     marginTop: -30,
+    zIndex: 2,
   },
   postTitle: {
     fontFamily: 'Pretendard-Thin',
@@ -399,8 +337,6 @@ const styles = StyleSheet.create({
     letterSpacing: 12.8,
     textAlign: 'center',
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowRadius: 4,
   },
   postSubtitle: {
     fontFamily: 'Pretendard-ExtraLight',
@@ -409,12 +345,10 @@ const styles = StyleSheet.create({
     letterSpacing: 15,
     textAlign: 'center',
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowRadius: 2,
   },
   postBottomRow: {
     marginBottom: -130,
-    zIndex: 3,
+    zIndex: 2,
   },
   userInfo: {
     flexDirection: 'row',
@@ -429,61 +363,40 @@ const styles = StyleSheet.create({
     borderColor: '#fff',
   },
   largeAvatar: {
-    width: 190, 
+    width: 190,
     height: 190,
     position: 'absolute',
-    left: -75, 
+    left: -75,
     top: -70,
     resizeMode: 'cover',
-  },
-  verifiedIcon: {
-    marginLeft: 5,
   },
   username: {
     color: '#fff',
     fontSize: 20,
     fontWeight: '600',
     marginLeft: 10,
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
   },
   postDescription: {
     color: '#fff',
     fontSize: 24,
     marginBottom: -120,
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
-    zIndex: 3,
+    zIndex: 2,
   },
   engagementRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    zIndex: 3,
+    zIndex: 2,
   },
   engagementItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginRight: 20,
   },
-  circleIcon: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   engagementText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: '600',
     marginLeft: 5,
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
   },
   bottomNav: {
     flexDirection: 'row',
@@ -512,27 +425,27 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
   },
-   fabContainer: {
-    position: 'absolute',
-    right: 15,
-    bottom: 80,
-    alignItems: 'center',
-  },
-	fabShadow: {
-		elevation: 6,
-		shadowColor: '#402E99',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.3,
-		shadowRadius: 6,
-		borderRadius: 28,
-	},
-	fabPrimary: {
-		width: 56,
-		height: 56,
-		borderRadius: 28,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+  fabContainer: {
+    position: 'absolute',
+    right: 15,
+    bottom: 80,
+    alignItems: 'center',
+  },
+  fabShadow: {
+    elevation: 6,
+    shadowColor: '#402E99',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    borderRadius: 28,
+  },
+  fabPrimary: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 export default HomeRecommendationScreen;
