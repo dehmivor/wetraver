@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -147,39 +146,19 @@ const HomePopularSellerScreen: React.FC = () => {
             <Text style={styles.hashtagText}>
               <Text style={styles.hashtagSymbol}>#</Text>일본여행
             </Text>
-            <Text style={{ fontSize: 20 }}>
-              <Text
-                style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}
-              >
-                #
-              </Text>
-              도쿄여행
+            <Text style={styles.hashtagText}>
+              <Text style={styles.hashtagSymbol}>#</Text>도쿄여행
             </Text>
-            <Text style={{ fontSize: 20 }}>
-              <Text
-                style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}
-              >
-                #
-              </Text>
-              로컬체험
+            <Text style={styles.hashtagText}>
+              <Text style={styles.hashtagSymbol}>#</Text>로컬체험
             </Text>
           </View>
           <View style={styles.hashtagRow}>
-            <Text style={{ fontSize: 20 }}>
-              <Text
-                style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}
-              >
-                #
-              </Text>
-              핫플
+            <Text style={styles.hashtagText}>
+              <Text style={styles.hashtagSymbol}>#</Text>핫플
             </Text>
-            <Text style={{ fontSize: 20 }}>
-              <Text
-                style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}
-              >
-                #
-              </Text>
-              숨은명소
+            <Text style={styles.hashtagText}>
+              <Text style={styles.hashtagSymbol}>#</Text>숨은명소
             </Text>
           </View>
         </View>

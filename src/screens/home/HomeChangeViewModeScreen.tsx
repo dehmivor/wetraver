@@ -21,7 +21,7 @@ type HomeChangeViewModeScreenNavigationProp = NativeStackNavigationProp<RootStac
 
 const HomeChangeViewModeScreen: React.FC = () => {
   const navigation = useNavigation<HomeChangeViewModeScreenNavigationProp>();
-  const [selectedMode, setSelectedMode] = useState('grid');
+  const [selectedMode, _setSelectedMode] = useState('grid');
   const [activeTab, setActiveTab] = useState('추천'); // default first tab
 
   const handleSearchPress = () => {
