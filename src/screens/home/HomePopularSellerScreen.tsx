@@ -260,7 +260,7 @@ backgroundColor: '#fff',
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#00C7A6',
+    backgroundColor: '#584DFF',
     marginTop: 5,
   },
   headerIcons: {

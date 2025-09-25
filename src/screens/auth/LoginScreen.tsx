@@ -39,7 +39,12 @@ const LoginScreen: React.FC = () => {
                 <Text variant="h1" color="white" align="center" style={styles.title}>
                   WETRAVER
                 </Text>
-                <View style={styles.titleBadge} />
+                {/* Replace View with UisComment */}
+                {/* <UisComment 
+                  color="white" 
+                  size={20} 
+                  style={styles.titleIcon} 
+                /> */}
               </View>
             </View>
             
@@ -100,8 +105,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: spacing.lg,
     justifyContent: 'space-between',
-    paddingTop: 110, // Add top padding to position title higher
-    paddingBottom: 60, // Add bottom padding
+    paddingTop: 110, 
+    paddingBottom: 60, 
   },
   headerSection: {
     alignItems: 'center',
@@ -116,12 +121,9 @@ const styles = StyleSheet.create({
     fontSize: 26,  
     letterSpacing: 2,  
   },
-  titleBadge: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: 'white',
+  titleIcon: {
     marginLeft: 8,
+    transform: [{ rotate: '-15deg' }], // Lean 15% to the left
   },
   bottomContent: {
     alignItems: 'center',
@@ -144,7 +146,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 32,
     marginBottom: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Add slight background
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', 
   },
   registerButtonText: {
     fontWeight: 'bold',

@@ -13,19 +13,24 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
+
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
 
 const HomeCreatorScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState('크리에이터');
   const navigation = useNavigation();
 
+
   const handleSearchPress = () => {
     console.log('Search pressed');
   };
 
+
   const handleNotificationPress = () => {
     console.log('Notification pressed');
   };
+
 
   const handleTabPress = (tab: string) => {
     setActiveTab(tab);
@@ -36,7 +41,9 @@ const HomeCreatorScreen: React.FC = () => {
     }
   };
 
+
   const tabs = ['추천', '인기셀러', '크리에이터'];
+
 
   return (
     <View style={styles.container}>
@@ -44,7 +51,9 @@ const HomeCreatorScreen: React.FC = () => {
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
+        
       </View>
+
 
       {/* Header with Tabs */}
       <View style={styles.header}>
@@ -79,21 +88,84 @@ const HomeCreatorScreen: React.FC = () => {
         </View>
       </View>
 
+
       {/* Main Content */}
-      <View style={styles.content}>
-        {/* Drag Handle */}
-        <View style={styles.dragHandle} />
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {/* Main Headline */}
+        <Text style={styles.mainHeadline}>
+         다양한 크리에이터 추천 상품을
+        </Text>
+        <Text style={styles.mainHeadline}>
+         지금 바로 확인해 보세요
+        </Text>
         
-        {/* Large Red Circle with Profile */}
-        <View style={styles.redCircleContainer}>
-          <View style={styles.redCircle}>
+        {/* Creator Cards */}
+        <ScrollView 
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          style={styles.cardsContainer}
+          contentContainerStyle={styles.cardsContent}
+        >
+          {/* Left Card */}
+          <View style={styles.card}>
             <Image 
-              source={require('../../assets/images/guiherme-stecanella.jpg')} 
-              style={styles.profileImage} 
+              source={require('../../assets/images/antonio-dafei.jpg')} 
+              style={styles.cardImage} 
             />
+            <View style={styles.cardOverlay}>
+              <Text style={styles.cardText}>피와</Text>
+              <Text style={styles.cardText}>여행</Text>
+            </View>
           </View>
+          
+          {/* Center Card - Main */}
+          <View style={[styles.card, styles.mainCard]}>
+            <Image 
+              source={require('../../assets/images/clay-banks.jpg')} 
+              style={styles.mainCardImage} 
+            />
+            <View style={styles.mainCardOverlay}>
+              <Text style={styles.mainCardTitle}>일본 도쿄 여행, </Text>
+              <Text style={styles.mainCardTitle}>숨은 맛집 이야기</Text>
+            </View>
+            <LinearGradient
+                      colors={['transparent', 'rgba(153, 107, 61, 0.7)']}
+                      start={{ x: 0.5, y: 0.7 }}
+                      end={{ x: 0.5, y: 0.9 }}
+                      style={styles.profileGradient}
+                    />
+<View style={styles.creatorProfile}>
+              <Image 
+                source={require('../../assets/images/anthony-tran.jpg')} 
+                style={styles.creatorAvatar} 
+              />
+            </View>
+          </View>
+          
+          {/* Right Card */}
+          <View style={styles.card}>
+            <Image 
+              source={require('../../assets/images/alison-pang.jpg')} 
+              style={styles.cardImage} 
+            />
+            <View style={styles.cardOverlay}>
+              <Text style={styles.cardText}>맛집</Text>
+            </View>
+          </View>
+        </ScrollView>
+        
+        {/* Location Section */}
+        <View style={styles.locationSection}>
+          <Icon name="location-on" size={30} color="#584DFF" />
+          <Text style={styles.locationText}>도쿄 ∙ 오사카, 일본</Text>
         </View>
-      </View>
+        
+        {/* View Products Button */}
+        <TouchableOpacity style={styles.viewProductsButton}>
+          <Text style={styles.viewProductsText}>상품 보기</Text>
+        </TouchableOpacity>
+      </ScrollView>
+
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
@@ -106,7 +178,7 @@ const HomeCreatorScreen: React.FC = () => {
           <Text style={styles.navText}>커뮤니티</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="star-border" size={24} color="#9CA3AF" />
+          <Icon name="star" size={24} color="#9CA3AF" />
           <Text style={styles.navText}>버디픽</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
@@ -117,6 +189,7 @@ const HomeCreatorScreen: React.FC = () => {
           <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
         </TouchableOpacity>
       </View>
+
 
       {/* Floating Action Button */}
         <View style={styles.fabContainer}>
@@ -135,6 +208,7 @@ const HomeCreatorScreen: React.FC = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -212,38 +286,137 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    paddingTop: 60,
   },
-  dragHandle: {
-    width: 40,
-    height: 4,
-    backgroundColor: '#D1D5DB',
-    borderRadius: 2,
-    marginBottom: 40,
+  mainHeadline: {
+    fontSize: 20,
+    fontWeight: '300',
+    color: '#000',
+    textAlign: 'center',
+    lineHeight: 28,
   },
-  redCircleContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  cardsContainer: {
+  marginTop: 20,
+  marginBottom: 100,  // increased bottom to allow avatar space
+},
+  cardsContent: {
+    paddingHorizontal: 10,
   },
-  redCircle: {
-    width: 280,
-    height: 280,
-    borderRadius: 140,
-    backgroundColor: '#FF0000',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
+  card: {
+    width: 172,
+    height: 235,
+    marginRight: 15,
+    borderRadius: 12,
+    overflow: 'hidden',
+    position: 'relative',
+    marginTop: 60,
   },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+  mainCard: {
+    width: 191,
+    height: 260,
+    borderRadius: 8,
+    overflow: 'visible',
+    marginTop: 80,  // increase space for avatar above
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
     resizeMode: 'cover',
+  },
+  mainCardImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+    resizeMode: 'cover',
+  },
+  cardOverlay: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+  },
+  mainCardOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingTop: 60, // add top padding to avoid overlap with avatar
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+    zIndex: 3
+  },
+  cardText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },
+  mainCardTitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '300',
+    marginBottom: 10,
+    textShadowColor: 'rgba(0,0,0,0.5)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
+  },profileGradient: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		right: 0,
+		bottom: 0,
+    borderRadius: 8,
+	},
+ creatorProfile: {
+  position: 'absolute',
+  bottom: -40,       // 40 pixels below card bottom
+  left: '50%',
+  marginLeft: -40,   // half avatar width to center
+  zIndex: 10,
+  elevation: 10,     // Android z-index
+  borderRadius: 40,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.3,
+  shadowRadius: 5,
+},
+  creatorAvatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    borderWidth: 2,
+    borderColor: '#fff',
+  },
+  locationSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  locationText: {
+    marginLeft: 5,
+    fontSize: 14,
+    color: '#18191A',
+    fontWeight: '400',
+  },
+  viewProductsButton: {
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#E5E7EB',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 60,
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  viewProductsText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#000',
   },
   bottomNav: {
     flexDirection: 'row',
@@ -273,26 +446,27 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   fabContainer: {
-    position: 'absolute',
-    right: 15,
-    bottom: 80,
-    alignItems: 'center',
-  },
-	fabShadow: {
-		elevation: 6,
-		shadowColor: '#402E99',
-		shadowOffset: { width: 0, height: 2 },
-		shadowOpacity: 0.3,
-		shadowRadius: 6,
-		borderRadius: 28,
-	},
-	fabPrimary: {
-		width: 56,
-		height: 56,
-		borderRadius: 28,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+    position: 'absolute',
+    right: 15,
+    bottom: 80,
+    alignItems: 'center',
+  },
+  fabShadow: {
+    elevation: 6,
+    shadowColor: '#402E99',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    borderRadius: 28,
+  },
+  fabPrimary: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
+
 
 export default HomeCreatorScreen;
