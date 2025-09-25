@@ -27,6 +27,8 @@ const RootNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        statusBarStyle: 'dark',
+        statusBarColor: '#FFFFFF',
       }}
       initialRouteName="Login"
     >
@@ -43,6 +45,8 @@ const RootNavigator = () => {
         component={JoinMembershipScreen}
         options={{
           title: '약관동의',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
@@ -50,20 +54,26 @@ const RootNavigator = () => {
         component={JoinMembershipPhoneNumberScreen}
         options={{
           title: '신규 회원 가입',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
         name="JoinMembershipPhoneNumberCheck"
         component={JoinMembershipPhoneNumberCheckScreen}
         options={{
-          title: '전화번호 인증하기',
+          title: '신규 회원 가입',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
         name="JoinMembershipEmail"
         component={JoinMembershipEmailScreen}
         options={{
-          title: '신규 회원 가입',
+          title: '전화번호 인증하기',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
@@ -71,6 +81,8 @@ const RootNavigator = () => {
         component={JoinMembershipEmailCheckScreen}
         options={{
           title: '이메일 인증하기',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
       <Stack.Screen
@@ -78,6 +90,8 @@ const RootNavigator = () => {
         component={JoinMembershipVerificationScreen}
         options={{
           title: '가입 완료하기',
+          headerShown: true,
+          headerTitleAlign: 'center',
         }}
       />
 

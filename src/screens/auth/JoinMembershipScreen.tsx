@@ -1,5 +1,6 @@
 import React, { useState, useLayoutEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import Divider from '../../components/ui/Divider';
@@ -71,7 +72,7 @@ const JoinMembershipScreen: React.FC = () => {
         >
           <MaterialIcons
             name="done"
-            size={34}
+            size={moderateScale(34)}
             color={allChecked ? colors.primary : colors.gray[300]}
           />
           <View>
@@ -159,7 +160,7 @@ const AgreementItem: React.FC<{
     >
       <MaterialIcons
         name="done"
-        size={24}
+        size={moderateScale(24)}
         color={checked ? colors.primary : colors.gray[300]}
       />
       <View style={styles.itemLabelWrap}>
@@ -167,14 +168,14 @@ const AgreementItem: React.FC<{
           {label}
         </Text>
       </View>
-      <MaterialIcons name="keyboard-arrow-right" size={34} color="gray" />
+      <MaterialIcons name="keyboard-arrow-right" size={moderateScale(34)} color="gray" />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: spacing['3xl'],
+    paddingBottom: spacing['xs'],
   },
   noteWrap: {
     backgroundColor: colors.gray[100],
@@ -182,27 +183,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     borderRadius: borderRadius.lg,
     alignItems: 'center',
-    marginBottom: spacing.lg,
+    marginBottom: spacing.sm,
   },
   allWrap: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.md,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.sm,
   },
   allText: {
     marginLeft: spacing.md,
   },
   boldDivider: {
-    height: 2,
+    height: verticalScale(2),
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     marginVertical: spacing.sm,
     opacity: 0.8,
   },
   thinDivider: {
-    paddingVertical: 1,
+    paddingVertical: verticalScale(1),
     backgroundColor: '#E1E3E5',
-    marginVertical: 1,
+    marginVertical: verticalScale(1),
   },
   itemRow: {
     flexDirection: 'row',
@@ -214,14 +215,14 @@ const styles = StyleSheet.create({
     marginLeft: spacing.md,
   },
   helperWrap: {
-    marginLeft: 44,
+    marginLeft: scale(44),
     marginBottom: spacing.lg,
   },
   footer: {
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: -10,
+    bottom: -verticalScale(10),
     borderTopColor: '#EBF0F5',
   },
 });
