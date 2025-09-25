@@ -38,7 +38,7 @@ export type HomeStackParamList = {
   HomePopularSeller: undefined;
   HomeCreator: undefined;
   HomeChangeViewMode: undefined;
-  HomeCardTap: undefined;
+  HomeCardTap: { modeId?: string } | undefined;
   HomeDetailPage: undefined;
   HomeComments: undefined;
 };

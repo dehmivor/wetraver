@@ -91,41 +91,6 @@ const HomePopularSellerScreen: React.FC = () => {
         </View>
       </View>
 
-
-      {/* Header with Tabs */}
-  <View style={styles.header}>
-        <View style={styles.tabContainer}>
-          {tabs.map((tab) => (
-            <TouchableOpacity
-              key={tab}
-              style={styles.tab}
-              onPress={() => handleTabPress(tab)}
-            >
-              <Text
-                style={
-                  activeTab === tab
-                    ? [styles.tabText, styles.activeTabText]
-                    : styles.tabText
-                }
-              >
-                {tab}
-              </Text>
-              {activeTab === tab && <View style={styles.tabIndicator} />}
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-            <Icon name="search" size={24} color="#000" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-            <Icon name="notifications" size={24} color="#000" />
-            <View style={styles.notificationDot} />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Call to Action Text */}
@@ -175,18 +140,18 @@ const HomePopularSellerScreen: React.FC = () => {
         </View>
 
 
-        {/* Hashtags Section */}
-        <View style={styles.hashtagsContainer}>
-          <View style={styles.hashtagRow}>
-            <Text style={{fontSize: 20}}>  <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>일본여행</Text>
-            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>도쿄여행</Text>
-            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>로컬체험</Text>
-          </View>
-          <View style={styles.hashtagRow}>
-            <Text style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>핫플</Text>
-            <Text  style={{fontSize: 20}}> <Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>숨은명소</Text>
-          </View>
-        </View>
+        {/* Hashtags Section */}
+        <View style={styles.hashtagsContainer}>
+          <View style={styles.hashtagRow}>
+            <Text style={{fontSize: 20}}><Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>일본여행</Text>
+            <Text style={{fontSize: 20}}><Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>도쿄여행</Text>
+            <Text style={{fontSize: 20}}><Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>로컬체험</Text>
+          </View>
+          <View style={styles.hashtagRow}>
+            <Text style={{fontSize: 20}}><Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>핫플</Text>
+            <Text style={{fontSize: 20}}><Text style={{ color: '#584DFF', fontSize: 20, fontWeight: '500' }}>#</Text>숨은명소</Text>
+          </View>
+        </View>
 
 
         {/* Follow Button */}

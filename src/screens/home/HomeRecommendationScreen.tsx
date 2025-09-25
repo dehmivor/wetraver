@@ -190,7 +190,7 @@ const HomeRecommendationScreen: React.FC = () => {
              </TouchableOpacity>
              <TouchableOpacity style={styles.navItem}>
                <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
-                 <Text style={styles.navText}>qwert</Text>
+               <Text style={styles.navText}>qwert</Text>
              </TouchableOpacity>
            </View>
 

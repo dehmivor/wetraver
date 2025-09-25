@@ -1,22 +1,28 @@
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../navigation/types';
 import React, { useState } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity, 
+import {
+  Dimensions,
   Image,
+  ScrollView,
   StatusBar,
-  Dimensions
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
+
+type HomeChangeViewModeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const HomeChangeViewModeScreen: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<HomeChangeViewModeScreenNavigationProp>();
   const [selectedMode, setSelectedMode] = useState('grid');
+  const [activeTab, setActiveTab] = useState('추천'); // default first tab
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -36,7 +42,18 @@ const HomeChangeViewModeScreen: React.FC = () => {
   };
 
   const handleImagePress = (modeId: string) => {
-    navigation.navigate('HomeCardTap' as never, { modeId } as never);
+    navigation.navigate('HomeCardTap', { modeId });
+  };
+
+  const handleTabPress = (tab: string) => {
+    setActiveTab(tab);
+    if (tab === '추천') {
+      navigation.navigate('HomeRecommendation');
+    } else if (tab === '인기셀러') {
+      navigation.navigate('HomePopularSeller');
+    } else if (tab === '크리에이터') {
+      navigation.navigate('HomeCreator');
+    }
   };
 
   const viewModes = [
@@ -74,32 +91,48 @@ const HomeChangeViewModeScreen: React.FC = () => {
     }
   ];
 
+  const tabs = ['추천', '인기셀러', '크리에이터'];
+
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       
       {/* Status Bar */}
       <View style={styles.statusBar}>
-        <Text style={styles.timeText}>23:18</Text>
-        <View style={styles.statusIcons}>
-          <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
-          <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
-        </View>
+        
       </View>
 
-      {/* Header */}
+      {/* Header with Tabs */}
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-          <Icon name="arrow-back" size={24} color="#fff" />
-        </TouchableOpacity>
-        <Text style={styles.title}>뷰 모드 변경</Text>
+        <View style={styles.tabContainer}>
+          {tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              style={styles.tab}
+              onPress={() => handleTabPress(tab)}
+            >
+              <Text
+                style={
+                  activeTab === tab
+                    ? [styles.tabText, styles.activeTabText]
+                    : styles.tabText
+                }
+              >
+                {tab}
+              </Text>
+              {activeTab === tab && <View style={styles.tabIndicator} />}
+            </TouchableOpacity>
+          ))}
+        </View>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-            <Icon name="search" size={24} color="#fff" />
+            <Icon name="search" size={24} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-            <Icon name="notifications" size={24} color="#fff" />
+          <TouchableOpacity
+            onPress={handleNotificationPress}
+            style={styles.iconButton}
+          >
+            <Icon name="notifications" size={24} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
         </View>
@@ -110,9 +143,9 @@ const HomeChangeViewModeScreen: React.FC = () => {
         <View style={styles.contentContainer}>
           <Text style={styles.sectionTitle}>콘텐츠 표시 방식</Text>
           <Text style={styles.sectionSubtitle}>원하는 뷰 모드를 선택하세요</Text>
-          
+
           <View style={styles.modesGrid}>
-            {viewModes.map((mode, index) => (
+            {viewModes.map((mode) => (
               <TouchableOpacity
                 key={mode.id}
                 style={[
@@ -124,17 +157,19 @@ const HomeChangeViewModeScreen: React.FC = () => {
                 <Image source={mode.image} style={styles.modeImage} />
                 <View style={styles.modeOverlay}>
                   <View style={styles.modeIconContainer}>
-                    <Icon 
-                      name={mode.icon} 
-                      size={24} 
-                      color={selectedMode === mode.id ? '#9C27B0' : '#fff'} 
+                    <Icon
+                      name={mode.icon}
+                      size={24}
+                      color={selectedMode === mode.id ? '#9C27B0' : '#fff'}
                     />
                   </View>
                   <View style={styles.modeInfo}>
-                    <Text style={[
-                      styles.modeTitle,
-                      selectedMode === mode.id && styles.selectedModeTitle
-                    ]}>
+                    <Text
+                      style={[
+                        styles.modeTitle,
+                        selectedMode === mode.id && styles.selectedModeTitle
+                      ]}
+                    >
                       {mode.title}
                     </Text>
                     <Text style={styles.modeSubtitle}>{mode.subtitle}</Text>
@@ -154,15 +189,15 @@ const HomeChangeViewModeScreen: React.FC = () => {
       {/* Bottom Navigation */}
       <View style={styles.bottomNav}>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>홈</Text>
+          <Icon name="home" size={24} color="#000" />
+          <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
           <Icon name="people" size={24} color="#9CA3AF" />
           <Text style={styles.navText}>커뮤니티</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="star-border" size={24} color="#9CA3AF" />
+          <Icon name="star" size={24} color="#9CA3AF" />
           <Text style={styles.navText}>버디픽</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
@@ -170,14 +205,26 @@ const HomeChangeViewModeScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
+          <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
+          <Text style={styles.navText}>qwert</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Floating Action Button */}
+      {/* Floating Action Buttons */}
       <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabPrimary}>
-          <Icon name="add" size={24} color="#fff" />
+        <TouchableOpacity style={styles.fabSecondary} onPress={() => handleImagePress('grid')}>
+          <Icon name="grid-on" size={24} color="#666" />
+        </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+          <LinearGradient
+            colors={["#AB42FF", "#7862FF", "#3687FF"]}
+            locations={[0, 0.5, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.fabPrimary}
+          >
+            <Icon name="add" size={24} color="#fff" />
+          </LinearGradient>
         </TouchableOpacity>
       </View>
     </View>
@@ -185,10 +232,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
+  container: { flex: 1, backgroundColor: '#fff' },
   statusBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -197,42 +241,27 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 5,
   },
-  timeText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  statusIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusIcon: {
-    marginLeft: 5,
-  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
     paddingVertical: 15,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
   },
-  backButton: {
-    padding: 8,
+  tabContainer: { flexDirection: 'row', alignItems: 'center' },
+  tab: { marginRight: 30, alignItems: 'center' },
+  tabText: { color: '#9CA3AF', fontSize: 16, fontWeight: '500' },
+  activeTabText: { color: '#000' },
+  tabIndicator: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#584DFF',
+    marginTop: 5
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  headerIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconButton: {
-    marginLeft: 15,
-    position: 'relative',
-  },
+  headerIcons: { flexDirection: 'row', alignItems: 'center' },
+  iconButton: { marginLeft: 15, position: 'relative' },
   notificationDot: {
     position: 'absolute',
     top: 0,
@@ -240,30 +269,25 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FF0000',
+    backgroundColor: '#FF0000'
   },
-  content: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    padding: 20,
-  },
+  content: { flex: 1, backgroundColor: '#fff', paddingTop: 60 },
+  contentContainer: { padding: 20 },
   sectionTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
-    marginBottom: 8,
+    marginBottom: 8
   },
   sectionSubtitle: {
     fontSize: 16,
     color: '#6B7280',
-    marginBottom: 24,
+    marginBottom: 24
   },
   modesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   modeCard: {
     width: (screenWidth - 60) / 2,
@@ -278,16 +302,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     borderWidth: 2,
-    borderColor: 'transparent',
+    borderColor: 'transparent'
   },
-  selectedModeCard: {
-    borderColor: '#9C27B0',
-  },
-  modeImage: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
+  selectedModeCard: { borderColor: '#9C27B0' },
+  modeImage: { width: '100%', height: '100%', resizeMode: 'cover' },
   modeOverlay: {
     position: 'absolute',
     top: 0,
@@ -295,35 +313,31 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     padding: 15,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   modeIconContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 20,
-    padding: 8,
+    padding: 8
   },
-  modeInfo: {
-    alignSelf: 'flex-end',
-  },
+  modeInfo: { alignSelf: 'flex-end' },
   modeTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-    marginBottom: 4,
+    marginBottom: 4
   },
-  selectedModeTitle: {
-    color: '#9C27B0',
-  },
+  selectedModeTitle: { color: '#9C27B0' },
   modeSubtitle: {
     fontSize: 12,
     color: '#fff',
-    textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2,
+    textShadowRadius: 2
   },
   selectedIndicator: {
     position: 'absolute',
@@ -334,7 +348,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#9C27B0',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   bottomNav: {
     flexDirection: 'row',
@@ -344,41 +358,42 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     justifyContent: 'space-around',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  navItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  navText: {
-    fontSize: 12,
-    color: '#9CA3AF',
-    marginTop: 4,
-  },
-  profileNavAvatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-  },
-  fabContainer: {
-    position: 'absolute',
-    right: 20,
-    bottom: 100,
-    alignItems: 'center',
-  },
+  navItem: { alignItems: 'center', flex: 1 },
+  navText: { fontSize: 12, color: '#9CA3AF', marginTop: 4 },
+  activeNavText: { color: '#000' },
+  profileNavAvatar: { width: 24, height: 24, borderRadius: 12 },
+  fabContainer: { position: 'absolute', right: 20, bottom: 100, alignItems: 'center' },
   fabPrimary: {
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#9C27B0',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
   },
+  fabSecondary: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#F3F4F6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  fabShadow: {
+    elevation: 6,
+    shadowColor: '#402E99',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    borderRadius: 28,
+  }
 });
 
 export default HomeChangeViewModeScreen;

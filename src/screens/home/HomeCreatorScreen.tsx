@@ -134,7 +134,7 @@ const HomeCreatorScreen: React.FC = () => {
                       end={{ x: 0.5, y: 0.9 }}
                       style={styles.profileGradient}
                     />
-<View style={styles.creatorProfile}>
+            <View style={styles.creatorProfile}>
               <Image 
                 source={require('../../assets/images/anthony-tran.jpg')} 
                 style={styles.creatorAvatar} 
