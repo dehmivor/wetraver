@@ -11,6 +11,7 @@ import {
 import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -77,53 +78,62 @@ const HomeRecommendationScreen: React.FC = () => {
       {/* Status Bar */}
       <View style={styles.statusBar}>
         <View style={styles.statusIcons}>
+          {/* Add status icons here if needed */}
         </View>
       </View>
 
       {/* Header with Tabs */}
-<View style={styles.header}>
-  <View style={styles.headerLeft} />
-  <View style={styles.tabContainer}>
-    {tabs.map((tab) => (
-      <TouchableOpacity
-        key={tab}
-        style={styles.tab}
-        onPress={() => handleTabPress(tab)}
-      >
-        <Text
-          style={
-            activeTab === tab
-              ? StyleSheet.flatten([styles.tabText, styles.activeTabText])
-              : styles.tabText
-          }
-        >
-          {tab}
-        </Text>
-        {activeTab === tab && <View style={styles.tabIndicator} />}
-      </TouchableOpacity>
-    ))}
-  </View>
- <View style={styles.headerIcons}>
-  <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
-    <Icon name="search" size={24} style={{ marginRight: 5 }}  color="black" />
-    <Icon name="bell-outline" size={24} color="black" />
-    <View style={styles.notificationDot} />
-  </TouchableOpacity>
-</View>
-</View>
+          <View style={styles.header}>
+            <View style={styles.tabContainer}>
+              {tabs.map((tab) => (
+                <TouchableOpacity
+                  key={tab}
+                  style={styles.tab}
+                  onPress={() => handleTabPress(tab)}
+                >
+                  <Text
+                    style={
+                      activeTab === tab
+                        ? [styles.tabText, styles.activeTabText]
+                        : styles.tabText
+                    }
+                  >
+                    {tab}
+                  </Text>
+                  {activeTab === tab && <View style={styles.tabIndicator} />}
+                </TouchableOpacity>
+              ))}
+            </View>
+            <View style={styles.headerIcons}>
+              <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+                <Icon name="search" size={24} color="#000" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+                <Icon name="notifications" size={24} color="#000" />
+                <View style={styles.notificationDot} />
+              </TouchableOpacity>
+            </View>
+          </View>
+
       {/* Main Content */}
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView 
+        style={styles.scrollView} 
+        contentContainerStyle={styles.contentContainer} 
+        showsVerticalScrollIndicator={false}
+      >
         {posts.map((post) => (
           <View key={post.id} style={styles.postCard}>
             <Image source={post.image} style={styles.postImage} />
             
             {/* Post Overlay Content */}
             <View style={styles.postOverlay}>
-            {/* Dimmed layer above image, below text */}
-            <View style={styles.dimOverlay} />
+              {/* Dimmed layer above image, below text */}
+              <View style={styles.dimOverlay} />
+              
               {/* Top Row - User Avatars and Bookmark */}
               <View style={styles.postTopRow}>
                 <View style={styles.userAvatars}>
+                  {/* Add user avatars if needed */}
                 </View>
                 <View style={styles.bookmarkContainer}>
                   <Icon name="bookmark-border" size={40} color="#fff" />
@@ -157,7 +167,8 @@ const HomeRecommendationScreen: React.FC = () => {
                   <Text style={styles.engagementText}>{post.likes}</Text>
                 </View>
                 <View style={styles.engagementItem}>
-                  <Icon name="message-circle" size={30} color="#fff" />
+                  {/* Replaced "message-circle" with "message" */}
+                  <Icon name="message" size={30} color="#fff" />
                   <Text style={styles.engagementText}>{post.comments}</Text>
                 </View>
               </View>
@@ -173,7 +184,7 @@ const HomeRecommendationScreen: React.FC = () => {
           <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Icon name="sharealt" size={24} color="#9CA3AF" />
+          <Icon name="share" size={24} color="#9CA3AF" />
           <Text style={styles.navText}>커뮤니티</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
@@ -188,35 +199,47 @@ const HomeRecommendationScreen: React.FC = () => {
           <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
         </TouchableOpacity>
       </View>
-
-      {/* Floating Action Buttons */}
-      <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabSecondary} onPress={handleViewModePress}>
-          <Icon name="grid-on" size={24} color="#666" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.fabPrimary}>
-          <Icon name="add" size={24} color="#fff" />
-        </TouchableOpacity>
-      </View>
+ {/* Floating Action Button */}
+        <View style={styles.fabContainer}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+            <LinearGradient
+              colors={["#AB42FF", "#7862FF", "#3687FF"]}
+              locations={[0, 0.5, 1]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.fabPrimary}
+            >
+              <Icon name="add" size={24} color="#fff" />
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  contentContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
   },
   statusBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 30,
-    paddingTop: 40,
-    paddingBottom: 3,
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 5,
   },
   timeText: {
-    color: '#fff',
+    color: '#000',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -235,9 +258,6 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: '#fff',
   },
-  headerLeft: {
-    width: 80, // Space for left side (same width as headerIcons)
-  },
   tabContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -247,7 +267,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tabText: {
-    color: '#666',
+    color: '#9CA3AF',
     fontSize: 16,
     fontWeight: '500',
   },
@@ -258,7 +278,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#00C7A6',
+    backgroundColor: '#584DFF',
     marginTop: 5,
   },
   headerIcons: {
@@ -266,14 +286,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconButton: {
-    flexDirection: 'row',
     marginLeft: 15,
     position: 'relative',
   },
   notificationDot: {
     position: 'absolute',
-    top: 2,
-    right: 2,
+    top: 0,
+    right: 0,
     width: 8,
     height: 8,
     borderRadius: 4,
@@ -282,6 +301,8 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   postCard: {
     marginHorizontal: 15,
@@ -296,9 +317,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   postImage: {
-    width: '100%',
-    height: 600,
-    resizeMode: 'cover',
+   width: '100%',
+  height: 300,              // Reduced height for demonstration
+  resizeMode: 'cover',
     transform: [
       { scale: 1.75 },
       { translateX: screenWidth * 0.15 },
@@ -322,7 +343,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     zIndex: 2,
-    pointerEvents: 'none'
+    pointerEvents: 'none',
   },
   postTopRow: {
     flexDirection: 'row',
@@ -374,8 +395,8 @@ const styles = StyleSheet.create({
   postTitle: {
     fontFamily: 'Pretendard-Thin',
     fontSize: 54,
-    lineHeight: 54, // 100%
-    letterSpacing: 12.8, // 20% of 54
+    lineHeight: 54,
+    letterSpacing: 12.8,
     textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
@@ -384,8 +405,8 @@ const styles = StyleSheet.create({
   postSubtitle: {
     fontFamily: 'Pretendard-ExtraLight',
     fontSize: 32,
-    lineHeight: 50, // 100%
-    letterSpacing: 15, // 42% of 32
+    lineHeight: 50,
+    letterSpacing: 15,
     textAlign: 'center',
     color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
@@ -491,39 +512,27 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
   },
-  fabContainer: {
-    position: 'absolute',
-    right: 20,
-    bottom: 100,
-    alignItems: 'center',
-  },
-  fabSecondary: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#F3F4F6',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  fabPrimary: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: '#9C27B0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.27,
-    shadowRadius: 4.65,
-  },
+   fabContainer: {
+    position: 'absolute',
+    right: 15,
+    bottom: 80,
+    alignItems: 'center',
+  },
+	fabShadow: {
+		elevation: 6,
+		shadowColor: '#402E99',
+		shadowOffset: { width: 0, height: 2 },
+		shadowOpacity: 0.3,
+		shadowRadius: 6,
+		borderRadius: 28,
+	},
+	fabPrimary: {
+		width: 56,
+		height: 56,
+		borderRadius: 28,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 });
 
 export default HomeRecommendationScreen;
