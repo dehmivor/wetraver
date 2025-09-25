@@ -167,30 +167,29 @@ const HomeCreatorScreen: React.FC = () => {
       </ScrollView>
 
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#000" />
-          <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="people" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>커뮤니티</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="star" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>버디픽</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="send" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>채팅</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
-            <Text style={styles.navText}></Text>
-        </TouchableOpacity>
-      </View>
-
+          {/* Bottom Navigation */}
+           <View style={styles.bottomNav}>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="home" size={24} color="#000" />
+               <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="people" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>커뮤니티</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="star" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>버디픽</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="send" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>채팅</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
+                 <Text style={styles.navText}>qwert</Text>
+             </TouchableOpacity>
+           </View>
 
       {/* Floating Action Button */}
         <View style={styles.fabContainer}>
@@ -419,7 +418,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000',
   },
-  bottomNav: {
+   bottomNav: {
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderTopWidth: 1,

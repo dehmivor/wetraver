@@ -50,10 +50,45 @@ const HomePopularSellerScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
-      
-      {/* Status Bar */}
-      <View style={styles.statusBar}>
+      <StatusBar barStyle="dark-content" backgroundColor="#fff" />
+      
+      {/* Status Bar */}
+      <View style={styles.statusBar}>
+        
+      </View>
+
+
+      {/* Header with Tabs */}
+      <View style={styles.header}>
+        <View style={styles.tabContainer}>
+          {tabs.map((tab) => (
+            <TouchableOpacity
+              key={tab}
+              style={styles.tab}
+              onPress={() => handleTabPress(tab)}
+            >
+              <Text
+                style={
+                  activeTab === tab
+                    ? [styles.tabText, styles.activeTabText]
+                    : styles.tabText
+                }
+              >
+                {tab}
+              </Text>
+              {activeTab === tab && <View style={styles.tabIndicator} />}
+            </TouchableOpacity>
+          ))}
+        </View>
+        <View style={styles.headerIcons}>
+          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+            <Icon name="search" size={24} color="#000" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+            <Icon name="notifications" size={24} color="#000" />
+            <View style={styles.notificationDot} />
+          </TouchableOpacity>
+        </View>
       </View>
 
 
@@ -161,28 +196,30 @@ const HomePopularSellerScreen: React.FC = () => {
       </ScrollView>
 
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>홈</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="people" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>커뮤니티</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="star-border" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>버디픽</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="send" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>채팅</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
-        </TouchableOpacity>
-      </View>
+       {/* Bottom Navigation */}
+           <View style={styles.bottomNav}>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="home" size={24} color="#000" />
+               <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="people" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>커뮤니티</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="star" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>버디픽</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Icon name="send" size={24} color="#9CA3AF" />
+               <Text style={styles.navText}>채팅</Text>
+             </TouchableOpacity>
+             <TouchableOpacity style={styles.navItem}>
+               <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
+                 <Text style={styles.navText}>qwert</Text>
+             </TouchableOpacity>
+           </View>
+
 
 
 		{/* Floating Action Button */}
@@ -393,30 +430,33 @@ marginBottom: 10,
     textAlign: 'center',
 paddingHorizontal: 40,
   },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  navItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  navText: {
-    fontSize: 12,
-    color: '#9CA3AF',
-    marginTop: 4,
-  },
-  profileNavAvatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-  },
+   bottomNav: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderTopWidth: 1,
+    borderTopColor: '#E5E7EB',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  navItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  navText: {
+    fontSize: 12,
+    color: '#9CA3AF',
+    marginTop: 4,
+  },
+  activeNavText: {
+    color: '#000',
+  },
+  profileNavAvatar: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+  },
   fabContainer: {
     position: 'absolute',
     right: 15,
