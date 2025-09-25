@@ -31,101 +31,101 @@ const RootNavigator = () => {
       initialRouteName="Login"
     >
       {/* Auth Screens */}
-      <Stack.Screen 
-        name="Login" 
+      <Stack.Screen
+        name="Login"
         component={LoginScreen}
         options={{
           title: 'Login',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembership" 
+      <Stack.Screen
+        name="JoinMembership"
         component={JoinMembershipScreen}
         options={{
           title: '약관동의',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembershipPhoneNumber" 
+      <Stack.Screen
+        name="JoinMembershipPhoneNumber"
         component={JoinMembershipPhoneNumberScreen}
         options={{
           title: '신규 회원 가입',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembershipPhoneNumberCheck" 
+      <Stack.Screen
+        name="JoinMembershipPhoneNumberCheck"
         component={JoinMembershipPhoneNumberCheckScreen}
         options={{
           title: '전화번호 인증하기',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembershipEmail" 
+      <Stack.Screen
+        name="JoinMembershipEmail"
         component={JoinMembershipEmailScreen}
         options={{
           title: '신규 회원 가입',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembershipEmailCheck" 
+      <Stack.Screen
+        name="JoinMembershipEmailCheck"
         component={JoinMembershipEmailCheckScreen}
         options={{
           title: '이메일 인증하기',
         }}
       />
-      <Stack.Screen 
-        name="JoinMembershipVerification" 
+      <Stack.Screen
+        name="JoinMembershipVerification"
         component={JoinMembershipVerificationScreen}
         options={{
           title: '가입 완료하기',
         }}
       />
-      
+
       {/* Home Screens */}
-      <Stack.Screen 
-        name="HomeRecommendation" 
+      <Stack.Screen
+        name="HomeRecommendation"
         component={HomeRecommendationScreen}
         options={{
           title: '추천',
         }}
       />
-      <Stack.Screen 
-        name="HomePopularSeller" 
+      <Stack.Screen
+        name="HomePopularSeller"
         component={HomePopularSellerScreen}
         options={{
           title: '인기셀러',
         }}
       />
-      <Stack.Screen 
-        name="HomeCreator" 
+      <Stack.Screen
+        name="HomeCreator"
         component={HomeCreatorScreen}
         options={{
           title: '크리에이터',
         }}
       />
-      <Stack.Screen 
-        name="HomeChangeViewMode" 
+      <Stack.Screen
+        name="HomeChangeViewMode"
         component={HomeChangeViewModeScreen}
         options={{
           title: '뷰 모드 변경',
         }}
       />
-      <Stack.Screen 
-        name="HomeCardTap" 
+      <Stack.Screen
+        name="HomeCardTap"
         component={HomeCardTapScreen}
         options={{
           title: '카드 탭',
         }}
       />
-      <Stack.Screen 
-        name="HomeDetailPage" 
+      <Stack.Screen
+        name="HomeDetailPage"
         component={HomeDetailPageScreen}
         options={{
           title: '상세 페이지',
         }}
       />
-      <Stack.Screen 
-        name="HomeComments" 
+      <Stack.Screen
+        name="HomeComments"
         component={HomeCommentsScreen}
         options={{
           title: '댓글',

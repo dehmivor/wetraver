@@ -25,21 +25,17 @@ const ProfileScreen: React.FC = () => {
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      'Đăng xuất',
-      'Bạn có chắc chắn muốn đăng xuất?',
-      [
-        { text: 'Hủy', style: 'cancel' },
-        {
-          text: 'Đăng xuất',
-          style: 'destructive',
-          onPress: () => {
-            // TODO: Implement logout logic
-            console.log('User logged out');
-          },
+    Alert.alert('Đăng xuất', 'Bạn có chắc chắn muốn đăng xuất?', [
+      { text: 'Hủy', style: 'cancel' },
+      {
+        text: 'Đăng xuất',
+        style: 'destructive',
+        onPress: () => {
+          // TODO: Implement logout logic
+          console.log('User logged out');
         },
-      ]
-    );
+      },
+    ]);
   };
 
   const menuItems = [
@@ -77,8 +73,12 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <Container>
-      <Header title="Hồ sơ" rightIcon="settings" onRightPress={handleSettings} />
-      
+      <Header
+        title="Hồ sơ"
+        rightIcon="settings"
+        onRightPress={handleSettings}
+      />
+
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Profile Header */}
         <Card style={styles.profileCard} padding="large">
@@ -106,12 +106,13 @@ const ProfileScreen: React.FC = () => {
 
         {/* Menu Items */}
         <View style={styles.menuSection}>
-          {menuItems.map((item) => (
+          {menuItems.map(item => (
             <Card
               key={item.id}
               style={styles.menuItem}
               onPress={item.onPress}
-              variant="outlined">
+              variant="outlined"
+            >
               <View style={styles.menuItemContent}>
                 <Text style={styles.menuIcon}>{item.icon}</Text>
                 <Text variant="body1" color="gray.900" style={styles.menuText}>

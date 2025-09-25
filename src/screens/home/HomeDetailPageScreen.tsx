@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity, 
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
   Image,
   StatusBar,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -52,14 +52,19 @@ const HomeDetailPageScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
-      
+
       {/* Status Bar */}
       <View style={styles.statusBar}>
         <Text style={styles.timeText}>23:18</Text>
         <View style={styles.statusIcons}>
           <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
           <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
+          <Icon
+            name="battery-full"
+            size={16}
+            color="#fff"
+            style={styles.statusIcon}
+          />
         </View>
       </View>
 
@@ -69,10 +74,16 @@ const HomeDetailPageScreen: React.FC = () => {
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleSearchPress}
+            style={styles.iconButton}
+          >
             <Icon name="search" size={24} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleNotificationPress}
+            style={styles.iconButton}
+          >
             <Icon name="notifications" size={24} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
@@ -84,9 +95,9 @@ const HomeDetailPageScreen: React.FC = () => {
         <View style={styles.userSection}>
           <View style={styles.userInfo}>
             <View style={styles.profileContainer}>
-              <Image 
-                source={require('../../assets/images/guiherme-stecanella.jpg')} 
-                style={styles.profileImage} 
+              <Image
+                source={require('../../assets/images/guiherme-stecanella.jpg')}
+                style={styles.profileImage}
               />
               <View style={styles.verifiedBadge}>
                 <Icon name="star" size={12} color="#FFD700" />
@@ -99,28 +110,30 @@ const HomeDetailPageScreen: React.FC = () => {
                 <Icon name="place" size={16} color="#9C27B0" />
                 <Text style={styles.locationText}>도쿄, 일본</Text>
                 <View style={styles.separator} />
-                <Text style={styles.dateText}>25.8.18 (월) - 26.8.21 (목) · 4일</Text>
+                <Text style={styles.dateText}>
+                  25.8.18 (월) - 26.8.21 (목) · 4일
+                </Text>
               </View>
             </View>
           </View>
-          <TouchableOpacity style={styles.followButton} onPress={handleFollowPress}>
+          <TouchableOpacity
+            style={styles.followButton}
+            onPress={handleFollowPress}
+          >
             <Text style={styles.followButtonText}>팔로우</Text>
           </TouchableOpacity>
         </View>
 
         {/* Main Image */}
         <View style={styles.imageContainer}>
-          <Image 
-            source={images[currentImageIndex]} 
-            style={styles.mainImage} 
-          />
+          <Image source={images[currentImageIndex]} style={styles.mainImage} />
           <View style={styles.imageCounter}>
             <Text style={styles.counterText}>{currentImageIndex + 1}/4</Text>
           </View>
           <View style={styles.avatarOverlay}>
-            <Image 
-              source={require('../../assets/images/ruitong-xie.jpg')} 
-              style={styles.overlayAvatar} 
+            <Image
+              source={require('../../assets/images/ruitong-xie.jpg')}
+              style={styles.overlayAvatar}
             />
           </View>
         </View>
@@ -132,7 +145,7 @@ const HomeDetailPageScreen: React.FC = () => {
               key={index}
               style={[
                 styles.paginationDot,
-                index === currentImageIndex && styles.activeDot
+                index === currentImageIndex && styles.activeDot,
               ]}
             />
           ))}
@@ -141,43 +154,48 @@ const HomeDetailPageScreen: React.FC = () => {
         {/* Description Text */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            스카이트리부터 시부야까지, 저와 함께 도쿄 속 숨은 이야기와 빛나는 순간을 여행해요. 골목길의 작은 카페부터 화려한 네온 사인까지, 도쿄가 들려주는 특별한 하루를 함께 걸어가요.
+            스카이트리부터 시부야까지, 저와 함께 도쿄 속 숨은 이야기와 빛나는
+            순간을 여행해요. 골목길의 작은 카페부터 화려한 네온 사인까지, 도쿄가
+            들려주는 특별한 하루를 함께 걸어가요.
           </Text>
           <Text style={styles.descriptionText}>
-            낮에는 전통이 살아 숨 쉬는 아사쿠사와 우에노 거리를 거닐며 옛 정취를 느끼고, 밤에는 시부야의 끝없는 에너지와 신주쿠의 빛나는 야경 속으로 들어갑니다.
+            낮에는 전통이 살아 숨 쉬는 아사쿠사와 우에노 거리를 거닐며 옛 정취를
+            느끼고, 밤에는 시부야의 끝없는 에너지와 신주쿠의 빛나는 야경 속으로
+            들어갑니다.
           </Text>
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
         <View style={styles.imageContainer}>
-          <Image 
-            source={images[currentImageIndex]} 
-            style={styles.mainImage} 
-          />
+          <Image source={images[currentImageIndex]} style={styles.mainImage} />
           <View style={styles.imageCounter}>
             <Text style={styles.counterText}>{currentImageIndex + 1}/4</Text>
           </View>
           <View style={styles.avatarOverlay}>
-            <Image 
-              source={require('../../assets/images/daniel-smit.jpg')} 
-              style={styles.overlayAvatar} 
+            <Image
+              source={require('../../assets/images/daniel-smit.jpg')}
+              style={styles.overlayAvatar}
             />
           </View>
         </View>
 
-         {/* Description Text */}
+        {/* Description Text */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와 함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리, 계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진 도쿄는 언제나 새로운 이야기를 들려줍니다.          </Text>
+            익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와
+            함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리,
+            계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진
+            도쿄는 언제나 새로운 이야기를 들려줍니다.{' '}
+          </Text>
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
         {/* Map Section */}
         <View style={styles.mapContainer}>
-           <View style={styles.avatarOverlay}>
-            <Image 
-              source={require('../../assets/images/map.png')} 
-              style={styles.overlayAvatar} 
+          <View style={styles.avatarOverlay}>
+            <Image
+              source={require('../../assets/images/map.png')}
+              style={styles.overlayAvatar}
             />
           </View>
           <View style={styles.mapPlaceholder}>
@@ -191,23 +209,23 @@ const HomeDetailPageScreen: React.FC = () => {
         <Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
 
         {/* Hashtags */}
-      <View style={styles.hashtagsContainer}>
-  <Text style={styles.hashtag}>
-    <Text style={{ color: '#2563EB' }}>#</Text>일본여행
-  </Text>
-  <Text style={styles.hashtag}>
-    <Text style={{ color: '#2563EB' }}>#</Text>도쿄여행
-  </Text>
-  <Text style={styles.hashtag}>
-    <Text style={{ color: '#2563EB' }}>#</Text>로컬체험
-  </Text>
-  <Text style={styles.hashtag}>
-    <Text style={{ color: '#2563EB' }}>#</Text>핫플
-  </Text>
-  <Text style={styles.hashtag}>
-    <Text style={{ color: '#2563EB' }}>#</Text>숨은명소
-  </Text>
-</View>
+        <View style={styles.hashtagsContainer}>
+          <Text style={styles.hashtag}>
+            <Text style={{ color: '#2563EB' }}>#</Text>일본여행
+          </Text>
+          <Text style={styles.hashtag}>
+            <Text style={{ color: '#2563EB' }}>#</Text>도쿄여행
+          </Text>
+          <Text style={styles.hashtag}>
+            <Text style={{ color: '#2563EB' }}>#</Text>로컬체험
+          </Text>
+          <Text style={styles.hashtag}>
+            <Text style={{ color: '#2563EB' }}>#</Text>핫플
+          </Text>
+          <Text style={styles.hashtag}>
+            <Text style={{ color: '#2563EB' }}>#</Text>숨은명소
+          </Text>
+        </View>
 
         {/* Engagement Metrics */}
         <View style={styles.engagementContainer}>
@@ -215,7 +233,10 @@ const HomeDetailPageScreen: React.FC = () => {
             <Icon name="favorite" size={20} color="#FF6B6B" />
             <Text style={styles.engagementText}>1.3만</Text>
           </View>
-          <TouchableOpacity style={styles.engagementItem} onPress={handleCommentPress}>
+          <TouchableOpacity
+            style={styles.engagementItem}
+            onPress={handleCommentPress}
+          >
             <Icon name="chat-bubble-outline" size={20} color="#9CA3AF" />
             <Text style={styles.engagementText}>97</Text>
           </TouchableOpacity>
@@ -233,7 +254,10 @@ const HomeDetailPageScreen: React.FC = () => {
               <Text style={styles.matchingButtonText}>매칭 가능상품</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.shareButton} onPress={handleSharePress}>
+          <TouchableOpacity
+            style={styles.shareButton}
+            onPress={handleSharePress}
+          >
             <Icon name="send" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -258,7 +282,10 @@ const HomeDetailPageScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
+          <Image
+            source={require('../../assets/images/harrison-chang.jpg')}
+            style={styles.profileNavAvatar}
+          />
         </TouchableOpacity>
       </View>
     </View>

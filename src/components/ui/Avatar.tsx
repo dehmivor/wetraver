@@ -56,20 +56,10 @@ const Avatar: React.FC<AvatarProps> = ({
       .slice(0, 2);
   };
 
-  const avatarStyle = [
-    styles.avatar,
-    getSizeStyle(),
-    style,
-  ];
+  const avatarStyle = [styles.avatar, getSizeStyle(), style];
 
   if (source?.uri) {
-    return (
-      <Image
-        source={source}
-        style={avatarStyle}
-        resizeMode="cover"
-      />
-    );
+    return <Image source={source} style={avatarStyle} resizeMode="cover" />;
   }
 
   return (

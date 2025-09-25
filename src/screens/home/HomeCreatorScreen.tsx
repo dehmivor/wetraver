@@ -1,36 +1,31 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity, 
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
   Image,
   StatusBar,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
-
+// const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const HomeCreatorScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState('크리에이터');
   const navigation = useNavigation();
 
-
   const handleSearchPress = () => {
     console.log('Search pressed');
   };
 
-
   const handleNotificationPress = () => {
     console.log('Notification pressed');
   };
-
 
   const handleTabPress = (tab: string) => {
     setActiveTab(tab);
@@ -41,24 +36,17 @@ const HomeCreatorScreen: React.FC = () => {
     }
   };
 
-
   const tabs = ['추천', '인기셀러', '크리에이터'];
-
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
       {/* Status Bar */}
-      <View style={styles.statusBar}>
-        
-      </View>
-
-
+      <View style={styles.statusBar} />
       {/* Header with Tabs */}
       <View style={styles.header}>
         <View style={styles.tabContainer}>
-          {tabs.map((tab) => (
+          {tabs.map(tab => (
             <TouchableOpacity
               key={tab}
               style={styles.tab}
@@ -78,137 +66,136 @@ const HomeCreatorScreen: React.FC = () => {
           ))}
         </View>
         <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleSearchPress}
+            style={styles.iconButton}
+          >
             <Icon name="search" size={24} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleNotificationPress}
+            style={styles.iconButton}
+          >
             <Icon name="notifications" size={24} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
         </View>
       </View>
-
-
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Main Headline */}
-        <Text style={styles.mainHeadline}>
-         다양한 크리에이터 추천 상품을
-        </Text>
-        <Text style={styles.mainHeadline}>
-         지금 바로 확인해 보세요
-        </Text>
-        
+        <Text style={styles.mainHeadline}>다양한 크리에이터 추천 상품을</Text>
+        <Text style={styles.mainHeadline}>지금 바로 확인해 보세요</Text>
+
         {/* Creator Cards */}
-        <ScrollView 
-          horizontal 
+        <ScrollView
+          horizontal
           showsHorizontalScrollIndicator={false}
           style={styles.cardsContainer}
           contentContainerStyle={styles.cardsContent}
         >
           {/* Left Card */}
           <View style={styles.card}>
-            <Image 
-              source={require('../../assets/images/antonio-dafei.jpg')} 
-              style={styles.cardImage} 
+            <Image
+              source={require('../../assets/images/antonio-dafei.jpg')}
+              style={styles.cardImage}
             />
             <View style={styles.cardOverlay}>
               <Text style={styles.cardText}>피와</Text>
               <Text style={styles.cardText}>여행</Text>
             </View>
           </View>
-          
+
           {/* Center Card - Main */}
           <View style={[styles.card, styles.mainCard]}>
-            <Image 
-              source={require('../../assets/images/clay-banks.jpg')} 
-              style={styles.mainCardImage} 
+            <Image
+              source={require('../../assets/images/clay-banks.jpg')}
+              style={styles.mainCardImage}
             />
             <View style={styles.mainCardOverlay}>
               <Text style={styles.mainCardTitle}>일본 도쿄 여행, </Text>
               <Text style={styles.mainCardTitle}>숨은 맛집 이야기</Text>
             </View>
             <LinearGradient
-                      colors={['transparent', 'rgba(153, 107, 61, 0.7)']}
-                      start={{ x: 0.5, y: 0.7 }}
-                      end={{ x: 0.5, y: 0.9 }}
-                      style={styles.profileGradient}
-                    />
+              colors={['transparent', 'rgba(153, 107, 61, 0.7)']}
+              start={{ x: 0.5, y: 0.7 }}
+              end={{ x: 0.5, y: 0.9 }}
+              style={styles.profileGradient}
+            />
             <View style={styles.creatorProfile}>
-              <Image 
-                source={require('../../assets/images/anthony-tran.jpg')} 
-                style={styles.creatorAvatar} 
+              <Image
+                source={require('../../assets/images/anthony-tran.jpg')}
+                style={styles.creatorAvatar}
               />
             </View>
           </View>
-          
+
           {/* Right Card */}
           <View style={styles.card}>
-            <Image 
-              source={require('../../assets/images/alison-pang.jpg')} 
-              style={styles.cardImage} 
+            <Image
+              source={require('../../assets/images/alison-pang.jpg')}
+              style={styles.cardImage}
             />
             <View style={styles.cardOverlay}>
               <Text style={styles.cardText}>맛집</Text>
             </View>
           </View>
         </ScrollView>
-        
+
         {/* Location Section */}
         <View style={styles.locationSection}>
           <Icon name="location-on" size={30} color="#584DFF" />
           <Text style={styles.locationText}>도쿄 ∙ 오사카, 일본</Text>
         </View>
-        
+
         {/* View Products Button */}
         <TouchableOpacity style={styles.viewProductsButton}>
           <Text style={styles.viewProductsText}>상품 보기</Text>
         </TouchableOpacity>
       </ScrollView>
-
-
-          {/* Bottom Navigation */}
-           <View style={styles.bottomNav}>
-             <TouchableOpacity style={styles.navItem}>
-               <Icon name="home" size={24} color="#000" />
-               <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.navItem}>
-               <Icon name="people" size={24} color="#9CA3AF" />
-               <Text style={styles.navText}>커뮤니티</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.navItem}>
-               <Icon name="star" size={24} color="#9CA3AF" />
-               <Text style={styles.navText}>버디픽</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.navItem}>
-               <Icon name="send" size={24} color="#9CA3AF" />
-               <Text style={styles.navText}>채팅</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.navItem}>
-               <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
-                 <Text style={styles.navText}>qwert</Text>
-             </TouchableOpacity>
-           </View>
-
+        {/* Bottom Navigation */}
+      <View style={styles.bottomNav}>
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="home" size={24} color="#000" />
+          <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="people" size={24} color="#9CA3AF" />
+          <Text style={styles.navText}>커뮤니티</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="star" size={24} color="#9CA3AF" />
+          <Text style={styles.navText}>버디픽</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Icon name="send" size={24} color="#9CA3AF" />
+          <Text style={styles.navText}>채팅</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navItem}>
+          <Image
+            source={require('../../assets/images/leandro-navarro.jpg')}
+            style={styles.profileNavAvatar}
+          />
+          <Text style={styles.navText}>qwert</Text>
+        </TouchableOpacity>
+      </View>
       {/* Floating Action Button */}
-        <View style={styles.fabContainer}>
-          <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
-            <LinearGradient
-              colors={["#AB42FF", "#7862FF", "#3687FF"]}
-              locations={[0, 0.5, 1]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.fabPrimary}
-            >
-              <Icon name="add" size={24} color="#fff" />
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.fabContainer}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
+          <LinearGradient
+            colors={['#AB42FF', '#7862FF', '#3687FF']}
+            locations={[0, 0.5, 1]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.fabPrimary}
+          >
+            <Icon name="add" size={24} color="#fff" />
+          </LinearGradient>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -296,9 +283,9 @@ const styles = StyleSheet.create({
     lineHeight: 28,
   },
   cardsContainer: {
-  marginTop: 20,
-  marginBottom: 100,  // increased bottom to allow avatar space
-},
+    marginTop: 20,
+    marginBottom: 100, // increased bottom to allow avatar space
+  },
   cardsContent: {
     paddingHorizontal: 10,
   },
@@ -316,7 +303,7 @@ const styles = StyleSheet.create({
     height: 260,
     borderRadius: 8,
     overflow: 'visible',
-    marginTop: 80,  // increase space for avatar above
+    marginTop: 80, // increase space for avatar above
   },
   cardImage: {
     width: '100%',
@@ -345,7 +332,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8,
-    zIndex: 3
+    zIndex: 3,
   },
   cardText: {
     color: '#fff',
@@ -363,27 +350,28 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.5)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
-  },profileGradient: {
-		position: 'absolute',
-		top: 0,
-		left: 0,
-		right: 0,
-		bottom: 0,
+  },
+  profileGradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     borderRadius: 8,
-	},
- creatorProfile: {
-  position: 'absolute',
-  bottom: -40,       // 40 pixels below card bottom
-  left: '50%',
-  marginLeft: -40,   // half avatar width to center
-  zIndex: 1,
-  elevation: 10,     // Android z-index
-  borderRadius: 40,
-  shadowColor: '#000',
-  shadowOffset: { width: 0, height: 3 },
-  shadowOpacity: 0.3,
-  shadowRadius: 5,
-},
+  },
+  creatorProfile: {
+    position: 'absolute',
+    bottom: -40, // 40 pixels below card bottom
+    left: '50%',
+    marginLeft: -40, // half avatar width to center
+    zIndex: 1,
+    elevation: 10, // Android z-index
+    borderRadius: 40,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+  },
   creatorAvatar: {
     width: 80,
     height: 80,
@@ -418,7 +406,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#000',
   },
-   bottomNav: {
+  bottomNav: {
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderTopWidth: 1,
@@ -467,6 +455,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
 
 export default HomeCreatorScreen;

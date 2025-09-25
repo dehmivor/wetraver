@@ -41,11 +41,7 @@ const Container: React.FC<ContainerProps> = ({
   ];
 
   if (safeArea) {
-    return (
-      <SafeAreaView style={containerStyle}>
-        {children}
-      </SafeAreaView>
-    );
+    return <SafeAreaView style={containerStyle}>{children}</SafeAreaView>;
   }
 
   return <View style={containerStyle}>{children}</View>;

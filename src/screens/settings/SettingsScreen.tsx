@@ -69,19 +69,20 @@ const SettingsScreen: React.FC = () => {
   return (
     <Container>
       <Header title="Cài đặt" showBackButton />
-      
+
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.section}>
           <Text variant="h4" color="gray.900" style={styles.sectionTitle}>
             Cài đặt chung
           </Text>
-          
-          {settingsItems.map((item) => (
+
+          {settingsItems.map(item => (
             <Card
               key={item.id}
               style={styles.settingItem}
               onPress={item.onPress}
-              variant="outlined">
+              variant="outlined"
+            >
               <View style={styles.settingItemContent}>
                 <Text style={styles.settingIcon}>{item.icon}</Text>
                 <View style={styles.settingTextContainer}>
@@ -102,8 +103,12 @@ const SettingsScreen: React.FC = () => {
           <Text variant="h4" color="gray.900" style={styles.sectionTitle}>
             Hỗ trợ
           </Text>
-          
-          <Card style={styles.settingItem} onPress={() => Alert.alert('Chức năng', 'Trung tâm trợ giúp')} variant="outlined">
+
+          <Card
+            style={styles.settingItem}
+            onPress={() => Alert.alert('Chức năng', 'Trung tâm trợ giúp')}
+            variant="outlined"
+          >
             <View style={styles.settingItemContent}>
               <Text style={styles.settingIcon}>❓</Text>
               <View style={styles.settingTextContainer}>
@@ -118,7 +123,11 @@ const SettingsScreen: React.FC = () => {
             </View>
           </Card>
 
-          <Card style={styles.settingItem} onPress={() => Alert.alert('Chức năng', 'Liên hệ hỗ trợ')} variant="outlined">
+          <Card
+            style={styles.settingItem}
+            onPress={() => Alert.alert('Chức năng', 'Liên hệ hỗ trợ')}
+            variant="outlined"
+          >
             <View style={styles.settingItemContent}>
               <Text style={styles.settingIcon}>📞</Text>
               <View style={styles.settingTextContainer}>

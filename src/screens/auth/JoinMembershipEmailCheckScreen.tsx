@@ -16,25 +16,38 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
   const isValid = useMemo(() => code.length === CODE_LENGTH, [code]);
 
   const handlePressCell = () => inputRef.current?.focus();
-  const cells = Array.from({ length: CODE_LENGTH }).map((_, idx) => code[idx] || '');
+  const cells = Array.from({ length: CODE_LENGTH }).map(
+    (_, idx) => code[idx] || '',
+  );
 
   return (
     <Container padding="large">
       <View style={{ alignItems: 'center', marginTop: spacing.lg }}>
-        <Text variant="h4" weight="bold">이메일 인증하기</Text>
+        <Text variant="h4" weight="bold">
+          이메일 인증하기
+        </Text>
       </View>
       <View style={{ alignItems: 'center', marginVertical: spacing.lg }}>
         <Text variant="body2" align="center">
           이메일을 통해
-          <Text variant="h4" weight="bold"> abcdef.wetraver@naver.com</Text>
+          <Text variant="h4" weight="bold">
+            {' '}
+            abcdef.wetraver@naver.com
+          </Text>
           으로{`\n`}보내드린 코드를 입력하세요.
         </Text>
       </View>
 
-      <TouchableOpacity activeOpacity={1} onPress={handlePressCell} style={styles.codeRow}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={handlePressCell}
+        style={styles.codeRow}
+      >
         {cells.map((c, i) => (
           <View key={i} style={styles.codeCell}>
-            <Text variant="h3" align="center">{c}</Text>
+            <Text variant="h3" align="center">
+              {c}
+            </Text>
             <View style={styles.codeUnderline} />
           </View>
         ))}
@@ -42,7 +55,9 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
           ref={inputRef}
           style={styles.hiddenInput}
           value={code}
-          onChangeText={t => setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))}
+          onChangeText={t =>
+            setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))
+          }
           keyboardType="number-pad"
           autoFocus
         />
@@ -51,14 +66,18 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
       <View style={{ alignItems: 'center', marginTop: spacing.md }}>
         <Text variant="caption" color="gray.500">
           코드를 받지 못하셨나요?{' '}
-          <Text variant="caption" color={colors.black} weight="bold">다시 보내기</Text>
+          <Text variant="caption" color={colors.black} weight="bold">
+            다시 보내기
+          </Text>
         </Text>
       </View>
 
       <View style={styles.footer}>
         <Button
           title="다음"
-          onPress={() => navigation.navigate('JoinMembershipVerification' as never)}
+          onPress={() =>
+            navigation.navigate('JoinMembershipVerification' as never)
+          }
           disabled={!isValid}
           size="large"
           style={{ borderRadius: 0, height: 100 }}
@@ -99,5 +118,3 @@ const styles = StyleSheet.create({
 });
 
 export default JoinMembershipEmailCheckScreen;
-
-

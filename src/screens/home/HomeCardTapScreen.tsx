@@ -1,19 +1,15 @@
 import React, { useRef } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity, 
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   Image,
   StatusBar,
-  Dimensions,
   PanResponder,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const SWIPE_THRESHOLD = 100; // Minimum vertical swipe distance
 
@@ -37,7 +33,7 @@ const HomeCardTapScreen: React.FC = () => {
           navigation.navigate('HomeDetailPage' as never);
         }
       },
-    })
+    }),
   ).current;
 
   const handleBackPress = () => {
@@ -55,14 +51,19 @@ const HomeCardTapScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
-      
+
       {/* Status Bar */}
       <View style={styles.statusBar}>
         <Text style={styles.timeText}>23:18</Text>
         <View style={styles.statusIcons}>
           <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
           <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
+          <Icon
+            name="battery-full"
+            size={16}
+            color="#fff"
+            style={styles.statusIcon}
+          />
         </View>
       </View>
 
@@ -73,10 +74,16 @@ const HomeCardTapScreen: React.FC = () => {
         </TouchableOpacity>
         <Text style={styles.title}>카드 탭</Text>
         <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleSearchPress}
+            style={styles.iconButton}
+          >
             <Icon name="search" size={24} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleNotificationPress}
+            style={styles.iconButton}
+          >
             <Icon name="notifications" size={24} color="#fff" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
@@ -85,11 +92,11 @@ const HomeCardTapScreen: React.FC = () => {
 
       {/* Main Content with Background Image and Swipe Gesture */}
       <View style={styles.content} {...panResponder.panHandlers}>
-        <Image 
-          source={require('../../assets/images/tokyo-traveler.jpg')} 
-          style={styles.backgroundImage} 
+        <Image
+          source={require('../../assets/images/tokyo-traveler.jpg')}
+          style={styles.backgroundImage}
         />
-        
+
         {/* Text Overlay */}
         <View style={styles.textOverlay}>
           <Text style={styles.titleText}>카드 탭</Text>
@@ -99,7 +106,10 @@ const HomeCardTapScreen: React.FC = () => {
         </View>
 
         {/* Scroll Indicator */}
-        <TouchableOpacity style={styles.scrollIndicator} onPress={() => navigation.navigate('HomeDetailPage' as never)}>
+        <TouchableOpacity
+          style={styles.scrollIndicator}
+          onPress={() => navigation.navigate('HomeDetailPage' as never)}
+        >
           <Text style={styles.scrollText}>아래로 스크롤 해주세요.</Text>
           <Icon name="keyboard-arrow-down" size={20} color="#fff" />
         </TouchableOpacity>
@@ -125,7 +135,10 @@ const HomeCardTapScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/harrison-chang.jpg')} style={styles.profileNavAvatar} />
+          <Image
+            source={require('../../assets/images/harrison-chang.jpg')}
+            style={styles.profileNavAvatar}
+          />
         </TouchableOpacity>
       </View>
     </View>

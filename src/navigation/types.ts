@@ -42,6 +42,3 @@ export type HomeStackParamList = {
   HomeDetailPage: undefined;
   HomeComments: undefined;
 };
-
-
-

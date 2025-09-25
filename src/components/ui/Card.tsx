@@ -53,12 +53,7 @@ const Card: React.FC<CardProps> = ({
     }
   };
 
-  const cardStyle = [
-    styles.base,
-    getVariantStyle(),
-    getPaddingStyle(),
-    style,
-  ];
+  const cardStyle = [styles.base, getVariantStyle(), getPaddingStyle(), style];
 
   if (onPress) {
     return (

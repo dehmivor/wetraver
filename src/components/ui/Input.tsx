@@ -9,7 +9,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { colors, typography, spacing, borderRadius } from '../../constants/theme';
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+} from '../../constants/theme';
 
 interface InputProps {
   label?: string;
@@ -62,7 +67,10 @@ const Input: React.FC<InputProps> = ({
   const getRightIcon = () => {
     if (secureTextEntry) {
       return (
-        <TouchableOpacity onPress={handlePasswordToggle} style={styles.iconButton}>
+        <TouchableOpacity
+          onPress={handlePasswordToggle}
+          style={styles.iconButton}
+        >
           <Icon
             name={isPasswordVisible ? 'visibility-off' : 'visibility'}
             size={20}
@@ -93,9 +101,15 @@ const Input: React.FC<InputProps> = ({
             borderColor: getBorderColor(),
             backgroundColor: disabled ? colors.gray[100] : colors.white,
           },
-        ]}>
+        ]}
+      >
         {leftIcon && (
-          <Icon name={leftIcon} size={20} color={colors.gray[500]} style={styles.leftIcon} />
+          <Icon
+            name={leftIcon}
+            size={20}
+            color={colors.gray[500]}
+            style={styles.leftIcon}
+          />
         )}
         <TextInput
           style={[

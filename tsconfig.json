@@ -3,10 +3,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-     "lib": [
-    "es2017",
-    "dom"
-  ],
+    "lib": ["es2017", "dom"],
     "allowJs": true,
     "jsx": "react-native",
     "noEmit": true,
@@ -23,12 +20,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx"
-  ],
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
   "exclude": [
     "node_modules",
     "**/node_modules",

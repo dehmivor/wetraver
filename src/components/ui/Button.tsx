@@ -7,7 +7,13 @@ import {
   TextStyle,
   ActivityIndicator,
 } from 'react-native';
-import { colors, typography, spacing, borderRadius, shadows } from '../../constants/theme';
+import {
+  colors,
+  typography,
+  spacing,
+  borderRadius,
+  shadows,
+} from '../../constants/theme';
 
 interface ButtonProps {
   title: string;
@@ -68,7 +74,10 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const getTextStyle = (): TextStyle => {
-    const sizeToTextStyle: Record<'small' | 'medium' | 'large', keyof typeof styles> = {
+    const sizeToTextStyle: Record<
+      'small' | 'medium' | 'large',
+      keyof typeof styles
+    > = {
       small: 'textSmall',
       medium: 'textMedium',
       large: 'textLarge',
@@ -105,10 +114,15 @@ const Button: React.FC<ButtonProps> = ({
       style={[getButtonStyle(), style]}
       onPress={onPress}
       disabled={disabled || loading}
-      activeOpacity={0.8}>
+      activeOpacity={0.8}
+    >
       {loading ? (
         <ActivityIndicator
-          color={variant === 'primary' || variant === 'secondary' ? colors.white : colors.primary}
+          color={
+            variant === 'primary' || variant === 'secondary'
+              ? colors.white
+              : colors.primary
+          }
           size="small"
         />
       ) : (

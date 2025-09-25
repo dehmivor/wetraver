@@ -3,12 +3,12 @@ export const colors = {
   primary: '#635BFF',
   primaryLight: '#7B72FF',
   primaryDark: '#5146E5',
-  
+
   // Secondary colors
   secondary: '#4ECDC4',
   secondaryLight: '#7EDDD6',
   secondaryDark: '#3BA99F',
-  
+
   // Neutral colors
   white: '#FFFFFF',
   black: '#000000',
@@ -24,13 +24,13 @@ export const colors = {
     800: '#1F2937',
     900: '#111827',
   },
-  
+
   // Status colors
   success: '#10B981',
   warning: '#F59E0B',
   error: '#EF4444',
   info: '#3B82F6',
-  
+
   // Background colors
   background: '#FFFFFF',
   surface: '#F9FAFB',

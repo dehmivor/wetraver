@@ -46,7 +46,7 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
 
   const isValid = useMemo(
     () => country.trim().length > 0 && phone.trim().length > 0,
-    [country, phone]
+    [country, phone],
   );
 
   return (
@@ -54,12 +54,12 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
       <View>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => setDropdownOpen((prev) => !prev)}
+          onPress={() => setDropdownOpen(prev => !prev)}
           style={styles.selectBox}
         >
           <Text variant="body1" color={country ? 'gray.900' : 'gray.400'}>
             {country
-              ? countryOptions.find((o) => o.value === country)?.label
+              ? countryOptions.find(o => o.value === country)?.label
               : '국가/지역'}
           </Text>
           <Text variant="body1" color="gray.400">
@@ -69,7 +69,7 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
 
         {dropdownOpen && (
           <View style={styles.dropdownMenu}>
-            {countryOptions.map((opt) => (
+            {countryOptions.map(opt => (
               <TouchableOpacity
                 key={opt.value}
                 activeOpacity={0.8}
@@ -115,21 +115,23 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
 
       <View style={styles.socialContainer}>
         {(Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).map(
-          (key) => (
+          key => (
             <SocialButton
               key={key}
               label={`${SOCIAL_LABELS[key]}로 로그인하기`}
               icon={SOCIAL_ICONS[key]}
               color={SOCIAL_COLORS[key]}
             />
-          )
+          ),
         )}
       </View>
 
       <View style={styles.footer}>
         <Button
           title="확인"
-          onPress={() => navigation.navigate('JoinMembershipPhoneNumberCheck' as never)}
+          onPress={() =>
+            navigation.navigate('JoinMembershipPhoneNumberCheck' as never)
+          }
           disabled={!isValid}
           size="large"
           style={{ borderRadius: 0, height: 100 }}
@@ -139,12 +141,15 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
   );
 };
 
-const SocialButton: React.FC<{ label: string; icon: string; color: string }> = ({
-  label,
-  icon,
-  color,
-}) => (
-  <TouchableOpacity style={[styles.socialBtn, { flexDirection: 'row', alignItems: 'center' }]} activeOpacity={0.8}>
+const SocialButton: React.FC<{
+  label: string;
+  icon: string;
+  color: string;
+}> = ({ label, icon, color }) => (
+  <TouchableOpacity
+    style={[styles.socialBtn, { flexDirection: 'row', alignItems: 'center' }]}
+    activeOpacity={0.8}
+  >
     <FontAwesome name={icon} size={20} color={color} />
     <Text variant="body1" color="gray.900" style={{ marginLeft: spacing.sm }}>
       {label}
@@ -207,7 +212,7 @@ const styles = StyleSheet.create({
     marginVertical: spacing.sm,
   },
   footer: {
-   position: 'absolute',
+    position: 'absolute',
     left: 0,
     right: 0,
     bottom: -10,

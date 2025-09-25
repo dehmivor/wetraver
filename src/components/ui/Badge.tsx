@@ -97,12 +97,14 @@ const Badge: React.FC<BadgeProps> = ({
           ...sizeStyle,
         },
         style,
-      ]}>
+      ]}
+    >
       <Text
         variant="caption"
         color={variantStyle.textColor}
         align="center"
-        style={styles.text}>
+        style={styles.text}
+      >
         {children}
       </Text>
     </View>

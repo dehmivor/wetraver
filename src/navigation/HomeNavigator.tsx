@@ -21,50 +21,50 @@ const HomeNavigator = () => {
       }}
       initialRouteName="HomeRecommendation"
     >
-      <Stack.Screen 
-        name="HomeRecommendation" 
+      <Stack.Screen
+        name="HomeRecommendation"
         component={HomeRecommendationScreen}
         options={{
           title: '추천',
         }}
       />
-      <Stack.Screen 
-        name="HomePopularSeller" 
+      <Stack.Screen
+        name="HomePopularSeller"
         component={HomePopularSellerScreen}
         options={{
           title: '인기셀러',
         }}
       />
-      <Stack.Screen 
-        name="HomeCreator" 
+      <Stack.Screen
+        name="HomeCreator"
         component={HomeCreatorScreen}
         options={{
           title: '크리에이터',
         }}
       />
-      <Stack.Screen 
-        name="HomeChangeViewMode" 
+      <Stack.Screen
+        name="HomeChangeViewMode"
         component={HomeChangeViewModeScreen}
         options={{
           title: '뷰 모드 변경',
         }}
       />
-      <Stack.Screen 
-        name="HomeCardTap" 
+      <Stack.Screen
+        name="HomeCardTap"
         component={HomeCardTapScreen}
         options={{
           title: '카드 탭',
         }}
       />
-      <Stack.Screen 
-        name="HomeDetailPage" 
+      <Stack.Screen
+        name="HomeDetailPage"
         component={HomeDetailPageScreen}
         options={{
           title: '상세 페이지',
         }}
       />
-      <Stack.Screen 
-        name="HomeComments" 
+      <Stack.Screen
+        name="HomeComments"
         component={HomeCommentsScreen}
         options={{
           title: '댓글',

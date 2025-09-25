@@ -76,7 +76,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
               resizeMode="contain"
             />
           </Animated.View>
-          
+
           {/* Brand Text */}
           <Animated.View
             style={[
@@ -87,9 +87,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
               },
             ]}
           >
-            <Text style={styles.brandText}>
-              WETRAVER
-            </Text>
+            <Text style={styles.brandText}>WETRAVER</Text>
           </Animated.View>
         </View>
       </SafeAreaView>
@@ -110,12 +108,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // Tính toán tỷ lệ từ thiết kế Figma (393x852) sang màn hình thực tế
     top: (260 / 852) * height, // 260px từ top trong thiết kế 852px
-    left: (120 / 393) * width,  // 120px từ left trong thiết kế 393px
+    left: (120 / 393) * width, // 120px từ left trong thiết kế 393px
   },
   logo: {
     // Tính toán kích thước tỷ lệ từ thiết kế Figma
-    width: (153 / 393) * width,   // 153px trong thiết kế 393px
-    height: (109 / 393) * width,  // 109px, giữ tỷ lệ theo width để responsive
+    width: (153 / 393) * width, // 153px trong thiết kế 393px
+    height: (109 / 393) * width, // 109px, giữ tỷ lệ theo width để responsive
   },
   brandContainer: {
     position: 'absolute',

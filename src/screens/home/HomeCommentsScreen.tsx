@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  ScrollView, 
-  Text, 
-  TouchableOpacity, 
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
   Image,
   StatusBar,
   TextInput,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
@@ -85,14 +85,19 @@ const HomeCommentsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
-      
+
       {/* Status Bar */}
       <View style={styles.statusBar}>
         <Text style={styles.timeText}>23:18</Text>
         <View style={styles.statusIcons}>
           <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
           <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
+          <Icon
+            name="battery-full"
+            size={16}
+            color="#fff"
+            style={styles.statusIcon}
+          />
         </View>
       </View>
 
@@ -117,8 +122,11 @@ const HomeCommentsScreen: React.FC = () => {
       </View>
 
       {/* Comments List */}
-      <ScrollView style={styles.commentsList} showsVerticalScrollIndicator={false}>
-        {comments.map((comment) => (
+      <ScrollView
+        style={styles.commentsList}
+        showsVerticalScrollIndicator={false}
+      >
+        {comments.map(comment => (
           <View key={comment.id} style={styles.commentItem}>
             <Image source={comment.avatar} style={styles.commentAvatar} />
             <View style={styles.commentContent}>
@@ -128,26 +136,34 @@ const HomeCommentsScreen: React.FC = () => {
               </View>
               <Text style={styles.commentText}>{comment.text}</Text>
               <View style={styles.commentActions}>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.replyButton}
                   onPress={() => handleReply(comment.id)}
                 >
                   <Text style={styles.replyText}>답글 달기</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={styles.likeButton}
                   onPress={() => handleLikeComment(comment.id)}
                 >
-                  <Icon 
-                    name="favorite" 
-                    size={16} 
-                    color={likedComments.has(comment.id) ? "#FF6B6B" : "#9CA3AF"} 
+                  <Icon
+                    name="favorite"
+                    size={16}
+                    color={
+                      likedComments.has(comment.id) ? '#FF6B6B' : '#9CA3AF'
+                    }
                   />
                   {comment.likes > 0 && (
-                    <Text style={[
-                      styles.commentLikeCount,
-                      { color: likedComments.has(comment.id) ? "#FF6B6B" : "#9CA3AF" }
-                    ]}>
+                    <Text
+                      style={[
+                        styles.commentLikeCount,
+                        {
+                          color: likedComments.has(comment.id)
+                            ? '#FF6B6B'
+                            : '#9CA3AF',
+                        },
+                      ]}
+                    >
                       {comment.likes}
                     </Text>
                   )}
@@ -165,9 +181,9 @@ const HomeCommentsScreen: React.FC = () => {
 
       {/* Comment Input */}
       <View style={styles.commentInputContainer}>
-        <Image 
-          source={require('../../assets/images/harrison-chang.jpg')} 
-          style={styles.inputAvatar} 
+        <Image
+          source={require('../../assets/images/harrison-chang.jpg')}
+          style={styles.inputAvatar}
         />
         <TextInput
           style={styles.commentInput}
@@ -180,7 +196,6 @@ const HomeCommentsScreen: React.FC = () => {
           <Icon name="keyboard-arrow-up" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
-
 
       {/* System Navigation Bar */}
       <View style={styles.systemNavBar}>

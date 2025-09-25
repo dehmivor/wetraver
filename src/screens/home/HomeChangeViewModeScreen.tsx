@@ -24,21 +24,12 @@ const HomeChangeViewModeScreen: React.FC = () => {
   const [selectedMode, setSelectedMode] = useState('grid');
   const [activeTab, setActiveTab] = useState('추천'); // default first tab
 
-  const handleBackPress = () => {
-    navigation.goBack();
-  };
-
   const handleSearchPress = () => {
     console.log('Search pressed');
   };
 
   const handleNotificationPress = () => {
     console.log('Notification pressed');
-  };
-
-  const handleModeSelect = (mode: string) => {
-    setSelectedMode(mode);
-    console.log('Selected mode:', mode);
   };
 
   const handleImagePress = (modeId: string) => {
@@ -98,9 +89,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       
       {/* Status Bar */}
-      <View style={styles.statusBar}>
-        
-      </View>
+      <View style={styles.statusBar} />
 
       {/* Header with Tabs */}
       <View style={styles.header}>

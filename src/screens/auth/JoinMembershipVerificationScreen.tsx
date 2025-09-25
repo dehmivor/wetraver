@@ -7,7 +7,8 @@ import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
 
-const emailRegex = /^(?:[a-zA-Z0-9_'^&\+\-])+(?:\.(?:[a-zA-Z0-9_'^&\+\-])+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
+const emailRegex =
+  /^(?:[a-zA-Z0-9_'^&\+\-])+(?:\.(?:[a-zA-Z0-9_'^&\+\-])+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
 const hasLetter = (s: string) => /[A-Za-z가-힣]/.test(s);
 const hasNumber = (s: string) => /\d/.test(s);
 const hasSpecial = (s: string) => /[^A-Za-z0-9가-힣]/.test(s);
@@ -33,14 +34,17 @@ const JoinMembershipVerificationScreen: React.FC = () => {
 
   const passwordValid = useMemo(() => {
     const lenOk = password.length >= 8 && password.length <= 20;
-    return lenOk && hasLetter(password) && hasNumber(password) && hasSpecial(password);
+    return (
+      lenOk &&
+      hasLetter(password) &&
+      hasNumber(password) &&
+      hasSpecial(password)
+    );
   }, [password]);
 
   const requiredValid = useMemo(
-    () =>
-      name.trim().length > 0 &&
-      agreePrivacy,
-    [ agreePrivacy]
+    () => name.trim().length > 0 && agreePrivacy,
+    [agreePrivacy],
   );
 
   return (
@@ -49,14 +53,32 @@ const JoinMembershipVerificationScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: spacing['3xl'] }}
       >
-        <Input placeholder="실명  (예 : 홍 길동)" value={name} onChangeText={setName} />
-        <Text variant="caption" color="gray.500" style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}>
+        <Input
+          placeholder="실명  (예 : 홍 길동)"
+          value={name}
+          onChangeText={setName}
+        />
+        <Text
+          variant="caption"
+          color="gray.500"
+          style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}
+        >
           정부 발급 신분증에 기재된 이름과 일치해야 합니다.
         </Text>
 
-        <Input placeholder="생년월일" value={birth} onChangeText={setBirth} keyboardType="numeric" />
-        <Text variant="caption" color="gray.500" style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}>
-          18세 이상의 성인만 회원으로 가입할 수 있습니다. 해당 정보는 다른 이용자에게 공개되지 않습니다.
+        <Input
+          placeholder="생년월일"
+          value={birth}
+          onChangeText={setBirth}
+          keyboardType="numeric"
+        />
+        <Text
+          variant="caption"
+          color="gray.500"
+          style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}
+        >
+          18세 이상의 성인만 회원으로 가입할 수 있습니다. 해당 정보는 다른
+          이용자에게 공개되지 않습니다.
         </Text>
 
         <TouchableOpacity
@@ -69,7 +91,9 @@ const JoinMembershipVerificationScreen: React.FC = () => {
               ? COUNTRY_OPTIONS.find(({ value }) => value === country)?.label
               : '국가/지역'}
           </Text>
-          <Text variant="body1" color="gray.400">▾</Text>
+          <Text variant="body1" color="gray.400">
+            ▾
+          </Text>
         </TouchableOpacity>
 
         {dropdownOpen && (
@@ -84,26 +108,52 @@ const JoinMembershipVerificationScreen: React.FC = () => {
                   setDropdownOpen(false);
                 }}
               >
-                <Text variant="body1" color="gray.900">{label}</Text>
+                <Text variant="body1" color="gray.900">
+                  {label}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
         )}
 
-        <Input placeholder="전화번호" value={phone} onChangeText={setPhone} keyboardType="phone-pad" />
-        <Input placeholder="이메일" value={email} onChangeText={setEmail} keyboardType="email-address" />
-        <Input placeholder="비밀번호" value={password} onChangeText={setPassword} secureTextEntry rightIcon="visibility" />
+        <Input
+          placeholder="전화번호"
+          value={phone}
+          onChangeText={setPhone}
+          keyboardType="phone-pad"
+        />
+        <Input
+          placeholder="이메일"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+        />
+        <Input
+          placeholder="비밀번호"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          rightIcon="visibility"
+        />
 
         <View style={styles.passwordHints}>
           <HintItem label="영문" active={hasLetter(password)} />
           <HintItem label="숫자" active={hasNumber(password)} />
           <HintItem label="특수문자" active={hasSpecial(password)} />
-          <HintItem label="8자 이상 20자 이하" active={password.length >= 8 && password.length <= 20} />
+          <HintItem
+            label="8자 이상 20자 이하"
+            active={password.length >= 8 && password.length <= 20}
+          />
         </View>
 
-        <Input placeholder="활동 지역" value={region} onChangeText={setRegion} />
+        <Input
+          placeholder="활동 지역"
+          value={region}
+          onChangeText={setRegion}
+        />
         <Text variant="caption" color="gray.500">
-          위트래버를 원활하게 이용하려면 활동지역을 설정해주세요. 설정된 지역을 바탕으로 맞춤형 여행 서비스를 제공합니다.
+          위트래버를 원활하게 이용하려면 활동지역을 설정해주세요. 설정된 지역을
+          바탕으로 맞춤형 여행 서비스를 제공합니다.
         </Text>
 
         <Divider />
@@ -120,45 +170,76 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           onPress={() => setAgreeMarketing(!agreeMarketing)}
         />
 
-        <Text variant="caption" color="gray.500" style={{ marginTop: spacing.md }}>
-          동의 및 계속하기를 선택하여 위트래버 서비스 약관, 결제 서비스 약관, 위치기반서비스 이용약관, 차별 금지 정책, 개인정보 처리방침에 동의합니다.
+        <Text
+          variant="caption"
+          color="gray.500"
+          style={{ marginTop: spacing.md }}
+        >
+          동의 및 계속하기를 선택하여 위트래버 서비스 약관, 결제 서비스 약관,
+          위치기반서비스 이용약관, 차별 금지 정책, 개인정보 처리방침에
+          동의합니다.
         </Text>
       </ScrollView>
 
-       <View style={styles.footer}>
-    <Button
-      title="다음"
-      onPress={() => {
-        // Navigate or submit
-      }}
-      disabled={!requiredValid}
-      size="large"
-      style={{
-        borderRadius: 0,
-        height: 100,
-        backgroundColor: requiredValid ? colors.primary : colors.gray[300],
-      }}
-    />
-  </View>
-
+      <View style={styles.footer}>
+        <Button
+          title="다음"
+          onPress={() => {
+            // Navigate or submit
+          }}
+          disabled={!requiredValid}
+          size="large"
+          style={{
+            borderRadius: 0,
+            height: 100,
+            backgroundColor: requiredValid ? colors.primary : colors.gray[300],
+          }}
+        />
+      </View>
     </Container>
   );
 };
 
-const AgreementRow: React.FC<{ label: string; checked: boolean; onPress: () => void }> = ({ label, checked, onPress }) => (
-  <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.agreeRow}>
+const AgreementRow: React.FC<{
+  label: string;
+  checked: boolean;
+  onPress: () => void;
+}> = ({ label, checked, onPress }) => (
+  <TouchableOpacity
+    activeOpacity={0.8}
+    onPress={onPress}
+    style={styles.agreeRow}
+  >
     <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
-      {checked ? <Text variant="button" color={'#fff'} align="center">✓</Text> : null}
+      {checked ? (
+        <Text variant="button" color={'#fff'} align="center">
+          ✓
+        </Text>
+      ) : null}
     </View>
-    <Text variant="body1" style={{ flex: 1 }}>{label}</Text>
-    <Text variant="body2" color="gray.400">›</Text>
+    <Text variant="body1" style={{ flex: 1 }}>
+      {label}
+    </Text>
+    <Text variant="body2" color="gray.400">
+      ›
+    </Text>
   </TouchableOpacity>
 );
 
-const HintItem: React.FC<{ label: string; active: boolean }> = ({ label, active }) => (
+const HintItem: React.FC<{ label: string; active: boolean }> = ({
+  label,
+  active,
+}) => (
   <View style={styles.hintItem}>
-    <View style={[styles.hintDot, { backgroundColor: active ? colors.primary : colors.gray[300] }]} />
-    <Text variant="caption" color={active ? colors.primary : colors.gray[500]}>{label}</Text>
+    <View
+      style={[
+        styles.hintDot,
+        { backgroundColor: active ? colors.primary : colors.gray[300] },
+      ]}
+    />
+    <Text variant="caption" color={active ? colors.primary : colors.gray[500]}>
+      {label}
+    </Text>
   </View>
 );
 
@@ -225,7 +306,7 @@ const styles = StyleSheet.create({
     borderColor: colors.primary,
   },
   footer: {
-     position: 'absolute',
+    position: 'absolute',
     left: 0,
     right: 0,
     bottom: -10,

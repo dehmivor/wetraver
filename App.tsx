@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AuthNavigator from './src/navigation/AuthNavigator';
-import HomeNavigator from './src/navigation/HomeNavigator';
 import SplashScreen from './src/screens/splash/SplashScreen';
 import RootNavigator from './src/navigation/RootNavigator';
 
@@ -18,11 +16,11 @@ function App() {
   }
 
   return (
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <RootNavigator />
-        </NavigationContainer>
-      </SafeAreaProvider>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 

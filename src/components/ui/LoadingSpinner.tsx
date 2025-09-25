@@ -28,7 +28,8 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
           variant="body2"
           color="gray.600"
           align="center"
-          style={styles.message}>
+          style={styles.message}
+        >
           {message}
         </Text>
       )}

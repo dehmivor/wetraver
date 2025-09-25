@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+} from 'react-native';
 import { colors, spacing } from '../../constants/theme';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
@@ -64,10 +71,10 @@ const RegisterScreen: React.FC = () => {
     try {
       // TODO: Implement actual register logic
       console.log('Register data:', data);
-      
+
       // Simulate API call
       await new Promise(resolve => setTimeout(() => resolve(undefined), 2000));
-      
+
       Alert.alert('Thành công', 'Đăng ký thành công!', [
         {
           text: 'OK',
@@ -93,15 +100,21 @@ const RegisterScreen: React.FC = () => {
     <Container backgroundColor={colors.background}>
       <KeyboardAvoidingView
         style={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
         <Header title="Đăng ký" showBackButton onBackPress={handleBackPress} />
-        
+
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           <View style={styles.headerSection}>
             <Text variant="h2" color="primary" align="center">
               Tạo tài khoản
             </Text>
-            <Text variant="body1" color="gray.600" align="center" style={styles.subtitle}>
+            <Text
+              variant="body1"
+              color="gray.600"
+              align="center"
+              style={styles.subtitle}
+            >
               Tham gia WeTraver để khám phá thế giới
             </Text>
           </View>

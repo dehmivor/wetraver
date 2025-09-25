@@ -16,22 +16,33 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
   const isValid = useMemo(() => code.length === CODE_LENGTH, [code]);
 
   const handlePressCell = () => inputRef.current?.focus();
-  const cells = Array.from({ length: CODE_LENGTH }).map((_, idx) => code[idx] || '');
+  const cells = Array.from({ length: CODE_LENGTH }).map(
+    (_, idx) => code[idx] || '',
+  );
 
   return (
     <Container padding="large">
       <View style={{ alignItems: 'center', marginVertical: spacing.lg }}>
         <Text variant="body2" align="center">
-          문자 메시지를 통해 
-          <Text variant="body1" weight="bold"> 010-1234-5678 </Text>
+          문자 메시지를 통해
+          <Text variant="body1" weight="bold">
+            {' '}
+            010-1234-5678{' '}
+          </Text>
           번으로{`\n`}보내드린 코드를 입력하세요.
         </Text>
       </View>
 
-      <TouchableOpacity activeOpacity={1} onPress={handlePressCell} style={styles.codeRow}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={handlePressCell}
+        style={styles.codeRow}
+      >
         {cells.map((c, i) => (
           <View key={i} style={styles.codeCell}>
-            <Text variant="h3" align="center">{c}</Text>
+            <Text variant="h3" align="center">
+              {c}
+            </Text>
             <View style={styles.codeUnderline} />
           </View>
         ))}
@@ -39,7 +50,9 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
           ref={inputRef}
           style={styles.hiddenInput}
           value={code}
-          onChangeText={t => setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))}
+          onChangeText={t =>
+            setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))
+          }
           keyboardType="number-pad"
           autoFocus
         />
@@ -48,7 +61,14 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
       <View style={{ alignItems: 'center', marginTop: spacing['2xl'] }}>
         <Text variant="caption" color="gray.500">
           코드를 받지 못하셨나요?{' '}
-          <Text variant="caption" color={colors.black} style={{ textDecorationLine: 'underline' }} weight="bold">다시 보내기</Text>
+          <Text
+            variant="caption"
+            color={colors.black}
+            style={{ textDecorationLine: 'underline' }}
+            weight="bold"
+          >
+            다시 보내기
+          </Text>
         </Text>
       </View>
 
@@ -57,8 +77,8 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
           title="다음"
           onPress={() => navigation.navigate('JoinMembershipEmail' as never)}
           disabled={!isValid}
-                   size="large"
-                   style={{ borderRadius: 0, height: 100 }}
+          size="large"
+          style={{ borderRadius: 0, height: 100 }}
         />
       </View>
     </Container>
@@ -79,7 +99,7 @@ const styles = StyleSheet.create({
   codeUnderline: {
     width: 42,
     height: 2,
-    backgroundColor: "#18191A",
+    backgroundColor: '#18191A',
     marginTop: spacing.sm,
   },
   hiddenInput: {
@@ -96,5 +116,3 @@ const styles = StyleSheet.create({
 });
 
 export default JoinMembershipPhoneNumberCheckScreen;
-
-
