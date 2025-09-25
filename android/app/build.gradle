@@ -52,7 +52,22 @@ android {
          signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+         signingConfig signingConfigs.release
+        minifyEnabled true
+        shrinkResources true
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    }
+    splits {
+      abi {
+        enable true
+        reset()
+        include 'arm64-v8a', 'armeabi-v7a' // drop x86/x86_64 for release if you don’t need emulator
+        universalApk false
+      }
+      density {
+        enable true
+      }
     }
 }
 
