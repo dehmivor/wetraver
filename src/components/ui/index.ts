@@ -6,6 +6,9 @@ export { default as Avatar } from './Avatar';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as Badge } from './Badge';
 export { default as Divider } from './Divider';
+export { default as HomeTab } from './HomeTab';
+export { default as HomeBottomNavigator } from './HomeBottomNavigator';
+export { default as FloatingActionButton } from './FloatingActionButton';
 export {
   Typography,
   H1,

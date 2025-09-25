@@ -10,14 +10,15 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-type HomeChangeViewModeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+type HomeChangeViewModeScreenNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
 
 const HomeChangeViewModeScreen: React.FC = () => {
   const navigation = useNavigation<HomeChangeViewModeScreenNavigationProp>();
@@ -54,7 +55,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
       subtitle: '2열 카드 형태',
       icon: 'grid-on',
       image: require('../../assets/images/tokyo-traveler.jpg'),
-      description: '사진을 중심으로 한 카드 형태의 레이아웃'
+      description: '사진을 중심으로 한 카드 형태의 레이아웃',
     },
     {
       id: 'list',
@@ -62,7 +63,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
       subtitle: '목록 형태',
       icon: 'list',
       image: require('../../assets/images/harrison-chang.jpg'),
-      description: '간단한 목록 형태의 레이아웃'
+      description: '간단한 목록 형태의 레이아웃',
     },
     {
       id: 'large',
@@ -70,7 +71,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
       subtitle: '대형 카드',
       icon: 'view-module',
       image: require('../../assets/images/guiherme-stecanella.jpg'),
-      description: '더 큰 이미지와 상세 정보가 포함된 카드'
+      description: '더 큰 이미지와 상세 정보가 포함된 카드',
     },
     {
       id: 'compact',
@@ -78,8 +79,8 @@ const HomeChangeViewModeScreen: React.FC = () => {
       subtitle: '간소화된 형태',
       icon: 'view-compact',
       image: require('../../assets/images/daniel-j.jpg'),
-      description: '공간을 효율적으로 사용하는 레이아웃'
-    }
+      description: '공간을 효율적으로 사용하는 레이아웃',
+    },
   ];
 
   const tabs = ['추천', '인기셀러', '크리에이터'];
@@ -87,14 +88,14 @@ const HomeChangeViewModeScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
-      
+
       {/* Status Bar */}
       <View style={styles.statusBar} />
 
       {/* Header with Tabs */}
       <View style={styles.header}>
         <View style={styles.tabContainer}>
-          {tabs.map((tab) => (
+          {tabs.map(tab => (
             <TouchableOpacity
               key={tab}
               style={styles.tab}
@@ -114,7 +115,10 @@ const HomeChangeViewModeScreen: React.FC = () => {
           ))}
         </View>
         <View style={styles.headerIcons}>
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
+          <TouchableOpacity
+            onPress={handleSearchPress}
+            style={styles.iconButton}
+          >
             <Icon name="search" size={24} color="#000" />
           </TouchableOpacity>
           <TouchableOpacity
@@ -131,15 +135,17 @@ const HomeChangeViewModeScreen: React.FC = () => {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.contentContainer}>
           <Text style={styles.sectionTitle}>콘텐츠 표시 방식</Text>
-          <Text style={styles.sectionSubtitle}>원하는 뷰 모드를 선택하세요</Text>
+          <Text style={styles.sectionSubtitle}>
+            원하는 뷰 모드를 선택하세요
+          </Text>
 
           <View style={styles.modesGrid}>
-            {viewModes.map((mode) => (
+            {viewModes.map(mode => (
               <TouchableOpacity
                 key={mode.id}
                 style={[
                   styles.modeCard,
-                  selectedMode === mode.id && styles.selectedModeCard
+                  selectedMode === mode.id && styles.selectedModeCard,
                 ]}
                 onPress={() => handleImagePress(mode.id)}
               >
@@ -156,7 +162,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
                     <Text
                       style={[
                         styles.modeTitle,
-                        selectedMode === mode.id && styles.selectedModeTitle
+                        selectedMode === mode.id && styles.selectedModeTitle,
                       ]}
                     >
                       {mode.title}
@@ -194,19 +200,25 @@ const HomeChangeViewModeScreen: React.FC = () => {
           <Text style={styles.navText}>채팅</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.navItem}>
-          <Image source={require('../../assets/images/leandro-navarro.jpg')} style={styles.profileNavAvatar} />
+          <Image
+            source={require('../../assets/images/leandro-navarro.jpg')}
+            style={styles.profileNavAvatar}
+          />
           <Text style={styles.navText}>qwert</Text>
         </TouchableOpacity>
       </View>
 
       {/* Floating Action Buttons */}
       <View style={styles.fabContainer}>
-        <TouchableOpacity style={styles.fabSecondary} onPress={() => handleImagePress('grid')}>
+        <TouchableOpacity
+          style={styles.fabSecondary}
+          onPress={() => handleImagePress('grid')}
+        >
           <Icon name="grid-on" size={24} color="#666" />
         </TouchableOpacity>
         <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
           <LinearGradient
-            colors={["#AB42FF", "#7862FF", "#3687FF"]}
+            colors={['#AB42FF', '#7862FF', '#3687FF']}
             locations={[0, 0.5, 1]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
@@ -247,7 +259,7 @@ const styles = StyleSheet.create({
     height: 6,
     borderRadius: 3,
     backgroundColor: '#584DFF',
-    marginTop: 5
+    marginTop: 5,
   },
   headerIcons: { flexDirection: 'row', alignItems: 'center' },
   iconButton: { marginLeft: 15, position: 'relative' },
@@ -258,7 +270,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#FF0000'
+    backgroundColor: '#FF0000',
   },
   content: { flex: 1, backgroundColor: '#fff', paddingTop: 60 },
   contentContainer: { padding: 20 },
@@ -266,17 +278,17 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#000',
-    marginBottom: 8
+    marginBottom: 8,
   },
   sectionSubtitle: {
     fontSize: 16,
     color: '#6B7280',
-    marginBottom: 24
+    marginBottom: 24,
   },
   modesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   modeCard: {
     width: (screenWidth - 60) / 2,
@@ -291,7 +303,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     borderWidth: 2,
-    borderColor: 'transparent'
+    borderColor: 'transparent',
   },
   selectedModeCard: { borderColor: '#9C27B0' },
   modeImage: { width: '100%', height: '100%', resizeMode: 'cover' },
@@ -302,13 +314,13 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     padding: 15,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   modeIconContainer: {
     alignSelf: 'flex-start',
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 20,
-    padding: 8
+    padding: 8,
   },
   modeInfo: { alignSelf: 'flex-end' },
   modeTitle: {
@@ -318,7 +330,7 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-    marginBottom: 4
+    marginBottom: 4,
   },
   selectedModeTitle: { color: '#9C27B0' },
   modeSubtitle: {
@@ -326,7 +338,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 2
+    textShadowRadius: 2,
   },
   selectedIndicator: {
     position: 'absolute',
@@ -337,7 +349,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     backgroundColor: '#9C27B0',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   bottomNav: {
     flexDirection: 'row',
@@ -347,13 +359,18 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   navItem: { alignItems: 'center', flex: 1 },
   navText: { fontSize: 12, color: '#9CA3AF', marginTop: 4 },
   activeNavText: { color: '#000' },
   profileNavAvatar: { width: 24, height: 24, borderRadius: 12 },
-  fabContainer: { position: 'absolute', right: 20, bottom: 100, alignItems: 'center' },
+  fabContainer: {
+    position: 'absolute',
+    right: 20,
+    bottom: 100,
+    alignItems: 'center',
+  },
   fabPrimary: {
     width: 56,
     height: 56,
@@ -382,7 +399,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 6,
     borderRadius: 28,
-  }
+  },
 });
 
 export default HomeChangeViewModeScreen;

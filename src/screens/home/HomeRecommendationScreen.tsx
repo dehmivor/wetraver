@@ -12,6 +12,11 @@ import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import {
+  HomeTab,
+  HomeBottomNavigator,
+  FloatingActionButton,
+} from '../../components/ui';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -79,43 +84,13 @@ const HomeRecommendationScreen: React.FC = () => {
       <View style={styles.statusBar} />
 
       {/* Header with Tabs */}
-      <View style={styles.header}>
-        <View style={styles.tabContainer}>
-          {tabs.map(tab => (
-            <TouchableOpacity
-              key={tab}
-              style={styles.tab}
-              onPress={() => handleTabPress(tab)}
-            >
-              <Text
-                style={
-                  activeTab === tab
-                    ? [styles.tabText, styles.activeTabText]
-                    : styles.tabText
-                }
-              >
-                {tab}
-              </Text>
-              {activeTab === tab && <View style={styles.tabIndicator} />}
-            </TouchableOpacity>
-          ))}
-        </View>
-        <View style={styles.headerIcons}>
-          <TouchableOpacity
-            onPress={handleSearchPress}
-            style={styles.iconButton}
-          >
-            <Icon name="search" size={24} color="#000" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleNotificationPress}
-            style={styles.iconButton}
-          >
-            <Icon name="notifications" size={24} color="#000" />
-            <View style={styles.notificationDot} />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <HomeTab
+        tabs={tabs}
+        activeTab={activeTab}
+        onTabPress={handleTabPress}
+        onSearchPress={handleSearchPress}
+        onNotificationPress={handleNotificationPress}
+      />
 
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
@@ -175,52 +150,14 @@ const HomeRecommendationScreen: React.FC = () => {
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#000" />
-          <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="people" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>커뮤니티</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="star" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>버디픽</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="send" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>채팅</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Image
-            source={require('../../assets/images/leandro-navarro.jpg')}
-            style={styles.profileNavAvatar}
-          />
-          <Text style={styles.navText}>qwert</Text>
-        </TouchableOpacity>
-      </View>
+      <HomeBottomNavigator activeTab="홈" />
 
       {/* Floating Action Buttons */}
-      <View style={styles.fabContainer}>
-        <TouchableOpacity
-          style={styles.fabSecondary}
-          onPress={handleViewModePress}
-        >
-          <Icon name="grid-on" size={24} color="#666" />
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.8} style={styles.fabShadow}>
-          <LinearGradient
-            colors={['#AB42FF', '#7862FF', '#3687FF']}
-            locations={[0, 0.5, 1]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.fabPrimary}
-          >
-            <Icon name="add" size={24} color="#fff" />
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
+      <FloatingActionButton
+        showSecondary={true}
+        onSecondaryPress={handleViewModePress}
+        onPrimaryPress={() => console.log('Primary FAB pressed')}
+      />
     </View>
   );
 };
@@ -249,57 +186,6 @@ const styles = StyleSheet.create({
   },
   statusIcon: {
     marginLeft: 5,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    backgroundColor: '#fff',
-  },
-  headerLeft: {
-    width: 80, // Space for left side (same width as headerIcons)
-  },
-  tabContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  tab: {
-    marginRight: 30,
-    alignItems: 'center',
-  },
-  tabText: {
-    color: '#666',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  activeTabText: {
-    color: '#000',
-  },
-  tabIndicator: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#584DFF',
-    marginTop: 5,
-  },
-  headerIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconButton: {
-    marginLeft: 15,
-    position: 'relative',
-  },
-  notificationDot: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#FF0000',
   },
   content: {
     flex: 1,
@@ -485,68 +371,6 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  navItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  navText: {
-    fontSize: 12,
-    color: '#9CA3AF',
-    marginTop: 4,
-  },
-  activeNavText: {
-    color: '#000',
-  },
-  profileNavAvatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-  },
-  fabContainer: {
-    position: 'absolute',
-    right: 20,
-    bottom: 100,
-    alignItems: 'center',
-  },
-  fabShadow: {
-    elevation: 6,
-    shadowColor: '#402E99',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    borderRadius: 28,
-  },
-  fabPrimary: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fabSecondary: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#F3F4F6',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
 });
 
