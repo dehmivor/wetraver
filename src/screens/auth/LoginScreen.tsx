@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import Container from '../../components/layout/Container';
 import Text from '../../components/ui/Text';
 import { spacing } from '../../constants/theme';
@@ -125,8 +126,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: spacing.lg,
     justifyContent: 'space-between',
-    paddingTop: 110,
-    paddingBottom: 60,
+    paddingTop: verticalScale(90),
+    paddingBottom: verticalScale(60),
   },
   headerSection: {
     alignItems: 'center',
@@ -137,45 +138,48 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontWeight: 500,
-    fontSize: 26,
-    letterSpacing: 2,
+    fontFamily: 'Pretendard',
+    fontWeight: '500',
+    textTransform: 'uppercase',
+    fontSize: moderateScale(26),
+    lineHeight: moderateScale(26),
+    letterSpacing: moderateScale(1.04),
   },
   titleIcon: {
-    marginLeft: 8,
+    marginLeft: scale(8),
     transform: [{ rotate: '-15deg' }], // Lean 15% to the left
   },
   bottomContent: {
     alignItems: 'center',
-    paddingBottom: 40,
+    paddingBottom: verticalScale(40),
   },
   subtitle: {
-    marginTop: 4,
-    marginBottom: 4,
+    marginTop: verticalScale(4),
+    marginBottom: verticalScale(4),
     textShadowColor: 'rgba(0,0,0,0.3)',
     textShadowOffset: { width: 0, height: 1 },
     textShadowRadius: 2,
-    fontSize: 15,
-    lineHeight: 20,
+    fontSize: moderateScale(15),
+    lineHeight: verticalScale(20),
   },
   registerButton: {
     borderWidth: 1.5,
     borderColor: 'white',
-    paddingVertical: 10,
-    paddingHorizontal: 90,
-    borderRadius: 8,
-    marginTop: 32,
-    marginBottom: 40,
+    paddingVertical: verticalScale(10),
+    paddingHorizontal: scale(90),
+    borderRadius: scale(8),
+    marginTop: verticalScale(32),
+    marginBottom: verticalScale(40),
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   registerButtonText: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   exploreText: {
     color: 'rgba(255, 255, 255, 0.8)',
     fontWeight: '500',
-    fontSize: 15,
+    fontSize: moderateScale(15),
   },
 });
 
