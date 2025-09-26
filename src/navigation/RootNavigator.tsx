@@ -10,6 +10,7 @@ import JoinMembershipPhoneNumberCheckScreen from '../screens/auth/JoinMembership
 import JoinMembershipEmailScreen from '../screens/auth/JoinMembershipEmailScreen';
 import JoinMembershipEmailCheckScreen from '../screens/auth/JoinMembershipEmailCheckScreen';
 import JoinMembershipVerificationScreen from '../screens/auth/JoinMembershipVerificationScreen';
+import OnboardingScreen from '../screens/onboarding/OnboardingScreen';
 
 // Import Home screens
 import HomeRecommendationScreen from '../screens/home/HomeRecommendationScreen';
@@ -91,6 +92,14 @@ const RootNavigator = () => {
           title: '가입 완료하기',
           headerShown: true,
           headerTitleAlign: 'center',
+        }}
+      />
+      <Stack.Screen
+        name="Onboarding"
+        component={OnboardingScreen}
+        options={{
+          title: '온보딩',
+          headerShown: false,
         }}
       />
 

@@ -7,6 +7,7 @@ export type RootStackParamList = {
   JoinMembershipEmail: undefined;
   JoinMembershipEmailCheck: undefined;
   JoinMembershipVerification: undefined;
+  Onboarding: undefined;
   // Home screens
   HomeRecommendation: undefined;
   HomePopularSeller: undefined;

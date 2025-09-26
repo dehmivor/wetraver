@@ -6,6 +6,7 @@ import Input from '../../components/ui/Input';
 import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 const emailRegex =
   /^(?:[a-zA-Z0-9_'^&\+\-])+(?:\.(?:[a-zA-Z0-9_'^&\+\-])+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$/;
@@ -20,6 +21,7 @@ const COUNTRY_OPTIONS = [
 ];
 
 const JoinMembershipVerificationScreen: React.FC = () => {
+  const navigation = useNavigation<any>();
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
   const [country, setCountry] = useState('');
@@ -162,7 +164,9 @@ const JoinMembershipVerificationScreen: React.FC = () => {
         <Button
           title="다음"
           onPress={() => {
-            // Navigate or submit
+            if (requiredValid) {
+              navigation.navigate('Onboarding');
+            }
           }}
           disabled={!requiredValid}
           size="large"
