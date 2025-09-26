@@ -27,7 +27,7 @@ type HomeChangeViewModeScreenNavigationProp = NativeStackNavigationProp<RootStac
 const HomeChangeViewModeScreen: React.FC = () => {
   const navigation = useNavigation<HomeChangeViewModeScreenNavigationProp>();
   const [activeTab, setActiveTab] = useState('추천');
-  const [isGridMode, setIsGridMode] = useState(true);
+  const [isGridMode, setIsGridMode] = useState(false);
 
   // Animated value to control fade between views
   const fadeAnim = useRef(new Animated.Value(1)).current;
