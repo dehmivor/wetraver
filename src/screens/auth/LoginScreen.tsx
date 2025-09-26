@@ -21,7 +21,7 @@ const LoginScreen: React.FC = () => {
   };
 
   const handleExploreBeforeLogin = () => {
-    navigation.navigate('HomeRecommendation' as never);
+    navigation.navigate('HomeChangeViewMode' as never);
   };
 
   return (
