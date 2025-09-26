@@ -16,7 +16,8 @@ const SWIPE_THRESHOLD = 100; // Minimum vertical swipe distance
 const HomeCardTapScreen: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute<any>();
-  const { modeId } = route.params || {};
+const { card } = route.params || {};
+
 
   // Ref to track vertical movement
   const panResponder = useRef(
@@ -92,18 +93,17 @@ const HomeCardTapScreen: React.FC = () => {
 
       {/* Main Content with Background Image and Swipe Gesture */}
       <View style={styles.content} {...panResponder.panHandlers}>
-        <Image
-          source={require('../../assets/images/tokyo-traveler.jpg')}
-          style={styles.backgroundImage}
-        />
+       <Image
+  source={card?.image}
+  style={styles.backgroundImage}
+/>
 
-        {/* Text Overlay */}
-        <View style={styles.textOverlay}>
-          <Text style={styles.titleText}>카드 탭</Text>
-          <Text style={styles.subtitleText}>
-            {modeId ? `선택된 모드: ${modeId}` : '모드 정보 없음'}
-          </Text>
-        </View>
+<View style={styles.textOverlay}>
+  <Text style={styles.titleText}>{card?.title}</Text>
+  <Text style={styles.subtitleText}>{card?.subtitle}</Text>
+  <Text style={{ color: "#fff", marginTop: 5 }}>by {card?.username}</Text>
+</View>
+
 
         {/* Scroll Indicator */}
         <TouchableOpacity

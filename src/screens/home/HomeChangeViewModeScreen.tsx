@@ -33,9 +33,10 @@ const HomeChangeViewModeScreen: React.FC = () => {
     console.log('Notification pressed');
   };
 
-  const handleImagePress = (modeId: string) => {
-    navigation.navigate('HomeCardTap', { modeId });
-  };
+ const handleImagePress = (mode: any) => {
+  navigation.navigate('HomeCardTap', { card: mode });
+};
+
 
   const handleTabPress = (tab: string) => {
     setActiveTab(tab);
@@ -176,7 +177,7 @@ const viewModes = [
     styles.viewModeCard,
     selectedMode === mode.id && styles.selectedViewModeCard,
   ]}
-  onPress={() => handleImagePress(mode.id)}
+  onPress={() => handleImagePress(mode)}
 >
   <Image source={mode.image} style={styles.viewModeImage} />
 
