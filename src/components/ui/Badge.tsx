@@ -10,12 +10,7 @@ interface BadgeProps {
   style?: ViewStyle;
 }
 
-const Badge: React.FC<BadgeProps> = ({
-  children,
-  variant = 'primary',
-  size = 'medium',
-  style,
-}) => {
+const Badge: React.FC<BadgeProps> = ({ children, variant = 'primary', size = 'medium', style }) => {
   const getVariantStyle = () => {
     switch (variant) {
       case 'primary':
@@ -99,12 +94,7 @@ const Badge: React.FC<BadgeProps> = ({
         style,
       ]}
     >
-      <Text
-        variant="caption"
-        color={variantStyle.textColor}
-        align="center"
-        style={styles.text}
-      >
+      <Text variant="caption" color={variantStyle.textColor} align="center" style={styles.text}>
         {children}
       </Text>
     </View>

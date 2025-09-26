@@ -10,12 +10,7 @@ interface AvatarProps {
   style?: ViewStyle;
 }
 
-const Avatar: React.FC<AvatarProps> = ({
-  source,
-  name,
-  size = 'medium',
-  style,
-}) => {
+const Avatar: React.FC<AvatarProps> = ({ source, name, size = 'medium', style }) => {
   const getSizeStyle = () => {
     switch (size) {
       case 'small':
@@ -50,7 +45,7 @@ const Avatar: React.FC<AvatarProps> = ({
     if (!name) return '?';
     return name
       .split(' ')
-      .map(word => word.charAt(0))
+      .map((word) => word.charAt(0))
       .join('')
       .toUpperCase()
       .slice(0, 2);

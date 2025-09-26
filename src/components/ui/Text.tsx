@@ -10,15 +10,7 @@ import { colors, typography } from '../../constants/theme';
 
 interface TextProps extends RNTextProps {
   children: React.ReactNode;
-  variant?:
-    | 'h1'
-    | 'h2'
-    | 'h3'
-    | 'h4'
-    | 'body1'
-    | 'body2'
-    | 'caption'
-    | 'button';
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'caption' | 'button';
   color?: keyof typeof colors | string;
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'medium' | 'bold';

@@ -16,9 +16,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
   const isValid = useMemo(() => code.length === CODE_LENGTH, [code]);
 
   const handlePressCell = () => inputRef.current?.focus();
-  const cells = Array.from({ length: CODE_LENGTH }).map(
-    (_, idx) => code[idx] || '',
-  );
+  const cells = Array.from({ length: CODE_LENGTH }).map((_, idx) => code[idx] || '');
 
   return (
     <Container padding="large">
@@ -38,11 +36,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
         </Text>
       </View>
 
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={handlePressCell}
-        style={styles.codeRow}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={handlePressCell} style={styles.codeRow}>
         {cells.map((c, i) => (
           <View key={i} style={styles.codeCell}>
             <Text variant="h3" align="center">
@@ -55,9 +49,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
           ref={inputRef}
           style={styles.hiddenInput}
           value={code}
-          onChangeText={t =>
-            setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))
-          }
+          onChangeText={(t) => setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))}
           keyboardType="number-pad"
           autoFocus
         />
@@ -75,9 +67,7 @@ const JoinMembershipEmailCheckScreen: React.FC = () => {
       <View style={styles.footer}>
         <Button
           title="다음"
-          onPress={() =>
-            navigation.navigate('JoinMembershipVerification' as never)
-          }
+          onPress={() => navigation.navigate('JoinMembershipVerification' as never)}
           disabled={!isValid}
           size="large"
           style={{ borderRadius: 0, height: 100 }}

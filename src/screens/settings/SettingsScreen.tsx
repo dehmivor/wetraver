@@ -76,7 +76,7 @@ const SettingsScreen: React.FC = () => {
             Cài đặt chung
           </Text>
 
-          {settingsItems.map(item => (
+          {settingsItems.map((item) => (
             <Card
               key={item.id}
               style={styles.settingItem}

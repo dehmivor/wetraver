@@ -1,7 +1,6 @@
-
 import Divider from '../../components/ui/Divider';
 import { useNavigation } from '@react-navigation/native';
-import {  useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -72,12 +71,7 @@ const HomeDetailPageScreen: React.FC = () => {
         <View style={styles.statusIcons}>
           <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
           <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon
-            name="battery-full"
-            size={16}
-            color="#fff"
-            style={styles.statusIcon}
-          />
+          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
         </View>
       </View>
 
@@ -87,16 +81,10 @@ const HomeDetailPageScreen: React.FC = () => {
           <Icon name="arrow-back" size={24} color="#000" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
-          <TouchableOpacity
-            onPress={handleSearchPress}
-            style={styles.iconButton}
-          >
+          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
             <Icon name="search" size={24} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleNotificationPress}
-            style={styles.iconButton}
-          >
+          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
             <Icon name="notifications" size={24} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
@@ -123,16 +111,11 @@ const HomeDetailPageScreen: React.FC = () => {
                 <Icon name="place" size={16} color="#9C27B0" />
                 <Text style={styles.locationText}>도쿄, 일본</Text>
                 <View style={styles.separator} />
-                <Text style={styles.dateText}>
-                  25.8.18 (월) - 26.8.21 (목) · 4일
-                </Text>
+                <Text style={styles.dateText}>25.8.18 (월) - 26.8.21 (목) · 4일</Text>
               </View>
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.followButton}
-            onPress={handleFollowPress}
-          >
+          <TouchableOpacity style={styles.followButton} onPress={handleFollowPress}>
             <Text style={styles.followButtonText}>팔로우</Text>
           </TouchableOpacity>
         </View>
@@ -146,12 +129,7 @@ const HomeDetailPageScreen: React.FC = () => {
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             onScroll={handleScroll}
-            renderItem={({ item }) => (
-              <Image
-                source={item}
-                style={styles.carouselImage}
-              />
-            )}
+            renderItem={({ item }) => <Image source={item} style={styles.carouselImage} />}
           />
         </View>
 
@@ -161,10 +139,7 @@ const HomeDetailPageScreen: React.FC = () => {
             <TouchableOpacity
               key={index}
               onPress={() => handleDotPress(index)}
-              style={[
-                styles.paginationDot,
-                currentIndex === index && styles.activeDot
-              ]}
+              style={[styles.paginationDot, currentIndex === index && styles.activeDot]}
             />
           ))}
         </View>
@@ -172,38 +147,34 @@ const HomeDetailPageScreen: React.FC = () => {
         {/* Description Text */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            스카이트리부터 시부야까지, 저와 함께 도쿄 속 숨은 이야기와 빛나는
-            순간을 여행해요. 골목길의 작은 카페부터 화려한 네온 사인까지, 도쿄가
-            들려주는 특별한 하루를 함께 걸어가요.
+            스카이트리부터 시부야까지, 저와 함께 도쿄 속 숨은 이야기와 빛나는 순간을 여행해요.
+            골목길의 작은 카페부터 화려한 네온 사인까지, 도쿄가 들려주는 특별한 하루를 함께
+            걸어가요.
           </Text>
           <Text style={styles.descriptionText}>
-            낮에는 전통이 살아 숨 쉬는 아사쿠사와 우에노 거리를 거닐며 옛 정취를
-            느끼고, 밤에는 시부야의 끝없는 에너지와 신주쿠의 빛나는 야경 속으로
-            들어갑니다.
+            낮에는 전통이 살아 숨 쉬는 아사쿠사와 우에노 거리를 거닐며 옛 정취를 느끼고, 밤에는
+            시부야의 끝없는 에너지와 신주쿠의 빛나는 야경 속으로 들어갑니다.
           </Text>
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
         <View style={styles.imageCarouselContainer}>
-         <FlatList
-  ref={flatListRef}
-  data={images}
-  keyExtractor={(_, index) => index.toString()}
-  horizontal
-  pagingEnabled
-  showsHorizontalScrollIndicator={false}
-  onScroll={handleScroll}
-  renderItem={({ item }) => (
-    <Image source={item} style={styles.carouselImage} />
-  )}
-  initialScrollIndex={2}   // 👈 start at the 2nd item
-  getItemLayout={(_, index) => ({
-    length: width,         // width of each item
-    offset: width * index, // distance from start
-    index,
-  })}
-/>
-
+          <FlatList
+            ref={flatListRef}
+            data={images}
+            keyExtractor={(_, index) => index.toString()}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={handleScroll}
+            renderItem={({ item }) => <Image source={item} style={styles.carouselImage} />}
+            initialScrollIndex={2} // 👈 start at the 2nd item
+            getItemLayout={(_, index) => ({
+              length: width, // width of each item
+              offset: width * index, // distance from start
+              index,
+            })}
+          />
         </View>
 
         {/* Pagination Dots */}
@@ -212,10 +183,7 @@ const HomeDetailPageScreen: React.FC = () => {
             <TouchableOpacity
               key={index}
               onPress={() => handleDotPress(index)}
-              style={[
-                styles.paginationDot,
-                currentIndex === index && styles.activeDot
-              ]}
+              style={[styles.paginationDot, currentIndex === index && styles.activeDot]}
             />
           ))}
         </View>
@@ -223,33 +191,31 @@ const HomeDetailPageScreen: React.FC = () => {
         {/* Description Text */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와 함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리, 계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진 도쿄는 언제나 새로운 이야기를 들려줍니다.
+            익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와 함께 한 발짝씩 따라가
+            보지 않으시겠어요?현대와 전통이 공존하는 거리, 계절마다 변하는 공원의 색채, 그리고
+            사람들의 활기찬 일상이 어우러진 도쿄는 언제나 새로운 이야기를 들려줍니다.
           </Text>
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
+        {/* Map Section */}
+        <View style={styles.mapContainer}>
+          <Image source={require('../../assets/images/map.png')} style={styles.mapImage} />
 
-     {/* Map Section */}
-<View style={styles.mapContainer}>
-  <Image
-    source={require('../../assets/images/map.png')}
-    style={styles.mapImage}
-  />
+          {/* Centered icon + text */}
+          <View style={styles.mapPlaceholder}>
+            <Icon name="map" size={40} color="#fff" />
+            <Text style={styles.mapText}>지도 보기</Text>
+          </View>
 
-  {/* Centered icon + text */}
-  <View style={styles.mapPlaceholder}>
-    <Icon name="map" size={40} color="#fff" />
-    <Text style={styles.mapText}>지도 보기</Text>
-  </View>
+          {/* Expand button in the corner */}
+          <TouchableOpacity style={styles.mapExpandButton}>
+            <Icon name="open-in-full" size={20} color="#000" />
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
 
-  {/* Expand button in the corner */}
-  <TouchableOpacity style={styles.mapExpandButton}>
-    <Icon name="open-in-full" size={20} color="#000" />
-  </TouchableOpacity>
-</View>
-<Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
-
-        <Divider style={{ flex: 1, height: 1,  marginHorizontal: 20}} />
+        <Divider style={{ flex: 1, height: 1, marginHorizontal: 20 }} />
 
         {/* Hashtags */}
         <View style={styles.hashtagsContainer}>
@@ -276,10 +242,7 @@ const HomeDetailPageScreen: React.FC = () => {
             <Icon name="favorite" size={20} color="#FF6B6B" />
             <Text style={styles.engagementText}>1.3만</Text>
           </View>
-          <TouchableOpacity
-            style={styles.engagementItem}
-            onPress={handleCommentPress}
-          >
+          <TouchableOpacity style={styles.engagementItem} onPress={handleCommentPress}>
             <Icon name="chat-bubble-outline" size={20} color="#9CA3AF" />
             <Text style={styles.engagementText}>97</Text>
           </TouchableOpacity>
@@ -297,10 +260,7 @@ const HomeDetailPageScreen: React.FC = () => {
               <Text style={styles.matchingButtonText}>매칭 가능상품</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            style={styles.shareButton}
-            onPress={handleSharePress}
-          >
+          <TouchableOpacity style={styles.shareButton} onPress={handleSharePress}>
             <Icon name="send" size={20} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -550,45 +510,45 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   mapContainer: {
-  position: 'relative',   // allow overlay
-  marginHorizontal: 20,
-  marginVertical: 15,
-  height: 180,
-  borderRadius: 12,
-  overflow: 'hidden',     // make image corners rounded
-},
-mapImage: {
-  width: '100%',
-  height: '100%',
-  resizeMode: 'cover',
-  position: 'absolute',   // make it background
-},
-mapPlaceholder: {
-  position: 'absolute',
-  top: '40%',
-  left: 0,
-  right: 0,
-  alignItems: 'center',
-  zIndex: 2,              // ensure it's above
-},
-mapExpandButton: {
-  position: 'absolute',
-  top: 10,
-  right: 10,
-  width: 36,
-  height: 36,
-  borderRadius: 18,
-  backgroundColor: 'rgba(255,255,255,0.9)',
-  justifyContent: 'center',
-  alignItems: 'center',
-  zIndex: 3,              // above placeholder & image
-},
-mapText: {
-  fontSize: 14,
-  color: '#fff',
-  marginTop: 8,
-  fontWeight: '600',
-},
+    position: 'relative', // allow overlay
+    marginHorizontal: 20,
+    marginVertical: 15,
+    height: 180,
+    borderRadius: 12,
+    overflow: 'hidden', // make image corners rounded
+  },
+  mapImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    position: 'absolute', // make it background
+  },
+  mapPlaceholder: {
+    position: 'absolute',
+    top: '40%',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    zIndex: 2, // ensure it's above
+  },
+  mapExpandButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 3, // above placeholder & image
+  },
+  mapText: {
+    fontSize: 14,
+    color: '#fff',
+    marginTop: 8,
+    fontWeight: '600',
+  },
   locationDetail: {
     fontSize: 14,
     color: '#6B7280',

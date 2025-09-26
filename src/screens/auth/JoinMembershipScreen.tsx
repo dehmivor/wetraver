@@ -9,13 +9,7 @@ import { colors, spacing, borderRadius } from '../../constants/theme';
 import { useNavigation } from '@react-navigation/native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-type AgreementKey =
-  | 'tos'
-  | 'privacy'
-  | 'location'
-  | 'personalized'
-  | 'marketing'
-  | 'age14';
+type AgreementKey = 'tos' | 'privacy' | 'location' | 'personalized' | 'marketing' | 'age14';
 
 const JoinMembershipScreen: React.FC = () => {
   const [agreements, setAgreements] = useState<Record<AgreementKey, boolean>>({
@@ -33,8 +27,7 @@ const JoinMembershipScreen: React.FC = () => {
     navigation.setOptions({ title: '회원가입 약관 동의' });
   }, [navigation]);
 
-  const requiredChecked =
-    agreements.tos && agreements.privacy && agreements.age14;
+  const requiredChecked = agreements.tos && agreements.privacy && agreements.age14;
   const allChecked = Object.values(agreements).every(Boolean);
 
   const toggleAll = () => {
@@ -50,26 +43,19 @@ const JoinMembershipScreen: React.FC = () => {
   };
 
   const toggle = (key: AgreementKey) => {
-    setAgreements(prev => ({ ...prev, [key]: !prev[key] }));
+    setAgreements((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
     <Container padding="large">
-      <ScrollView
-        showsVerticalScrollIndicator={true}
-        contentContainerStyle={styles.scrollContent}
-      >
+      <ScrollView showsVerticalScrollIndicator={true} contentContainerStyle={styles.scrollContent}>
         <View style={styles.noteWrap}>
           <Text variant="caption" color="gray.600" align="center">
             아래 약관 내용에 동의 후 서비스 이용이 가능합니다.
           </Text>
         </View>
 
-        <TouchableOpacity
-          onPress={toggleAll}
-          activeOpacity={0.8}
-          style={styles.allWrap}
-        >
+        <TouchableOpacity onPress={toggleAll} activeOpacity={0.8} style={styles.allWrap}>
           <MaterialIcons
             name="done"
             size={moderateScale(34)}
@@ -135,9 +121,7 @@ const JoinMembershipScreen: React.FC = () => {
       <View style={styles.footer}>
         <Button
           title="확인"
-          onPress={() =>
-            navigation.navigate('JoinMembershipPhoneNumber' as never)
-          }
+          onPress={() => navigation.navigate('JoinMembershipPhoneNumber' as never)}
           disabled={!requiredChecked}
           size="large"
           style={{ borderRadius: 0, height: 100 }}
@@ -153,11 +137,7 @@ const AgreementItem: React.FC<{
   label: string;
 }> = ({ checked, onPress, label }) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.8}
-      style={styles.itemRow}
-    >
+    <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles.itemRow}>
       <MaterialIcons
         name="done"
         size={moderateScale(24)}

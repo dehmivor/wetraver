@@ -33,12 +33,7 @@ const Container: React.FC<ContainerProps> = ({
     }
   };
 
-  const containerStyle = [
-    styles.container,
-    { backgroundColor },
-    getPaddingStyle(),
-    style,
-  ];
+  const containerStyle = [styles.container, { backgroundColor }, getPaddingStyle(), style];
 
   if (safeArea) {
     return <SafeAreaView style={containerStyle}>{children}</SafeAreaView>;

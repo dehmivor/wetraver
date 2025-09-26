@@ -24,13 +24,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
   return (
- <Stack.Navigator
+    <Stack.Navigator
       screenOptions={{
         headerShown: false,
         statusBarStyle: 'dark', // or remove if mismatched version
       }}
       initialRouteName="Login"
-    > 
+    >
       {/* Auth Screens */}
       <Stack.Screen
         name="Login"
@@ -128,19 +128,19 @@ const RootNavigator = () => {
         component={HomeCardTapScreen}
         options={{
           title: '카드 탭',
-        statusBarStyle: 'light',
+          statusBarStyle: 'light',
         }}
       />
       <Stack.Screen
-  name="HomeDetailPage"
-  component={HomeDetailPageScreen}
-  options={{
-    title: '상세 페이지',
-    animation: 'slide_from_bottom',   // 👈 makes the transition come from bottom
-    // presentation: 'modal',         // optional → iOS modal style
-    headerShown: false,               // optional if you don’t want header
-  }}
-/>
+        name="HomeDetailPage"
+        component={HomeDetailPageScreen}
+        options={{
+          title: '상세 페이지',
+          animation: 'slide_from_bottom', // 👈 makes the transition come from bottom
+          // presentation: 'modal',         // optional → iOS modal style
+          headerShown: false, // optional if you don’t want header
+        }}
+      />
       <Stack.Screen
         name="HomeComments"
         component={HomeCommentsScreen}

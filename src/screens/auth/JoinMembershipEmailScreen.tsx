@@ -40,16 +40,8 @@ const JoinMembershipEmailScreen: React.FC = () => {
 
       <View style={{ gap: spacing.sm }}>
         <SocialButton label="전화번호로 로그인하기" icon="phone-android" />
-        <SocialButton
-          label="네이버로 로그인하기"
-          icon="public"
-          color="#03C75A"
-        />
-        <SocialButton
-          label="페이스북으로 로그인하기"
-          icon="facebook"
-          color="#1877F2"
-        />
+        <SocialButton label="네이버로 로그인하기" icon="public" color="#03C75A" />
+        <SocialButton label="페이스북으로 로그인하기" icon="facebook" color="#1877F2" />
         <SocialButton label="구글로 로그인하기" icon="google" color="#DB4437" />
         <SocialButton label="Apple로 로그인하기" icon="apple" color="#000" />
       </View>
@@ -57,9 +49,7 @@ const JoinMembershipEmailScreen: React.FC = () => {
       <View style={styles.footer}>
         <Button
           title="다음"
-          onPress={() =>
-            navigation.navigate('JoinMembershipEmailCheck' as never)
-          }
+          onPress={() => navigation.navigate('JoinMembershipEmailCheck' as never)}
           disabled={!isValid}
           size="large"
           style={{ borderRadius: 0, height: 100 }}
@@ -75,12 +65,7 @@ const SocialButton: React.FC<{
   color?: string;
 }> = ({ label, icon, color = colors.gray[700] }) => (
   <TouchableOpacity activeOpacity={0.8} style={styles.socialBtn}>
-    <Icon
-      name={icon}
-      size={20}
-      color={color}
-      style={{ marginRight: spacing.md }}
-    />
+    <Icon name={icon} size={20} color={color} style={{ marginRight: spacing.md }} />
     <Text variant="body1" color="gray.900">
       {label}
     </Text>

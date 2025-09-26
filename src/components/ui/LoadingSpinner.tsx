@@ -16,20 +16,13 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   message,
   overlay = false,
 }) => {
-  const containerStyle = overlay
-    ? [styles.container, styles.overlay]
-    : styles.container;
+  const containerStyle = overlay ? [styles.container, styles.overlay] : styles.container;
 
   return (
     <View style={containerStyle}>
       <ActivityIndicator size={size} color={color} />
       {message && (
-        <Text
-          variant="body2"
-          color="gray.600"
-          align="center"
-          style={styles.message}
-        >
+        <Text variant="body2" color="gray.600" align="center" style={styles.message}>
           {message}
         </Text>
       )}

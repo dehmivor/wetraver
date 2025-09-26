@@ -17,8 +17,7 @@ const SWIPE_THRESHOLD = 100; // Minimum vertical swipe distance
 const HomeCardTapScreen: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute<any>();
-const { card } = route.params || {};
-
+  const { card } = route.params || {};
 
   // Ref to track vertical movement
   const panResponder = useRef(
@@ -52,27 +51,17 @@ const { card } = route.params || {};
 
   return (
     <View style={styles.container}>
-<StatusBar
-  barStyle="light-content"
-  translucent
-  backgroundColor="transparent"
-/>
+      <StatusBar barStyle="light-content" translucent backgroundColor="transparent" />
       {/* Header with Back Button and Icons */}
       <View style={styles.header}>
         <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
         <View style={styles.headerIcons}>
-          <TouchableOpacity
-            onPress={handleSearchPress}
-            style={styles.iconButton}
-          >
+          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
             <Icon name="search" size={20} color="#000" />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleNotificationPress}
-            style={styles.iconButton}
-          >
+          <TouchableOpacity onPress={handleNotificationPress} style={styles.iconButton}>
             <Icon name="notifications" size={20} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>

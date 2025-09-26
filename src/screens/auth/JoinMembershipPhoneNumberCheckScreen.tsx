@@ -16,9 +16,7 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
   const isValid = useMemo(() => code.length === CODE_LENGTH, [code]);
 
   const handlePressCell = () => inputRef.current?.focus();
-  const cells = Array.from({ length: CODE_LENGTH }).map(
-    (_, idx) => code[idx] || '',
-  );
+  const cells = Array.from({ length: CODE_LENGTH }).map((_, idx) => code[idx] || '');
 
   return (
     <Container padding="large">
@@ -33,11 +31,7 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
         </Text>
       </View>
 
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={handlePressCell}
-        style={styles.codeRow}
-      >
+      <TouchableOpacity activeOpacity={1} onPress={handlePressCell} style={styles.codeRow}>
         {cells.map((c, i) => (
           <View key={i} style={styles.codeCell}>
             <Text variant="h3" align="center">
@@ -50,9 +44,7 @@ const JoinMembershipPhoneNumberCheckScreen: React.FC = () => {
           ref={inputRef}
           style={styles.hiddenInput}
           value={code}
-          onChangeText={t =>
-            setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))
-          }
+          onChangeText={(t) => setCode(t.replace(/[^0-9]/g, '').slice(0, CODE_LENGTH))}
           keyboardType="number-pad"
           autoFocus
         />

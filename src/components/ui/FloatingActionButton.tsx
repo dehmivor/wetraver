@@ -31,10 +31,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   return (
     <View style={fabContainerStyle}>
       {showSecondary && (
-        <TouchableOpacity
-          style={styles.fabSecondary}
-          onPress={onSecondaryPress}
-        >
+        <TouchableOpacity style={styles.fabSecondary} onPress={onSecondaryPress}>
           <Icon name={secondaryIcon} size={24} color="#666" />
         </TouchableOpacity>
       )}

@@ -2,10 +2,7 @@ import { StyleSheet, TextStyle } from 'react-native';
 import { typography, colors } from './theme';
 
 // Helper function to calculate letter spacing as percentage of font size
-const calculateLetterSpacing = (
-  fontSize: number,
-  percentage: number,
-): number => {
+const calculateLetterSpacing = (fontSize: number, percentage: number): number => {
   return (fontSize * percentage) / 100;
 };
 

@@ -21,12 +21,5 @@
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-  "exclude": [
-    "node_modules",
-    "**/node_modules",
-    "build",
-    ".expo",
-    "**/Pods",
-    "**/__tests__/*"
-  ]
+  "exclude": ["node_modules", "**/node_modules", "build", ".expo", "**/Pods", "**/__tests__/*"]
 }

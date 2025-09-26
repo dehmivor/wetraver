@@ -37,12 +37,7 @@ const LoginScreen: React.FC = () => {
           {/* Header Section with Title and Badge */}
           <View style={styles.headerSection}>
             <View style={styles.titleRow}>
-              <Text
-                variant="h1"
-                color="white"
-                align="center"
-                style={styles.title}
-              >
+              <Text variant="h1" color="white" align="center" style={styles.title}>
                 WETRAVER
               </Text>
               {/* Replace View with UisComment */}
@@ -78,20 +73,12 @@ const LoginScreen: React.FC = () => {
               onPress={handleRegisterPress}
               activeOpacity={0.7}
             >
-              <Text
-                variant="button"
-                color="white"
-                align="center"
-                style={styles.registerButtonText}
-              >
+              <Text variant="button" color="white" align="center" style={styles.registerButtonText}>
                 회원 가입하기
               </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={handleExploreBeforeLogin}
-              activeOpacity={0.7}
-            >
+            <TouchableOpacity onPress={handleExploreBeforeLogin} activeOpacity={0.7}>
               <Text
                 variant="caption"
                 color="rgba(255, 255, 255, 0.8)"

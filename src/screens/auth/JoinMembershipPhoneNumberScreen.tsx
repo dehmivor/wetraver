@@ -54,13 +54,11 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
       <View>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => setDropdownOpen(prev => !prev)}
+          onPress={() => setDropdownOpen((prev) => !prev)}
           style={styles.selectBox}
         >
           <Text variant="body1" color={country ? 'gray.900' : 'gray.400'}>
-            {country
-              ? countryOptions.find(o => o.value === country)?.label
-              : '국가/지역'}
+            {country ? countryOptions.find((o) => o.value === country)?.label : '국가/지역'}
           </Text>
           <Text variant="body1" color="gray.400">
             ▾
@@ -69,7 +67,7 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
 
         {dropdownOpen && (
           <View style={styles.dropdownMenu}>
-            {countryOptions.map(opt => (
+            {countryOptions.map((opt) => (
               <TouchableOpacity
                 key={opt.value}
                 activeOpacity={0.8}
@@ -114,24 +112,20 @@ const JoinMembershipPhoneNumberScreen: React.FC = () => {
       </View>
 
       <View style={styles.socialContainer}>
-        {(Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).map(
-          key => (
-            <SocialButton
-              key={key}
-              label={`${SOCIAL_LABELS[key]}로 로그인하기`}
-              icon={SOCIAL_ICONS[key]}
-              color={SOCIAL_COLORS[key]}
-            />
-          ),
-        )}
+        {(Object.keys(SOCIAL_ICONS) as Array<keyof typeof SOCIAL_ICONS>).map((key) => (
+          <SocialButton
+            key={key}
+            label={`${SOCIAL_LABELS[key]}로 로그인하기`}
+            icon={SOCIAL_ICONS[key]}
+            color={SOCIAL_COLORS[key]}
+          />
+        ))}
       </View>
 
       <View style={styles.footer}>
         <Button
           title="확인"
-          onPress={() =>
-            navigation.navigate('JoinMembershipPhoneNumberCheck' as never)
-          }
+          onPress={() => navigation.navigate('JoinMembershipPhoneNumberCheck' as never)}
           disabled={!isValid}
           size="large"
           style={{ borderRadius: 0, height: 100 }}

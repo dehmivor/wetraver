@@ -11,11 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  HomeTab,
-  HomeBottomNavigator,
-  FloatingActionButton,
-} from '../../components/ui';
+import { HomeTab, HomeBottomNavigator, FloatingActionButton } from '../../components/ui';
 
 // const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -63,13 +59,8 @@ const HomePopularSellerScreen: React.FC = () => {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
                 {/* Call to Action Text */}       {' '}
         <View style={styles.callToActionContainer}>
-                   {' '}
-          <Text style={styles.callToActionText}>
-            다양한 여행 친구를 팔로우하고
-          </Text>
-                   {' '}
-          <Text style={styles.callToActionText}>인기 콘텐츠를 즐겨보세요</Text> 
-               {' '}
+                    <Text style={styles.callToActionText}>다양한 여행 친구를 팔로우하고</Text>     
+              <Text style={styles.callToActionText}>인기 콘텐츠를 즐겨보세요</Text>       {' '}
         </View>
                 {/* Profile Cards Section */}       {' '}
         <View style={styles.profileCardsContainer}>
@@ -97,10 +88,8 @@ const HomePopularSellerScreen: React.FC = () => {
             />
                        {' '}
             <View style={styles.profileOverlay}>
-                           {' '}
-              <Text style={styles.profileTitle}>일본탐방 로컬도쿄</Text>       
-                    <Text style={styles.profileUsername}>wewemomo</Text>       
-                 {' '}
+                            <Text style={styles.profileTitle}>일본탐방 로컬도쿄</Text>             {' '}
+              <Text style={styles.profileUsername}>wewemomo</Text>           {' '}
             </View>
                      {' '}
           </View>
@@ -138,10 +127,7 @@ const HomePopularSellerScreen: React.FC = () => {
           </View>
         </View>
                 {/* Follow Button */}     
-        <TouchableOpacity
-          style={styles.followButton}
-          onPress={handleFollowPress}
-        >
+        <TouchableOpacity style={styles.followButton} onPress={handleFollowPress}>
                     <Text style={styles.followButtonText}>팔로우</Text>     
         </TouchableOpacity>
       </ScrollView>

@@ -12,10 +12,11 @@ export type RootStackParamList = {
   HomePopularSeller: undefined;
   HomeCreator: undefined;
   HomeChangeViewMode: undefined;
- HomeCardTap: {
+  HomeCardTap: {
     modeId?: string;
     card?: any; // 👈 add card here
-  };  HomeDetailPage: undefined;
+  };
+  HomeDetailPage: undefined;
   HomeComments: undefined;
 };
 

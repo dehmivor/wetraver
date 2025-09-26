@@ -92,12 +92,7 @@ const HomeCommentsScreen: React.FC = () => {
         <View style={styles.statusIcons}>
           <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
           <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon
-            name="battery-full"
-            size={16}
-            color="#fff"
-            style={styles.statusIcon}
-          />
+          <Icon name="battery-full" size={16} color="#fff" style={styles.statusIcon} />
         </View>
       </View>
 
@@ -122,11 +117,8 @@ const HomeCommentsScreen: React.FC = () => {
       </View>
 
       {/* Comments List */}
-      <ScrollView
-        style={styles.commentsList}
-        showsVerticalScrollIndicator={false}
-      >
-        {comments.map(comment => (
+      <ScrollView style={styles.commentsList} showsVerticalScrollIndicator={false}>
+        {comments.map((comment) => (
           <View key={comment.id} style={styles.commentItem}>
             <Image source={comment.avatar} style={styles.commentAvatar} />
             <View style={styles.commentContent}>
@@ -149,18 +141,14 @@ const HomeCommentsScreen: React.FC = () => {
                   <Icon
                     name="favorite"
                     size={16}
-                    color={
-                      likedComments.has(comment.id) ? '#FF6B6B' : '#9CA3AF'
-                    }
+                    color={likedComments.has(comment.id) ? '#FF6B6B' : '#9CA3AF'}
                   />
                   {comment.likes > 0 && (
                     <Text
                       style={[
                         styles.commentLikeCount,
                         {
-                          color: likedComments.has(comment.id)
-                            ? '#FF6B6B'
-                            : '#9CA3AF',
+                          color: likedComments.has(comment.id) ? '#FF6B6B' : '#9CA3AF',
                         },
                       ]}
                     >

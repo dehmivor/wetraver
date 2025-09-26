@@ -21,18 +21,10 @@ const HomeTab: React.FC<HomeTabProps> = ({
   return (
     <View style={styles.header}>
       <View style={styles.tabContainer}>
-        {tabs.map(tab => (
-          <TouchableOpacity
-            key={tab}
-            style={styles.tab}
-            onPress={() => onTabPress(tab)}
-          >
+        {tabs.map((tab) => (
+          <TouchableOpacity key={tab} style={styles.tab} onPress={() => onTabPress(tab)}>
             <Text
-              style={
-                activeTab === tab
-                  ? [styles.tabText, styles.activeTabText]
-                  : styles.tabText
-              }
+              style={activeTab === tab ? [styles.tabText, styles.activeTabText] : styles.tabText}
             >
               {tab}
             </Text>
@@ -44,10 +36,7 @@ const HomeTab: React.FC<HomeTabProps> = ({
         <TouchableOpacity onPress={onSearchPress} style={styles.iconButton}>
           <Icon name="search" size={24} color="#000" />
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={onNotificationPress}
-          style={styles.iconButton}
-        >
+        <TouchableOpacity onPress={onNotificationPress} style={styles.iconButton}>
           <Icon name="notifications" size={24} color="#000" />
           <View style={styles.notificationDot} />
         </TouchableOpacity>

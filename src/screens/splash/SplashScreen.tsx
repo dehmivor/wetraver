@@ -1,12 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  StatusBar,
-  Dimensions,
-  Animated,
-} from 'react-native';
+import { View, StyleSheet, Image, StatusBar, Dimensions, Animated } from 'react-native';
 import Text from '../../components/ui/Text';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { colors, spacing } from '../../constants/theme';
@@ -53,11 +46,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
   return (
     <SafeAreaProvider>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={colors.white}
-        translucent={false}
-      />
+      <StatusBar barStyle="dark-content" backgroundColor={colors.white} translucent={false} />
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
           {/* Logo */}

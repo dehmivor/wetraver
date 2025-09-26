@@ -11,11 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  HomeTab,
-  HomeBottomNavigator,
-  FloatingActionButton,
-} from '../../components/ui';
+import { HomeTab, HomeBottomNavigator, FloatingActionButton } from '../../components/ui';
 
 // const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 

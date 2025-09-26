@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  StyleSheet,
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-} from 'react-native';
+import { View, StyleSheet, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { colors, spacing } from '../../constants/theme';
 import Container from '../../components/layout/Container';
 import Header from '../../components/layout/Header';
@@ -26,14 +19,8 @@ interface RegisterFormData {
 }
 
 const schema = yup.object({
-  fullName: yup
-    .string()
-    .min(2, 'Họ tên phải có ít nhất 2 ký tự')
-    .required('Vui lòng nhập họ tên'),
-  email: yup
-    .string()
-    .email('Email không hợp lệ')
-    .required('Vui lòng nhập email'),
+  fullName: yup.string().min(2, 'Họ tên phải có ít nhất 2 ký tự').required('Vui lòng nhập họ tên'),
+  email: yup.string().email('Email không hợp lệ').required('Vui lòng nhập email'),
   phone: yup
     .string()
     .matches(/^[0-9]{10,11}$/, 'Số điện thoại không hợp lệ')
@@ -73,7 +60,7 @@ const RegisterScreen: React.FC = () => {
       console.log('Register data:', data);
 
       // Simulate API call
-      await new Promise(resolve => setTimeout(() => resolve(undefined), 2000));
+      await new Promise((resolve) => setTimeout(() => resolve(undefined), 2000));
 
       Alert.alert('Thành công', 'Đăng ký thành công!', [
         {
@@ -109,12 +96,7 @@ const RegisterScreen: React.FC = () => {
             <Text variant="h2" color="primary" align="center">
               Tạo tài khoản
             </Text>
-            <Text
-              variant="body1"
-              color="gray.600"
-              align="center"
-              style={styles.subtitle}
-            >
+            <Text variant="body1" color="gray.600" align="center" style={styles.subtitle}>
               Tham gia WeTraver để khám phá thế giới
             </Text>
           </View>

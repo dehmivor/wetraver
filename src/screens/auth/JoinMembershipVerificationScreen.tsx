@@ -34,18 +34,10 @@ const JoinMembershipVerificationScreen: React.FC = () => {
 
   const passwordValid = useMemo(() => {
     const lenOk = password.length >= 8 && password.length <= 20;
-    return (
-      lenOk &&
-      hasLetter(password) &&
-      hasNumber(password) &&
-      hasSpecial(password)
-    );
+    return lenOk && hasLetter(password) && hasNumber(password) && hasSpecial(password);
   }, [password]);
 
-  const requiredValid = useMemo(
-    () => name.trim().length > 0 && agreePrivacy,
-    [agreePrivacy],
-  );
+  const requiredValid = useMemo(() => name.trim().length > 0 && agreePrivacy, [agreePrivacy]);
 
   return (
     <Container padding="large">
@@ -53,11 +45,7 @@ const JoinMembershipVerificationScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: spacing['3xl'] }}
       >
-        <Input
-          placeholder="실명  (예 : 홍 길동)"
-          value={name}
-          onChangeText={setName}
-        />
+        <Input placeholder="실명  (예 : 홍 길동)" value={name} onChangeText={setName} />
         <Text
           variant="caption"
           color="gray.500"
@@ -77,8 +65,8 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           color="gray.500"
           style={{ marginTop: -spacing.sm, marginBottom: spacing.md }}
         >
-          18세 이상의 성인만 회원으로 가입할 수 있습니다. 해당 정보는 다른
-          이용자에게 공개되지 않습니다.
+          18세 이상의 성인만 회원으로 가입할 수 있습니다. 해당 정보는 다른 이용자에게 공개되지
+          않습니다.
         </Text>
 
         <TouchableOpacity
@@ -87,9 +75,7 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           onPress={() => setDropdownOpen(!dropdownOpen)}
         >
           <Text variant="body1" color={country ? 'gray.900' : 'gray.400'}>
-            {country
-              ? COUNTRY_OPTIONS.find(({ value }) => value === country)?.label
-              : '국가/지역'}
+            {country ? COUNTRY_OPTIONS.find(({ value }) => value === country)?.label : '국가/지역'}
           </Text>
           <Text variant="body1" color="gray.400">
             ▾
@@ -146,14 +132,10 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           />
         </View>
 
-        <Input
-          placeholder="활동 지역"
-          value={region}
-          onChangeText={setRegion}
-        />
+        <Input placeholder="활동 지역" value={region} onChangeText={setRegion} />
         <Text variant="caption" color="gray.500">
-          위트래버를 원활하게 이용하려면 활동지역을 설정해주세요. 설정된 지역을
-          바탕으로 맞춤형 여행 서비스를 제공합니다.
+          위트래버를 원활하게 이용하려면 활동지역을 설정해주세요. 설정된 지역을 바탕으로 맞춤형 여행
+          서비스를 제공합니다.
         </Text>
 
         <Divider />
@@ -170,14 +152,9 @@ const JoinMembershipVerificationScreen: React.FC = () => {
           onPress={() => setAgreeMarketing(!agreeMarketing)}
         />
 
-        <Text
-          variant="caption"
-          color="gray.500"
-          style={{ marginTop: spacing.md }}
-        >
-          동의 및 계속하기를 선택하여 위트래버 서비스 약관, 결제 서비스 약관,
-          위치기반서비스 이용약관, 차별 금지 정책, 개인정보 처리방침에
-          동의합니다.
+        <Text variant="caption" color="gray.500" style={{ marginTop: spacing.md }}>
+          동의 및 계속하기를 선택하여 위트래버 서비스 약관, 결제 서비스 약관, 위치기반서비스
+          이용약관, 차별 금지 정책, 개인정보 처리방침에 동의합니다.
         </Text>
       </ScrollView>
 
@@ -205,11 +182,7 @@ const AgreementRow: React.FC<{
   checked: boolean;
   onPress: () => void;
 }> = ({ label, checked, onPress }) => (
-  <TouchableOpacity
-    activeOpacity={0.8}
-    onPress={onPress}
-    style={styles.agreeRow}
-  >
+  <TouchableOpacity activeOpacity={0.8} onPress={onPress} style={styles.agreeRow}>
     <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
       {checked ? (
         <Text variant="button" color={'#fff'} align="center">
@@ -226,16 +199,10 @@ const AgreementRow: React.FC<{
   </TouchableOpacity>
 );
 
-const HintItem: React.FC<{ label: string; active: boolean }> = ({
-  label,
-  active,
-}) => (
+const HintItem: React.FC<{ label: string; active: boolean }> = ({ label, active }) => (
   <View style={styles.hintItem}>
     <View
-      style={[
-        styles.hintDot,
-        { backgroundColor: active ? colors.primary : colors.gray[300] },
-      ]}
+      style={[styles.hintDot, { backgroundColor: active ? colors.primary : colors.gray[300] }]}
     />
     <Text variant="caption" color={active ? colors.primary : colors.gray[500]}>
       {label}

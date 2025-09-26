@@ -22,7 +22,7 @@ const HomeBottomNavigator: React.FC<HomeBottomNavigatorProps> = ({
 
   return (
     <View style={styles.bottomNav}>
-      {navItems.map(item => (
+      {navItems.map((item) => (
         <TouchableOpacity
           key={item.key}
           style={styles.navItem}
@@ -34,18 +34,9 @@ const HomeBottomNavigator: React.FC<HomeBottomNavigatorProps> = ({
               style={styles.profileNavAvatar}
             />
           ) : (
-            <Icon
-              name={item.icon}
-              size={24}
-              color={activeTab === item.key ? '#000' : '#9CA3AF'}
-            />
+            <Icon name={item.icon} size={24} color={activeTab === item.key ? '#000' : '#9CA3AF'} />
           )}
-          <Text
-            style={[
-              styles.navText,
-              activeTab === item.key && styles.activeNavText,
-            ]}
-          >
+          <Text style={[styles.navText, activeTab === item.key && styles.activeNavText]}>
             {item.label}
           </Text>
         </TouchableOpacity>

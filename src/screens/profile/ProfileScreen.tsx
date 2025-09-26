@@ -73,11 +73,7 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <Container>
-      <Header
-        title="Hồ sơ"
-        rightIcon="settings"
-        onRightPress={handleSettings}
-      />
+      <Header title="Hồ sơ" rightIcon="settings" onRightPress={handleSettings} />
 
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Profile Header */}
@@ -106,13 +102,8 @@ const ProfileScreen: React.FC = () => {
 
         {/* Menu Items */}
         <View style={styles.menuSection}>
-          {menuItems.map(item => (
-            <Card
-              key={item.id}
-              style={styles.menuItem}
-              onPress={item.onPress}
-              variant="outlined"
-            >
+          {menuItems.map((item) => (
+            <Card key={item.id} style={styles.menuItem} onPress={item.onPress} variant="outlined">
               <View style={styles.menuItemContent}>
                 <Text style={styles.menuIcon}>{item.icon}</Text>
                 <Text variant="body1" color="gray.900" style={styles.menuText}>

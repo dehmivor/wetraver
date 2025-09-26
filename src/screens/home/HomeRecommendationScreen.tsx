@@ -12,11 +12,7 @@ import Text from '../../components/ui/Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
-import {
-  HomeTab,
-  HomeBottomNavigator,
-  FloatingActionButton,
-} from '../../components/ui';
+import { HomeTab, HomeBottomNavigator, FloatingActionButton } from '../../components/ui';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -94,7 +90,7 @@ const HomeRecommendationScreen: React.FC = () => {
 
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        {posts.map(post => (
+        {posts.map((post) => (
           <View key={post.id} style={styles.postCard}>
             <Image source={post.image} style={styles.postImage} />
 
@@ -121,10 +117,7 @@ const HomeRecommendationScreen: React.FC = () => {
               <View style={styles.postBottomRow}>
                 <View style={styles.userInfo}>
                   <View style={styles.avatarContainer}>
-                    <Image
-                      source={post.userAvatar}
-                      style={styles.largeAvatar}
-                    />
+                    <Image source={post.userAvatar} style={styles.largeAvatar} />
                   </View>
                   <Text style={styles.username}>{post.username}</Text>
                 </View>

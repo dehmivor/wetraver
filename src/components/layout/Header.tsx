@@ -37,30 +37,18 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor={backgroundColor}
-        translucent={false}
-      />
+      <StatusBar barStyle="dark-content" backgroundColor={backgroundColor} translucent={false} />
       <SafeAreaView style={[styles.safeArea, { backgroundColor }]}>
         <View style={[styles.container, style]}>
           {/* Left side */}
           <View style={styles.leftSection}>
             {showBackButton && (
-              <Button
-                variant="ghost"
-                onPress={handleBackPress}
-                style={styles.iconButton}
-              >
+              <Button variant="ghost" onPress={handleBackPress} style={styles.iconButton}>
                 <Icon name="arrow-back" size={24} color={colors.gray[700]} />
               </Button>
             )}
             {leftIcon && onLeftPress && (
-              <Button
-                variant="ghost"
-                onPress={onLeftPress}
-                style={styles.iconButton}
-              >
+              <Button variant="ghost" onPress={onLeftPress} style={styles.iconButton}>
                 <Icon name={leftIcon} size={24} color={colors.gray[700]} />
               </Button>
             )}
@@ -69,12 +57,7 @@ const Header: React.FC<HeaderProps> = ({
           {/* Center - Title */}
           {title && (
             <View style={styles.centerSection}>
-              <Text
-                variant="h4"
-                color="gray.900"
-                align="center"
-                numberOfLines={1}
-              >
+              <Text variant="h4" color="gray.900" align="center" numberOfLines={1}>
                 {title}
               </Text>
             </View>
@@ -83,11 +66,7 @@ const Header: React.FC<HeaderProps> = ({
           {/* Right side */}
           <View style={styles.rightSection}>
             {rightIcon && onRightPress && (
-              <Button
-                variant="ghost"
-                onPress={onRightPress}
-                style={styles.iconButton}
-              >
+              <Button variant="ghost" onPress={onRightPress} style={styles.iconButton}>
                 <Icon name={rightIcon} size={24} color={colors.gray[700]} />
               </Button>
             )}
