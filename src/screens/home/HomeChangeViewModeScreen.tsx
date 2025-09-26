@@ -51,51 +51,70 @@ const HomeChangeViewModeScreen: React.FC = () => {
   const handleBackToHome = () => {
     navigation.navigate('HomeRecommendation');
   };
+const viewModes = [
+  {
+    id: 'grid',
+    title: '그리드 뷰',
+    subtitle: '2열 카드 형태',
+    username: 'wetraver.kk',
+    image: require('../../assets/images/tokyo-traveler.jpg'),
+    avatar: require('../../assets/images/guiherme-stecanella.jpg'),
+    bookmarks: 120,
+    isBookmarked: true,
+  },
+  {
+    id: 'list',
+    title: '리스트 뷰',
+    subtitle: '목록 형태',
+    username: 'adventure.seeker',
+    image: require('../../assets/images/harrison-chang.jpg'),
+    avatar: require('../../assets/images/anthony-tran.jpg'),
+    bookmarks: 80,
+    isBookmarked: false,
+  },
+  {
+    id: 'large',
+    title: '큰 카드 뷰',
+    subtitle: '대형 카드',
+    username: 'seoul.walker',
+    image: require('../../assets/images/joe-pohle.jpg'),
+    avatar: require('../../assets/images/daniel-j.jpg'),
+    bookmarks: 200,
+    isBookmarked: true,
+  },
+  {
+    id: 'compact',
+    title: '컴팩트 뷰',
+    subtitle: '간소화된 형태',
+    username: 'busan.lover',
+    image: require('../../assets/images/letteris.jpg'),
+    avatar: require('../../assets/images/osaka-master.jpg'),
+    bookmarks: 65,
+    isBookmarked: false,
+  },
+  {
+    id: 'mosaic',
+    title: '모자이크 뷰',
+    subtitle: '조각 모음 형태',
+    username: 'mosaic.creator',
+    image: require('../../assets/images/joe-jasmin.jpg'),
+    avatar: require('../../assets/images/harrison-chang.jpg'),
+    bookmarks: 140,
+    isBookmarked: true,
+  },
+  {
+    id: 'gallery',
+    title: '갤러리 뷰',
+    subtitle: '전시 형태',
+    username: 'gallery.curator',
+    image: require('../../assets/images/ahmet-yuksek.jpg'),
+    avatar: require('../../assets/images/tokyo-traveler.jpg'),
+    bookmarks: 99,
+    isBookmarked: false,
+  },
+];
 
-  const viewModes = [
-    {
-      id: 'grid',
-      title: '그리드 뷰',
-      subtitle: '2열 카드 형태',
-      username: 'wetraver.kk',
-      image: require('../../assets/images/tokyo-traveler.jpg'),
-    },
-    {
-      id: 'list',
-      title: '리스트 뷰',
-      subtitle: '목록 형태',
-      username: 'adventure.seeker',
-      image: require('../../assets/images/harrison-chang.jpg'),
-    },
-    {
-      id: 'large',
-      title: '큰 카드 뷰',
-      subtitle: '대형 카드',
-      username: 'seoul.walker',
-      image: require('../../assets/images/joe-pohle.jpg'),
-    },
-    {
-      id: 'compact',
-      title: '컴팩트 뷰',
-      subtitle: '간소화된 형태',
-      username: 'busan.lover',
-      image: require('../../assets/images/letteris.jpg'),
-    },
-    {
-      id: 'mosaic',
-      title: '모자이크 뷰',
-      subtitle: '조각 모음 형태',
-      username: 'mosaic.creator',
-      image: require('../../assets/images/alison-pang.jpg'),
-    },
-    {
-      id: 'gallery',
-      title: '갤러리 뷰',
-      subtitle: '전시 형태',
-      username: 'gallery.curator',
-      image: require('../../assets/images/anthony-tran.jpg'),
-    },
-  ];
+
 
   const tabs = ['추천', '인기셀러', '크리에이터'];
 
@@ -151,31 +170,43 @@ const HomeChangeViewModeScreen: React.FC = () => {
           {/* 3x2 Grid of View Mode Options (6 cards) */}
           <View style={styles.viewModesGrid}>
             {viewModes.map(mode => (
-              <TouchableOpacity
-                key={mode.id}
-                style={[
-                  styles.viewModeCard,
-                  selectedMode === mode.id && styles.selectedViewModeCard,
-                ]}
-                onPress={() => handleImagePress(mode.id)}
-              >
-                <Image source={mode.image} style={styles.viewModeImage} />
-                <View style={styles.viewModeOverlay}>
-                  <View style={styles.viewModeTextContainer}>
-                    <Text style={styles.viewModeTitle}>{mode.title}</Text>
-                    <Text style={styles.viewModeSubtitle}>{mode.subtitle}</Text>
-                  </View>
-                  <View style={styles.viewModeBottomRow}>
-                    <View style={styles.viewModeAvatar}>
-                      <Image
-                        source={require('../../assets/images/guiherme-stecanella.jpg')}
-                        style={styles.avatarImage}
-                      />
-                    </View>
-                    <Text style={styles.viewModeUsername}>{mode.username}</Text>
-                  </View>
-                </View>
-              </TouchableOpacity>
+             <TouchableOpacity
+  key={mode.id}
+  style={[
+    styles.viewModeCard,
+    selectedMode === mode.id && styles.selectedViewModeCard,
+  ]}
+  onPress={() => handleImagePress(mode.id)}
+>
+  <Image source={mode.image} style={styles.viewModeImage} />
+
+  <View style={styles.viewModeOverlay}>
+    {/* Top row: Bookmark */}
+    <View style={styles.postTopRow}>
+      <View style={styles.userAvatars} />
+      <View style={styles.bookmarkContainer}>
+        <Icon
+          name={mode.isBookmarked ? 'bookmark' : 'bookmark-border'}
+          size={22}
+          color="#fff"
+        />
+      </View>
+    </View>
+
+    {/* Bottom: Text + Avatar */}
+    <View style={styles.viewModeTextContainer}>
+      <Text style={styles.viewModeTitle}>{mode.title}</Text>
+      <Text style={styles.viewModeSubtitle}>{mode.subtitle}</Text>
+    </View>
+    <View style={styles.viewModeBottomRow}>
+      <View style={styles.viewModeAvatar}>
+        <Image source={mode.avatar} style={styles.avatarImage} />
+      </View>
+      <Text style={styles.viewModeUsername}>{mode.username}</Text>
+    </View>
+  </View>
+</TouchableOpacity>
+
             ))}
           </View>
         </View>
@@ -273,30 +304,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF0000',
   },
   content: { flex: 1, backgroundColor: '#fff' },
-  contentContainer: { padding: 20 },
+  contentContainer: { padding:5 },
   // 3x2 Grid for View Mode Options (6 cards)
-  viewModesGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingHorizontal: 10.5, // To center the cards with left: 185.5px positioning
-  },
-  viewModeCard: {
-    width: 175,
-    height: 280,
-    borderRadius: 8,
-    overflow: 'hidden',
-    backgroundColor: '#000',
-    marginBottom: 20,
-    elevation: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  selectedViewModeCard: { borderColor: '#9C27B0' },
+ viewModesGrid: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  gap: 10, // RN 0.71+ supports gap
+  justifyContent: 'center', // <-- center align items
+  paddingHorizontal: 1, 
+},
+viewModeCard: {
+  flexBasis: (screenWidth - 30) / 2, // 2 cards per row with 10px gap
+  height: 280,
+  borderRadius: 8,
+  overflow: 'hidden',
+  borderWidth: 2,
+  borderColor: 'transparent',
+},
+  selectedViewModeCard: {  },
   viewModeImage: { 
     width: '100%', 
     height: '100%', 
@@ -310,7 +335,23 @@ const styles = StyleSheet.create({
     bottom: 0,
     padding: 16,
     justifyContent: 'space-between',
-  },
+  },postTopRow: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+},
+bookmarkContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  borderRadius: 12,
+  paddingHorizontal: 0.5,
+  paddingVertical: 2,
+},
+ 
+userAvatars: {
+  flexDirection: 'row',
+  alignItems: 'center',
+},
   viewModeTextContainer: {
     marginTop: 'auto',
     marginBottom: 16,
