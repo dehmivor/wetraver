@@ -24,7 +24,7 @@ const HomeBottomNavigator: React.FC<HomeBottomNavigatorProps> = ({
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView edges={['bottom']} style={[styles.bottomNav, { paddingBottom: Math.max(10, 10 + insets.bottom) }]}>
+    <SafeAreaView edges={['bottom']} style={[styles.bottomNav]}>
       {navItems.map((item) => (
         <TouchableOpacity
           key={item.key}
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderTopWidth: 1,
     borderTopColor: '#E5E7EB',
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 20,
     justifyContent: 'space-around',
     alignItems: 'center',
