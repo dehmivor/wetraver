@@ -51,29 +51,17 @@ const { card } = route.params || {};
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#000" />
-
-      {/* Status Bar */}
-      <View style={styles.statusBar}>
-        <Text style={styles.timeText}>23:18</Text>
-        <View style={styles.statusIcons}>
-          <Icon name="signal-cellular-4-bar" size={16} color="#fff" />
-          <Icon name="wifi" size={16} color="#fff" style={styles.statusIcon} />
-          <Icon
-            name="battery-full"
-            size={16}
-            color="#fff"
-            style={styles.statusIcon}
-          />
-        </View>
-      </View>
+<StatusBar
+  barStyle="light-content"
+  translucent
+  backgroundColor="transparent"
+/>
 
       {/* Header with Back Button and Icons */}
       <View style={styles.header}>
         <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
           <Icon name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.title}>카드 탭</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity
             onPress={handleSearchPress}
@@ -146,10 +134,10 @@ const { card } = route.params || {};
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
+ container: {
+  flex: 1,
+  backgroundColor: 'transparent', // not white
+},
   statusBar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -175,7 +163,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 5,
     backgroundColor: 'transparent',
     position: 'absolute',
     top: 50,
