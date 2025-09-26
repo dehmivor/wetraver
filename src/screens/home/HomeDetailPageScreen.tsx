@@ -13,6 +13,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
 
@@ -60,6 +61,8 @@ const HomeDetailPageScreen: React.FC = () => {
     require('../../assets/images/daniel-smit.jpg'),
     require('../../assets/images/joe-pohle.jpg'),
   ];
+
+  const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
@@ -267,7 +270,7 @@ const HomeDetailPageScreen: React.FC = () => {
       </ScrollView>
 
       {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
+      <SafeAreaView edges={['bottom']} style={[styles.bottomNav, { paddingBottom: Math.max(10, 10 + insets.bottom) }]}>
         <TouchableOpacity style={styles.navItem}>
           <Icon name="home" size={24} color="#000" />
           <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
@@ -290,7 +293,7 @@ const HomeDetailPageScreen: React.FC = () => {
             style={styles.profileNavAvatar}
           />
         </TouchableOpacity>
-      </View>
+      </SafeAreaView>
     </View>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Text from './Text';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -20,8 +21,10 @@ const HomeBottomNavigator: React.FC<HomeBottomNavigatorProps> = ({
     { key: '프로필', icon: 'profile', label: 'qwert', isProfile: true },
   ];
 
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.bottomNav}>
+    <SafeAreaView edges={['bottom']} style={[styles.bottomNav, { paddingBottom: Math.max(10, 10 + insets.bottom) }]}>
       {navItems.map((item) => (
         <TouchableOpacity
           key={item.key}
@@ -41,7 +44,7 @@ const HomeBottomNavigator: React.FC<HomeBottomNavigatorProps> = ({
           </Text>
         </TouchableOpacity>
       ))}
-    </View>
+    </SafeAreaView>
   );
 };
 
