@@ -155,7 +155,7 @@ const AgreementItem: React.FC<{
 
 const styles = StyleSheet.create({
   scrollContent: {
-    paddingBottom: spacing['xs'],
+    paddingBottom: spacing.xs,
   },
   noteWrap: {
     backgroundColor: colors.gray[100],
