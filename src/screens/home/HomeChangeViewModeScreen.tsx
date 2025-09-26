@@ -15,7 +15,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 
-const { width: screenWidth } = Dimensions.get('window');
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 type HomeChangeViewModeScreenNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
@@ -48,38 +48,52 @@ const HomeChangeViewModeScreen: React.FC = () => {
     }
   };
 
+  const handleBackToHome = () => {
+    navigation.navigate('HomeRecommendation');
+  };
+
   const viewModes = [
     {
       id: 'grid',
       title: '그리드 뷰',
       subtitle: '2열 카드 형태',
-      icon: 'grid-on',
+      username: 'wetraver.kk',
       image: require('../../assets/images/tokyo-traveler.jpg'),
-      description: '사진을 중심으로 한 카드 형태의 레이아웃',
     },
     {
       id: 'list',
       title: '리스트 뷰',
       subtitle: '목록 형태',
-      icon: 'list',
+      username: 'adventure.seeker',
       image: require('../../assets/images/harrison-chang.jpg'),
-      description: '간단한 목록 형태의 레이아웃',
     },
     {
       id: 'large',
       title: '큰 카드 뷰',
       subtitle: '대형 카드',
-      icon: 'view-module',
-      image: require('../../assets/images/guiherme-stecanella.jpg'),
-      description: '더 큰 이미지와 상세 정보가 포함된 카드',
+      username: 'seoul.walker',
+      image: require('../../assets/images/joe-pohle.jpg'),
     },
     {
       id: 'compact',
       title: '컴팩트 뷰',
       subtitle: '간소화된 형태',
-      icon: 'view-compact',
-      image: require('../../assets/images/daniel-j.jpg'),
-      description: '공간을 효율적으로 사용하는 레이아웃',
+      username: 'busan.lover',
+      image: require('../../assets/images/letteris.jpg'),
+    },
+    {
+      id: 'mosaic',
+      title: '모자이크 뷰',
+      subtitle: '조각 모음 형태',
+      username: 'mosaic.creator',
+      image: require('../../assets/images/alison-pang.jpg'),
+    },
+    {
+      id: 'gallery',
+      title: '갤러리 뷰',
+      subtitle: '전시 형태',
+      username: 'gallery.curator',
+      image: require('../../assets/images/anthony-tran.jpg'),
     },
   ];
 
@@ -134,46 +148,32 @@ const HomeChangeViewModeScreen: React.FC = () => {
       {/* Main Content */}
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.contentContainer}>
-          <Text style={styles.sectionTitle}>콘텐츠 표시 방식</Text>
-          <Text style={styles.sectionSubtitle}>
-            원하는 뷰 모드를 선택하세요
-          </Text>
-
-          <View style={styles.modesGrid}>
+          {/* 3x2 Grid of View Mode Options (6 cards) */}
+          <View style={styles.viewModesGrid}>
             {viewModes.map(mode => (
               <TouchableOpacity
                 key={mode.id}
                 style={[
-                  styles.modeCard,
-                  selectedMode === mode.id && styles.selectedModeCard,
+                  styles.viewModeCard,
+                  selectedMode === mode.id && styles.selectedViewModeCard,
                 ]}
                 onPress={() => handleImagePress(mode.id)}
               >
-                <Image source={mode.image} style={styles.modeImage} />
-                <View style={styles.modeOverlay}>
-                  <View style={styles.modeIconContainer}>
-                    <Icon
-                      name={mode.icon}
-                      size={24}
-                      color={selectedMode === mode.id ? '#9C27B0' : '#fff'}
-                    />
+                <Image source={mode.image} style={styles.viewModeImage} />
+                <View style={styles.viewModeOverlay}>
+                  <View style={styles.viewModeTextContainer}>
+                    <Text style={styles.viewModeTitle}>{mode.title}</Text>
+                    <Text style={styles.viewModeSubtitle}>{mode.subtitle}</Text>
                   </View>
-                  <View style={styles.modeInfo}>
-                    <Text
-                      style={[
-                        styles.modeTitle,
-                        selectedMode === mode.id && styles.selectedModeTitle,
-                      ]}
-                    >
-                      {mode.title}
-                    </Text>
-                    <Text style={styles.modeSubtitle}>{mode.subtitle}</Text>
-                  </View>
-                  {selectedMode === mode.id && (
-                    <View style={styles.selectedIndicator}>
-                      <Icon name="check" size={16} color="#fff" />
+                  <View style={styles.viewModeBottomRow}>
+                    <View style={styles.viewModeAvatar}>
+                      <Image
+                        source={require('../../assets/images/guiherme-stecanella.jpg')}
+                        style={styles.avatarImage}
+                      />
                     </View>
-                  )}
+                    <Text style={styles.viewModeUsername}>{mode.username}</Text>
+                  </View>
                 </View>
               </TouchableOpacity>
             ))}
@@ -212,7 +212,7 @@ const HomeChangeViewModeScreen: React.FC = () => {
       <View style={styles.fabContainer}>
         <TouchableOpacity
           style={styles.fabSecondary}
-          onPress={() => handleImagePress('grid')}
+          onPress={handleBackToHome}
         >
           <Icon name="grid-on" size={24} color="#666" />
         </TouchableOpacity>
@@ -272,28 +272,19 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#FF0000',
   },
-  content: { flex: 1, backgroundColor: '#fff', paddingTop: 60 },
+  content: { flex: 1, backgroundColor: '#fff' },
   contentContainer: { padding: 20 },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#000',
-    marginBottom: 8,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: '#6B7280',
-    marginBottom: 24,
-  },
-  modesGrid: {
+  // 3x2 Grid for View Mode Options (6 cards)
+  viewModesGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    paddingHorizontal: 10.5, // To center the cards with left: 185.5px positioning
   },
-  modeCard: {
-    width: (screenWidth - 60) / 2,
-    height: 200,
-    borderRadius: 15,
+  viewModeCard: {
+    width: 175,
+    height: 280,
+    borderRadius: 8,
     overflow: 'hidden',
     backgroundColor: '#000',
     marginBottom: 20,
@@ -305,51 +296,76 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  selectedModeCard: { borderColor: '#9C27B0' },
-  modeImage: { width: '100%', height: '100%', resizeMode: 'cover' },
-  modeOverlay: {
+  selectedViewModeCard: { borderColor: '#9C27B0' },
+  viewModeImage: { 
+    width: '100%', 
+    height: '100%', 
+    resizeMode: 'cover' 
+  },
+  viewModeOverlay: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    padding: 15,
+    padding: 16,
     justifyContent: 'space-between',
   },
-  modeIconContainer: {
-    alignSelf: 'flex-start',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 20,
-    padding: 8,
+  viewModeTextContainer: {
+    marginTop: 'auto',
+    marginBottom: 16,
   },
-  modeInfo: { alignSelf: 'flex-end' },
-  modeTitle: {
+  viewModeTitle: {
+    fontFamily: 'Pretendard',
+    fontWeight: '500',
     fontSize: 16,
-    fontWeight: 'bold',
+    lineHeight: 24,
+    letterSpacing: -0.32, // -2% of 16px
     color: '#fff',
     textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
     marginBottom: 4,
   },
-  selectedModeTitle: { color: '#9C27B0' },
-  modeSubtitle: {
-    fontSize: 12,
+  viewModeSubtitle: {
+    fontFamily: 'Pretendard',
+    fontWeight: '500',
+    fontSize: 16,
+    lineHeight: 24,
+    letterSpacing: -0.32, // -2% of 16px
     color: '#fff',
     textShadowColor: 'rgba(0,0,0,0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
   },
-  selectedIndicator: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: '#9C27B0',
-    justifyContent: 'center',
+  viewModeBottomRow: {
+    flexDirection: 'row',
     alignItems: 'center',
+  },
+  viewModeAvatar: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#fff',
+    overflow: 'hidden',
+    marginRight: 8,
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  viewModeUsername: {
+    fontFamily: 'Pretendard',
+    fontWeight: '400',
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: -0.28, // -2% of 14px
+    color: '#fff',
+    textShadowColor: 'rgba(0,0,0,0.8)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   bottomNav: {
     flexDirection: 'row',
