@@ -1,22 +1,35 @@
-import React, { useState } from 'react';
+
+import Divider from '../../components/ui/Divider';
+import { useNavigation } from '@react-navigation/native';
+import {  useRef, useState } from 'react';
 import {
-  View,
-  StyleSheet,
+  Dimensions,
+  FlatList,
+  Image,
   ScrollView,
+  StatusBar,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  Image,
-  StatusBar,
-  Dimensions,
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useNavigation } from '@react-navigation/native';
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const HomeDetailPageScreen: React.FC = () => {
   const navigation = useNavigation();
-  const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const flatListRef = useRef<FlatList<any>>(null);
+
+  const handleScroll = (event: any) => {
+    const index = Math.round(event.nativeEvent.contentOffset.x / width);
+    setCurrentIndex(index);
+  };
+
+  const handleDotPress = (index: number) => {
+    flatListRef.current?.scrollToIndex({ index, animated: true });
+  };
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -43,10 +56,10 @@ const HomeDetailPageScreen: React.FC = () => {
   };
 
   const images = [
-    require('../../assets/images/tokyo-traveler.jpg'),
     require('../../assets/images/ruitong-xie.jpg'),
-    require('../../assets/images/anthony-tran.jpg'),
-    require('../../assets/images/leandro-navarro.jpg'),
+    require('../../assets/images/antonio-dafei.jpg'),
+    require('../../assets/images/daniel-smit.jpg'),
+    require('../../assets/images/joe-pohle.jpg'),
   ];
 
   return (
@@ -124,28 +137,33 @@ const HomeDetailPageScreen: React.FC = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Main Image */}
-        <View style={styles.imageContainer}>
-          <Image source={images[currentImageIndex]} style={styles.mainImage} />
-          <View style={styles.imageCounter}>
-            <Text style={styles.counterText}>{currentImageIndex + 1}/4</Text>
-          </View>
-          <View style={styles.avatarOverlay}>
-            <Image
-              source={require('../../assets/images/ruitong-xie.jpg')}
-              style={styles.overlayAvatar}
-            />
-          </View>
+        <View style={styles.imageCarouselContainer}>
+          <FlatList
+            ref={flatListRef}
+            data={images}
+            keyExtractor={(_, index) => index.toString()}
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            onScroll={handleScroll}
+            renderItem={({ item }) => (
+              <Image
+                source={item}
+                style={styles.carouselImage}
+              />
+            )}
+          />
         </View>
 
         {/* Pagination Dots */}
         <View style={styles.paginationContainer}>
           {images.map((_, index) => (
-            <View
+            <TouchableOpacity
               key={index}
+              onPress={() => handleDotPress(index)}
               style={[
                 styles.paginationDot,
-                index === currentImageIndex && styles.activeDot,
+                currentIndex === index && styles.activeDot
               ]}
             />
           ))}
@@ -166,47 +184,72 @@ const HomeDetailPageScreen: React.FC = () => {
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
-        <View style={styles.imageContainer}>
-          <Image source={images[currentImageIndex]} style={styles.mainImage} />
-          <View style={styles.imageCounter}>
-            <Text style={styles.counterText}>{currentImageIndex + 1}/4</Text>
-          </View>
-          <View style={styles.avatarOverlay}>
-            <Image
-              source={require('../../assets/images/daniel-smit.jpg')}
-              style={styles.overlayAvatar}
+        <View style={styles.imageCarouselContainer}>
+         <FlatList
+  ref={flatListRef}
+  data={images}
+  keyExtractor={(_, index) => index.toString()}
+  horizontal
+  pagingEnabled
+  showsHorizontalScrollIndicator={false}
+  onScroll={handleScroll}
+  renderItem={({ item }) => (
+    <Image source={item} style={styles.carouselImage} />
+  )}
+  initialScrollIndex={2}   // 👈 start at the 2nd item
+  getItemLayout={(_, index) => ({
+    length: width,         // width of each item
+    offset: width * index, // distance from start
+    index,
+  })}
+/>
+
+        </View>
+
+        {/* Pagination Dots */}
+        <View style={styles.paginationContainer}>
+          {images.map((_, index) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => handleDotPress(index)}
+              style={[
+                styles.paginationDot,
+                currentIndex === index && styles.activeDot
+              ]}
             />
-          </View>
+          ))}
         </View>
 
         {/* Description Text */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.descriptionText}>
-            익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와
-            함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리,
-            계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진
-            도쿄는 언제나 새로운 이야기를 들려줍니다.{' '}
+            익숙하면서도 늘 새로운 도시, 도쿄가 보여주는 다채로운 풍경을 저와 함께 한 발짝씩 따라가 보지 않으시겠어요?현대와 전통이 공존하는 거리, 계절마다 변하는 공원의 색채, 그리고 사람들의 활기찬 일상이 어우러진 도쿄는 언제나 새로운 이야기를 들려줍니다.
           </Text>
           <Text style={styles.timestamp}>9시간 전</Text>
         </View>
 
-        {/* Map Section */}
-        <View style={styles.mapContainer}>
-          <View style={styles.avatarOverlay}>
-            <Image
-              source={require('../../assets/images/map.png')}
-              style={styles.overlayAvatar}
-            />
-          </View>
-          <View style={styles.mapPlaceholder}>
-            <Icon name="map" size={40} color="#9CA3AF" />
-            <Text style={styles.mapText}>지도 보기</Text>
-          </View>
-          <View style={styles.mapExpandButton}>
-            <Icon name="open-in-full" size={20} color="#9CA3AF" />
-          </View>
-        </View>
-        <Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
+
+     {/* Map Section */}
+<View style={styles.mapContainer}>
+  <Image
+    source={require('../../assets/images/map.png')}
+    style={styles.mapImage}
+  />
+
+  {/* Centered icon + text */}
+  <View style={styles.mapPlaceholder}>
+    <Icon name="map" size={40} color="#fff" />
+    <Text style={styles.mapText}>지도 보기</Text>
+  </View>
+
+  {/* Expand button in the corner */}
+  <TouchableOpacity style={styles.mapExpandButton}>
+    <Icon name="open-in-full" size={20} color="#000" />
+  </TouchableOpacity>
+</View>
+<Text style={styles.locationDetail}>일본, 도쿄, 381-12</Text>
+
+        <Divider style={{ flex: 1, height: 1,  marginHorizontal: 20}} />
 
         {/* Hashtags */}
         <View style={styles.hashtagsContainer}>
@@ -452,28 +495,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-  imageContainer: {
-    position: 'relative',
+  imageCarouselContainer: {
+    marginTop: 0,
+  },
+  carouselImage: {
+    width: width,
     height: 300,
-  },
-  mainImage: {
-    width: '100%',
-    height: '100%',
     resizeMode: 'cover',
-  },
-  imageCounter: {
-    position: 'absolute',
-    top: 15,
-    right: 15,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  counterText: {
-    color: '#fff',
-    fontSize: 12,
-    fontWeight: '600',
   },
   avatarOverlay: {
     position: 'absolute',
@@ -522,39 +550,45 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   mapContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    marginVertical: 15,
-    height: 120,
-    backgroundColor: '#F9FAFB',
-    borderRadius: 12,
-    padding: 15,
-  },
-  mapPlaceholder: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  mapText: {
-    fontSize: 14,
-    color: '#9CA3AF',
-    marginTop: 8,
-  },
-  mapExpandButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-  },
+  position: 'relative',   // allow overlay
+  marginHorizontal: 20,
+  marginVertical: 15,
+  height: 180,
+  borderRadius: 12,
+  overflow: 'hidden',     // make image corners rounded
+},
+mapImage: {
+  width: '100%',
+  height: '100%',
+  resizeMode: 'cover',
+  position: 'absolute',   // make it background
+},
+mapPlaceholder: {
+  position: 'absolute',
+  top: '40%',
+  left: 0,
+  right: 0,
+  alignItems: 'center',
+  zIndex: 2,              // ensure it's above
+},
+mapExpandButton: {
+  position: 'absolute',
+  top: 10,
+  right: 10,
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  backgroundColor: 'rgba(255,255,255,0.9)',
+  justifyContent: 'center',
+  alignItems: 'center',
+  zIndex: 3,              // above placeholder & image
+},
+mapText: {
+  fontSize: 14,
+  color: '#fff',
+  marginTop: 8,
+  fontWeight: '600',
+},
   locationDetail: {
     fontSize: 14,
     color: '#6B7280',
@@ -570,7 +604,6 @@ const styles = StyleSheet.create({
   hashtag: {
     backgroundColor: '#fff',
     color: '#000',
-    paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 15,
     fontSize: 12,

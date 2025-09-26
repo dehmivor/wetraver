@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { HomeBottomNavigator } from '../../components/ui';
 
 const SWIPE_THRESHOLD = 100; // Minimum vertical swipe distance
 
@@ -56,7 +57,6 @@ const { card } = route.params || {};
   translucent
   backgroundColor="transparent"
 />
-
       {/* Header with Back Button and Icons */}
       <View style={styles.header}>
         <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
@@ -67,13 +67,13 @@ const { card } = route.params || {};
             onPress={handleSearchPress}
             style={styles.iconButton}
           >
-            <Icon name="search" size={24} color="#fff" />
+            <Icon name="search" size={20} color="#000" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={handleNotificationPress}
             style={styles.iconButton}
           >
-            <Icon name="notifications" size={24} color="#fff" />
+            <Icon name="notifications" size={20} color="#000" />
             <View style={styles.notificationDot} />
           </TouchableOpacity>
         </View>
@@ -81,17 +81,15 @@ const { card } = route.params || {};
 
       {/* Main Content with Background Image and Swipe Gesture */}
       <View style={styles.content} {...panResponder.panHandlers}>
-       <Image
-  source={card?.image}
-  style={styles.backgroundImage}
-/>
+        <Image
+          source={require('../../assets/images/tokyo-traveler.jpg')}
+          style={styles.backgroundImage}
+        />
 
-<View style={styles.textOverlay}>
-  <Text style={styles.titleText}>{card?.title}</Text>
-  <Text style={styles.subtitleText}>{card?.subtitle}</Text>
-  <Text style={{ color: "#fff", marginTop: 5 }}>by {card?.username}</Text>
-</View>
-
+        <View style={styles.textOverlay}>
+          <Text style={styles.titleText}>TOKYO</Text>
+          <Text style={styles.subtitleText}>Traveler</Text>
+        </View>
 
         {/* Scroll Indicator */}
         <TouchableOpacity
@@ -104,83 +102,34 @@ const { card } = route.params || {};
       </View>
 
       {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="home" size={24} color="#000" />
-          <Text style={[styles.navText, styles.activeNavText]}>홈</Text>
-          <View style={styles.activeIndicator} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="people" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>커뮤니티</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="star-border" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>버디픽</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Icon name="send" size={24} color="#9CA3AF" />
-          <Text style={styles.navText}>채팅</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Image
-            source={require('../../assets/images/harrison-chang.jpg')}
-            style={styles.profileNavAvatar}
-          />
-        </TouchableOpacity>
-      </View>
+      <HomeBottomNavigator activeTab="홈" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
- container: {
-  flex: 1,
-  backgroundColor: 'transparent', // not white
-},
-  statusBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 5,
-  },
-  timeText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  statusIcons: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  statusIcon: {
-    marginLeft: 5,
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 5,
+    paddingVertical: 25,
     backgroundColor: 'transparent',
     position: 'absolute',
-    top: 50,
+    top: 10,
     left: 0,
     right: 0,
     zIndex: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
   },
   backButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(156, 163, 175, 0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -192,7 +141,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#000',
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
@@ -218,82 +169,54 @@ const styles = StyleSheet.create({
   },
   textOverlay: {
     position: 'absolute',
-    top: '50%',
+    top: '40%',
     left: 0,
     right: 0,
     alignItems: 'center',
-    transform: [{ translateY: -50 }],
   },
   titleText: {
-    fontSize: 48,
-    fontWeight: 'bold',
+    fontFamily: 'Pretendard-Thin',
+    fontSize: 54,
+    fontWeight: '100',
     color: '#fff',
     textAlign: 'center',
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 4,
+    letterSpacing: 12,
   },
   subtitleText: {
-    fontSize: 24,
-    fontWeight: '300',
+    fontFamily: 'Pretendard-ExtraLight',
+    fontSize: 32,
+    fontWeight: '200',
     color: '#fff',
     textAlign: 'center',
     marginTop: 10,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
+    letterSpacing: 15,
   },
   scrollIndicator: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 120,
     left: 0,
     right: 0,
     alignItems: 'center',
   },
   scrollText: {
+    fontFamily: 'Pretendard-Regular',
+    fontSize: 12,
+    fontWeight: '400',
     color: '#fff',
-    fontSize: 14,
     marginBottom: 5,
     textShadowColor: 'rgba(0, 0, 0, 0.8)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  navItem: {
-    alignItems: 'center',
-    flex: 1,
-    position: 'relative',
-  },
-  navText: {
-    fontSize: 12,
-    color: '#9CA3AF',
-    marginTop: 4,
-  },
-  activeNavText: {
-    color: '#000',
-  },
-  activeIndicator: {
-    position: 'absolute',
-    bottom: -10,
-    left: '50%',
-    marginLeft: -15,
-    width: 30,
-    height: 2,
-    backgroundColor: '#20B2AA',
-  },
-  profileNavAvatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    lineHeight: 16,
+    letterSpacing: 0,
+    width: 113,
+    textAlign: 'center',
   },
 });
 
