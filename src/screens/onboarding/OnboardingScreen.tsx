@@ -5,6 +5,7 @@ import Text from '../../components/ui/Text';
 import Divider from '../../components/ui/Divider';
 import Button from '../../components/ui/Button';
 import { colors, spacing, borderRadius } from '../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 // Simple chip button for multi-select
 const Chip: React.FC<{
@@ -50,6 +51,7 @@ const toggleInSet = (
 };
 
 const OnboardingScreen: React.FC = () => {
+  const navigation = useNavigation<any>();
   const [interests, setInterests] = useState<Set<string>>(new Set());
   const [style, setStyle] = useState<Set<string>>(new Set());
   const [preference, setPreference] = useState<Set<string>>(new Set());
@@ -151,7 +153,9 @@ const OnboardingScreen: React.FC = () => {
         <Button
           title="WeTraver 시작하기"
           onPress={() => {
-            // navigate to home or next step
+            if (canContinue) {
+              navigation.navigate('HomeChangeViewMode');
+            }
           }}
           disabled={!canContinue}
           size="large"
